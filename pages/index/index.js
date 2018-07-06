@@ -1,5 +1,6 @@
 var util = require('../../utils/util.js');
 var app = getApp();
+const ImgLoader = require('../../img-loader/img-loader.js');
 Page({
 
   /**
@@ -13,6 +14,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 图片预加载
+    this.imgLoader = new ImgLoader(this);
     util.showLoading(true);
   },
   toNewsMore:function(e){
@@ -100,6 +103,19 @@ Page({
         product: dataList
       })
       wx.hideLoading()
+    })
+  },
+  imageOnLoad:function(e){
+    console.log(e.target.dataset.id)
+    var id = e.target.dataset.id;
+    var imgUrl = e.target.dataset.imgurl;
+    var arr = 'arr' + '[' + id + ']';
+    // this.setData({
+    //   [arr]:true
+    // })
+    this.imgLoader.load(imgUrl, (err, data) => {
+      if (!err)
+        this.setData({ [arr]: data.src })
     })
   },
 
