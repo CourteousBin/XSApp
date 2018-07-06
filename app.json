@@ -1,0 +1,75 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/formBase/formBase",
+    "pages/fastTest/fastTest",
+    "pages/fastProgramme/fastProgramme",
+    "pages/brandPartner/brandPartner",
+    "pages/quarterly/quarterly",
+    "pages/myTeam/myTeam",
+    "pages/businessTeam/businessTeam",
+    "pages/myOrderDetail/myOrderDetail",
+    "pages/myOrder/myOrder",
+    "pages/myTeamLogin/myTeamLogin",
+    "pages/my/my",
+    "pages/activity/activity",
+    "pages/formInsurance/formInsurance",
+    "pages/formLoan/formLoan",
+    "pages/shopCar/shopCar",
+    "pages/order/order",
+    "pages/customized/customized",
+    "pages/formHouse/formHouse",
+    "pages/about/about",
+    "pages/productMix/productMix",
+    "pages/merchantEntry/merchantEntry",
+    "pages/newsMore/newsMore",
+    "pages/newsDetail/newsDetail",
+    "pages/goods/goods",
+    "pages/moreGoods/moreGoods",
+    "pages/formCredit/formCredit",
+    "pages/form/form",
+    "pages/test/test",
+    "pages/classify/classify",
+    "pages/store/store",
+    "pages/test2/test2",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#FF4544",
+    "navigationBarTitleText": "貳9貳金融顾问",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "selectedColor": "#ff4544",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "/images/actHome.png"
+      },
+      {
+        "pagePath": "pages/classify/classify",
+        "text": "分类",
+        "iconPath": "images/classify.png",
+        "selectedIconPath": "/images/actClassify.png"
+      },
+      {
+        "pagePath": "pages/shopCar/shopCar",
+        "text": "收藏",
+        "iconPath": "images/like.png",
+        "selectedIconPath": "/images/likeAct.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "/images/actMy.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+<view class="page">
+  <view class='container'>
+    <view class='head'>
+      <view class="weui-flex page__bd_spacing">
+          <view class="weui-flex__item">
+            <view class="headTitle">可借贷额度</view>
+          </view>
+      </view>
+      <view class="weui-flex">
+          <view class="weui-flex__item money">
+            <view class="headBody">{{money}}<text class='unit'> 元</text></view>
+          </view>
+      </view>
+
+      <view class="weui-flex">
+
+            <view class="weui-flex__item multiple">
+              <view class='multipleBorder'>
+                <view class="tipColor">
+                  <view class="placeholder">选择杠杆:</view>
+                </view>
+                <view class=''>
+                  <picker name="degree" data-type="DegreeIndex" bindchange="pickerChange" value="{{DegreeIndex}}" range="{{pickerDegree}}">
+                    <view class="multiple-select">{{pickerDegree[DegreeIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+          
+      </view>
+
+    </view>
+
+    <view class='body page__bd_spacing'>
+
+      <view class='weui-flex'>
+        <view class='weui-flex__item'>
+          <view class='toForm'>
+            <image catchtap='toForm' class='toFormImg' src='/images/fastProgramme.jpg'></image>
+          </view>
+        </view>
+      </view>
+
+      <view class='weui-flex'>
+        <view class='weui-flex__item'>
+          <view class='info'>
+            <image class='jinbiBg' src='/images/jinbiBg.png'></image>
+
+            <view class='weui-flex'>
+              <!-- <view class='weui-flex__item'></view> -->
+              <view class='weui-flex__item infoCenter'>
+                <view class='infoTitle'>无抵押信用贷</view>
+                <view class='infoRow'>      
+                  <view>还贷利息: {{Interest}} ~ {{maxInterest}}</view>
+                </view>
+                <view>贷款年限:{{loanYears}}</view>
+                <view>还款方式:等本等息还款</view>
+                <view>每月还款低至:{{payment}}/元 ~ {{maxPayment}}/元</view>
+              </view>
+            </view>
+
+          </view>
+        </view>
+
+        
+      </view>
+
+    </view>
+
+  </view>
+</view>

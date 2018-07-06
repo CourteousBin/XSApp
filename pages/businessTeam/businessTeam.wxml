@@ -1,0 +1,43 @@
+<!-- <view class="page">
+  <view class="container">
+    <view class='leftImg'>
+      <image mode='widthFix' src='/images/teamMember.jpg'></image>
+    </view>
+    <view class='rightMain'>
+      <view class=""></view>
+      <view>What possible argument could I muster18 against that? There was none. Did I eat the peas? You bet I did. I ate them that day and every other time they were served thereafter. The five dollars were quickly spent. My grandmother passed away a few years later. But the legacy19 of the peas lived on, as it lives on to this day. If I so much as curl my lip when they are served (because, after all, I still hate the horrid20 little things), my mother repeats the dreaded21 words one more time: "You ate them for money," she says. "You can eat them for love."</view>
+    </view>
+  </view>
+</view> -->
+
+<view class="page">
+  <view class="container">
+    <view class='leftImg' style='width:40%;'>
+      <image mode='widthFix' src='/images/teamMember.jpg' style='float:left;width:100%;'></image>
+    </view>
+    <view class='rightMain'>
+      <view class='positionRow'>
+        <view class='memberName'>测试人员</view>
+        <view class='position'><text>工程师</text></view>
+        
+        <!-- <view>JAVA教研专家</view> -->
+      </view>
+      <text class='mainText'>What possible argument could I muster18 against that? There was none. Did I eat the peas? You bet I did. I ate them that day and every other time they were served thereafter. The five dollars were quickly spent. My grandmother passed away a few years later. But the legacy19 of the peas lived on, as it lives on to this day. If I so much as curl my lip when they are served (because, after all, I still hate the horrid20 little things), my mother repeats the dreaded21 words one more time: "You ate them for money," she says. "You can eat them for love."</text>
+    </view>
+  </view>
+
+   <view class="container" style='margin-top:20rpx;'>
+    <view class='leftImg' style='width:40%;'>
+      <image mode='widthFix' src='/images/teamMember.jpg' style='float:left;width:100%;'></image>
+    </view>
+    <view class='rightMain'>
+      <view class='positionRow'>
+        <view class='memberName'>测试人员</view>
+        <view class='position'><text>工程师</text></view>
+        
+        <!-- <view>JAVA教研专家</view> -->
+      </view>
+      <text class='mainText'>What possible argument could I muster18 against that? There was none. Did I eat the peas? You bet I did. I ate them that day and every other time they were served thereafter. The five dollars were quickly spent. My grandmother passed away a few years later. But the legacy19 of the peas lived on, as it lives on to this day. If I so much as curl my lip when they are served (because, after all, I still hate the horrid20 little things), my mother repeats the dreaded21 words one more time: "You ate them for money," she says. "You can eat them for love."</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,528 @@
+<view class="after-navber">
+  <!--banner  -->
+  <view>
+    <swiper class="banner" autoplay="true" interval="5000" duration="300" indicator-dots="true" circular="true">
+      <block wx:for="{{banner}}">
+        <swiper-item>
+          <view class="slide-title">{{item.ad_name}}</view>
+          <image src="{{item.ad_pic}}" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!--导航栏  -->
+  <view>
+    <view class="nav-icon-list flex-row">
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../productMix/productMix" open-type="navigate">
+          <image src="/images/productList.png"></image>
+          <view>产品大纲</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="{{item.url}}" open-type="{{item.open_type}}">
+          <image src="/images/posmachine.png"></image>
+          <view>Pos机</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="{{item.url}}" open-type="{{item.open_type}}">
+          <image src="/images/creditCard.png"></image>
+          <view>信用卡</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../activity/activity" open-type="navigate">
+          <image src="/images/activity.png"></image>
+          <view>活动</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../merchantEntry/merchantEntry" open-type="navigate">
+          <image src="/images/shopAdd.png"></image>
+          <view>加盟我们</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../businessTeam/businessTeam" open-type="navigate">
+          <image src="/images/team.png"></image>
+          <view>业务团队</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../newsMore/newsMore" open-type="navigate">
+          <image src="/images/newsCenter.png"></image>
+          <view>咨询中心</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../customized/customized" open-type="navigate">
+          <image src="/images/Customized.png"></image>
+          <view>定制服务</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../brandPartner/brandPartner" open-type="navigate">
+          <image src="/images/brandShop.png"></image>
+          <view>品牌街铺</view>
+        </navigator>
+      </view>
+
+      <view class="flex-grow-0 nav-icon-1">
+        <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../about/about" open-type="navigate">
+          <image src="/images/aboutUs.png"></image>
+          <view>关于我们</view>
+        </navigator>
+      </view>
+
+    </view>
+  </view>
+
+  <!--贷款分类  -->
+  <view>
+    <swiper style='height:200rpx;' interval="5000" duration="300" indicator-dots="true">
+      <block wx:for="{{target}}">
+        <swiper-item>
+          <view class="nav-icon-list flex-row">
+            <block wx:for="{{item}}" wx:for-item="itemName">
+              <view class="flex-grow-0 nav-icon-1">
+                <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../moreGoods/moreGoods" open-type="navigate">
+                  <image src="{{itemName.cat_pic}}"></image>
+                  <view>{{itemName.cat_name}}</view>
+                </navigator>
+              </view>
+              </block>
+            </view>
+        </swiper-item>
+        
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 快速测试 -->  
+  <view catchtap='fastTest' style='margin-bottom:20rpx;'>
+    <swiper class="banner" style='height:250rpx;'>
+      <swiper-item>
+        <image src="/images/testFast.jpg" class="slide-image" />
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!--头条新闻  -->
+  <view class='newsRow'>
+    <view class='newLeft'>
+      <image src='/images/timeIsMoney.png'></image>
+      <view class='newsLine'></view>
+    </view>
+    <view class='newMain'>
+
+      <view catchtap='toNewsDetail' class='newMainRow'>
+        <view class='newMainImg'>
+          <image src='/images/newArrow.png'></image>
+        </view>
+        <text>{{news[0].title}}</text>
+      </view>
+
+      <view catchtap='toNewsDetail' class='newMainRow'>
+        <view class='newMainImg'>
+          <image src='/images/newArrow2.png'></image>
+        </view>
+        <text>{{news[1].title}}</text>
+      </view>
+
+      <view catchtap='toNewsDetail' class='newMainRow'>
+        <view class='newMainImg'>
+          <image src='/images/newArrow3.png'></image>
+        </view>
+        <text>{{news[2].title}}</text>
+      </view>
+      
+    </view>
+    <view class='newRight'>
+      <view class='newLine'></view>
+      <view class='newRightImg'>
+        <image catchtap='toNewsMore' src='/images/more.png'></image> 
+      </view>
+    </view>
+  </view>
+
+  <!--热销商品  -->
+  <view>
+    <block>
+          <view style="background: #fff;margin-bottom: 10rpx;width:100%;overflow-x: hidden;">
+              <view class="title-bar flex-y-center flex-x-center">
+                  <view class="title-line"></view>
+                  <view class="title flex-y-center">
+                      <text class='sellText'>热销商品</text>
+                  </view>
+                  <view class="title-line"></view>
+              </view>
+              <!--产品大纲  -->
+              <block wx:for="{{product}}">
+                <view class='hotProductTitle'>
+                  <view style='margin-left:10rpx;font-size:30rpx'>{{index}}</view>
+                  <view class='productMore'>
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text style='font-size:30rpx;'>更多</text>
+                       <image src="/images/icon-jiantou-r.png" /> 
+                    </navigator>
+                  </view>
+                  </view>
+                <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+                  <block wx:for="{{item}}" wx:for-item="itemProduct">
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="{{itemProduct.pic}}" mode="aspectFill" />
+                            <text>{{itemProduct.name}}</text>
+                        </navigator>
+                    </view>
+
+                    <!-- <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg3.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view> -->
+                  </block>  
+                </view>
+              </block>
+
+              <!-- <block>
+                <view class='rowBg'></view>
+                <view class='hotProductTitle'>
+                  <view style='margin-left:10rpx;font-size:30rpx'>个人信贷类热推产品</view>
+                  <view class='productMore'>
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text style='font-size:30rpx;'>更多</text>
+                       <image src="/images/icon-jiantou-r.png" /> 
+                    </navigator>
+                  </view>
+                  </view>
+                <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg2.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg3.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+                </view>
+              </block>   
+
+              <block>
+                <view class='rowBg'></view>
+                <view class='hotProductTitle'>
+                  <view style='margin-left:10rpx;font-size:30rpx'>个人房抵押类热推产品</view>
+                  <view class='productMore'>
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text style='font-size:30rpx;'>更多</text>
+                       <image src="/images/icon-jiantou-r.png" /> 
+                    </navigator>
+                  </view>
+                  </view>
+                <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg2.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg3.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+                </view>
+              </block>   
+
+              <block>
+                <view class='rowBg'></view>
+                <view class='hotProductTitle'>
+                  <view style='margin-left:10rpx;font-size:30rpx'>个人车抵押类热推产品</view>
+                  <view class='productMore'>
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text style='font-size:30rpx;'>更多</text>
+                       <image src="/images/icon-jiantou-r.png" /> 
+                    </navigator>
+                  </view>
+                  </view>
+                <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg2.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg3.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+                </view>
+              </block>   
+
+              <block>
+                <view class='rowBg'></view>
+                <view class='hotProductTitle'>
+                  <view style='margin-left:10rpx;font-size:30rpx'>企业信贷类热推产品</view>
+                  <view class='productMore'>
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text style='font-size:30rpx;'>更多</text>
+                       <image src="/images/icon-jiantou-r.png" /> 
+                    </navigator>
+                  </view>
+                  </view>
+                <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg2.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg3.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+                </view>
+              </block>  
+
+               <block>
+                <view class='rowBg'></view>
+                <view class='hotProductTitle'>
+                  <view style='margin-left:10rpx;font-size:30rpx'>企业抵押类热推产品</view>
+                  <view class='productMore'>
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text style='font-size:30rpx;'>更多</text>
+                       <image src="/images/icon-jiantou-r.png" /> 
+                    </navigator>
+                  </view>
+                  </view>
+                <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg2.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg3.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+
+                    <view class="flex-grow-0">
+                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                            <image src="/images/timg.jpg" mode="aspectFill" />
+                            <text>商品名称</text>
+                        </navigator>
+                    </view>
+                </view>
+              </block>     -->
+
+          </view>
+      </block>
+  </view>
+
+  <!--猜你喜欢  -->
+  <view>
+    <block>
+          <view style="background: #fff;margin-bottom: 10rpx;width:100%;overflow-x: hidden;">
+              <view class="title-bar flex-y-center flex-x-center">
+                  <view class="title-line"></view>
+                  <view class="title flex-y-center">
+                      <image src="/images/love.png" mode="aspectFill"></image> 
+                      <text class='sellText'>猜你喜欢</text>
+                  </view>
+                  <view class="title-line"></view>
+                  <navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text>更多</text>
+                      <image src="/images/icon-jiantou-r.png" />
+                  </navigator>
+              </view>
+
+              <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg2.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+                  
+              </view>
+          </view>
+      </block>
+  </view>
+
+  <!-- <view>
+    <block>
+          <view style="background: #fff;margin-bottom: 10rpx;width:100%;overflow-x: hidden;">
+              <view class="title-bar flex-y-center flex-x-center">
+                  <view class="title-line"></view>
+                  <view class="title flex-y-center">
+                      <text class='sellText'>汽车贷款</text>
+                  </view>
+                  <view class="title-line"></view>
+                  <navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text>更多</text>
+                      <image src="/images/icon-jiantou-r.png" />
+                  </navigator>
+              </view>
+
+              <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg2.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+              </view>
+          </view>
+      </block>
+
+      <view>
+    <block>
+      <view style="background: #fff;margin-bottom: 10rpx;width:100%;overflow-x: hidden;">
+              <view class="title-bar flex-y-center flex-x-center">
+                  <view class="title-line"></view>
+                  <view class="title flex-y-center">
+                      <text class='sellText'>抵押贷款</text>
+                  </view>
+                  <view class="title-line"></view>
+                  <navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                      <text>更多</text>
+                      <image src="/images/icon-jiantou-r.png" />
+                  </navigator>
+              </view>
+
+              <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg2.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+
+                  <view class="flex-grow-0">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                          <image src="/images/timg.jpg" mode="aspectFill" />
+                          <text>商品名称</text>
+                      </navigator>
+                  </view>
+              </view>
+          </view>
+    </block>
+    </view>
+  </view> -->
+
+</view>
+
+<block>
+  <include src="/commons/float-icon/float-icon.wxml" />
+</block>

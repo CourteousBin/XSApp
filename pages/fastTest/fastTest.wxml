@@ -1,0 +1,233 @@
+<view class="page">
+
+  <!--头部  -->
+  <view class="page__hd titleBg">
+    <image class='formBg' src='/images/testFast.jpg'></image>
+  </view>
+
+  <view class='main'>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+    <!--一 基础内容  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">客户姓名:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="fastName" type='text'></input>
+          </view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">联系电话:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="fastPhone" type='number' maxlength="11"></input>
+          </view>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title interval">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label tipColor">出生日期:</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker name="fastAge" data-type="ageDate" mode="date" value="{{ageDate}}" bindchange="DateChange">
+                <view class="weui-input">{{ageDate}}</view>
+              </picker>
+            </view>
+          </view>
+        </view> 
+
+        <view class="weui-cells__title">请问你的职业是?</view>
+          <view class="weui-cells weui-cells_after-title interval">
+            <radio-group name="fastJob" data-type="radioJob" data-judge="isBusiness" bindchange="radioChange">
+              <label class="weui-cell weui-check__label" wx:for="{{radioJob}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                </view>
+              </label>
+            </radio-group>
+          </view>
+
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label tipColor">工作地点:</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker name="fastWorkPlace" data-value="plant" custom-item="{{plantSection}}" mode="region" value="{{plant}}" bindchange="bindRegionChange">
+                <view class="weui-input"> {{plant[0]}} {{plant[1]}} {{plant[2]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">工作地点详情:</view>
+          <view class="weui-cells weui-cells_after-title interval">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea bindinput="companyAdderessChange" name="fastWorkPlaceDetail" class="weui-textarea" data-value="plantNumber" placeholder="请输入文本" style="height: 4em" maxlength='80' cursor-spacing="60" />
+                <view class="weui-textarea-counter">{{plantNumber}}/80</view>
+              </view>
+            </view>
+          </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问是否有半年以上供房记录:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isHouse" data-judge="isHouse" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isHouse == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="tooLong">请问月供房多少元:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="payHouse" type='digit'></input>
+            </view>
+            <view class='unit'>/元</view>
+          </view>
+        </block>  
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问是否有两年以上人寿保单:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isInsurance" data-judge="isInsurance" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isInsurance == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="tooLong">请问累计叠加三份一共年缴保费多少:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="payInsurance" type='digit'></input>
+            </view>
+            <view class='unit'>/元</view>
+          </view>
+        </block> 
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问是否有一年以上供车记录:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCar" data-judge="isCar" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCar == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="tooLong">请问供车月供多少钱:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="payCar" type='digit'></input>
+            </view>
+            <view class='unit'>/元</view>
+          </view>
+        </block>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问是否有缴费基数大于3500的公积金:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isFund" data-judge="isFund" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isFund == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="tooLong">请问缴费基数多少:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="payFund" type='digit'></input>
+            </view>
+            <view class='unit'>/元</view>
+          </view>
+        </block>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问所有信用卡总额度多少:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="fastTotalCredit" type='digit'></input>
+          </view>
+          <view class='unit'>/元</view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问所有信用卡已使用多少额度:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="fastUsedCredit" type='digit'></input>
+          </view>
+          <view class='unit'>/元</view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问所有信用/保证贷款余额是多少:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="fastALLCreditBond" type='digit'></input>
+          </view>
+          <view class='unit'>/元</view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问所有信用类/保证类贷款月供:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="fastUsedALLCreditBond" type='digit'></input>
+          </view>
+          <view class='unit'>/元</view>
+        </view>
+
+      </block>
+
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="warn" formType="submit">马上测试</button>
+      </view>
+
+      </form>
+
+    </view>
+
+  <!--尾部  -->
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-footer ">
+      <view class="weui-footer__links">
+        <navigator url="" class="weui-footer__link">底部链接</navigator>
+      </view>
+      <view class="weui-footer__text">Copyright © 佛山驰实网络科技有限公司</view>
+    </view>
+  </view>    
+
+</view>

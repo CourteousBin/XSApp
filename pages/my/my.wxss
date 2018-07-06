@@ -1,0 +1,133 @@
+@import '/style/weui.wxss';
+
+page{
+    background-color: #F8F8F8;
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.page__hd {
+    padding: 40px;
+ }
+.page__bd {
+    padding-bottom: 40px;
+}
+.page__bd_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.page__ft{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.page__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.page__desc {
+    margin-top: 5px;
+    color: #888888;
+    text-align: left;
+    font-size: 14px;
+}
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    background-color: #EBEBEB;
+    height: 2.3em;
+    line-height: 2.3em;
+    color: #cfcfcf;
+}
+
+.userContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 350rpx;
+}
+.userBg {
+  width: 100%;
+  height: 350rpx;
+  /* border: 1px solid blue; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+.userImg {
+  width: 130rpx;
+  height: 130rpx;
+  overflow: hidden;
+  border-radius: 50%;
+  border:5rpx solid #fff;
+}
+.userImg > image {
+  width: 100%;
+  height: 100%;
+}
+.userName {
+  text-align: center;
+  padding: 10rpx;
+  color: #fff;
+}
+.userLevel {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  font-size: 8pt;
+  position: relative;
+}
+.userLevel > image {
+  width: 44rpx;
+  height: 44rpx;
+}
+.userLevel > text {
+  background-color:#3c3642;
+  border-radius:0 18rpx 18rpx 0;
+  padding: 0rpx 10rpx 0 20rpx;
+  position: absolute;
+  left: 35rpx;
+  width: 100rpx;
+  z-index: -1;
+  top: 7rpx;
+}
+.choiceTop {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.choiceLeft,.choiceRight {
+  height: 200rpx;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #3c3642;
+  font-size: 30rpx;
+  /* border: 1px solid red; */
+}
+.choiceLeft > image , .choiceRight > image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.border-right {
+  border-right: 1px solid #eee;
+}
+.border-bottom {
+  border-bottom: 1px solid #eee;
+}
+.marginLeft {
+  margin-left: 10%;
+}

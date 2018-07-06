@@ -1,0 +1,131 @@
+@import '/style/weui.wxss';
+
+page{
+    background-color: #F8F8F8;
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.page__hd {
+    padding: 40px;
+ }
+.page__bd {
+    padding-bottom: 40px;
+}
+.page__bd_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.page__ft{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.page__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.page__desc {
+    margin-top: 5px;
+    color: #888888;
+    text-align: left;
+    font-size: 14px;
+}
+
+.head {
+  background: #FF4544;
+  padding: 0 0 50rpx 0;
+}
+.headTitle {
+  color: #fff;
+
+}
+.headBody {
+  color: #fff;
+  text-align: center;
+  font-size: 25pt;
+}
+.money {
+  padding: 20rpx 0;
+}
+.unit {
+  font-size: 12pt;
+}
+.multiple {
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #fff;
+}
+.multipleBorder {
+    padding:10rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+   border: 1px solid #fff;
+   border-radius: 50rpx;
+}
+.tipColor {
+
+}
+.multiple-select {
+  text-align: center;
+  width: 100rpx;
+  height: 50rpx;
+
+}
+.body {
+  padding-top: 60rpx;
+}
+.toForm {
+  width: 100%;
+  overflow: hidden;
+  height: 300rpx;
+  border-radius: 15rpx;
+  box-shadow:0rpx 10rpx 50rpx 5rpx #FF4544;
+}
+.toFormImg {
+  width: 100%;
+  height: 100%;
+}
+.info {
+  overflow: hidden;
+  margin-top: 60rpx;
+  height: 300rpx;
+  position: relative;
+   border-radius: 15rpx;
+  box-shadow:0rpx 10rpx 50rpx 5rpx #fdd9bb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jinbi {
+  position: absolute;
+  top: 0;
+  left: 20rpx;
+  width: 250rpx;
+  height: 250rpx;
+  z-index: -1;
+}
+.jinbiBg {
+  position: absolute;
+  width: 100%;
+  height: 300rpx;
+  z-index: -2;
+}
+.infoRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.infoCenter {
+  text-align: center;
+  font-weight: bold;
+}
+.infoTitle {
+  font-size: 38rpx;
+  margin-bottom: 20rpx;
+  
+}

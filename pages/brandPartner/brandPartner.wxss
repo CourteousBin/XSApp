@@ -1,0 +1,130 @@
+@import '/style/weui.wxss';
+
+page{
+    background-color: #F8F8F8;
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.page__hd {
+    padding: 40px;
+ }
+.page__bd {
+    padding-bottom: 40px;
+}
+.page__bd_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.page__ft{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.page__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.page__desc {
+    margin-top: 5px;
+    color: #888888;
+    text-align: left;
+    font-size: 14px;
+}
+.actTitle {
+  margin-top: 20rpx;
+  text-align: left;
+  font-size: 33rpx;
+  font-weight: 500;
+}
+.actPicBox {
+  margin: 10rpx 0;
+  width: 100%;
+  height: 350rpx;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+.actPic {
+  width: 100%;
+  height: 100%;
+}
+
+.weui-flex__item {
+  padding: 0 17px;
+  background: #fff;
+  overflow: hidden;
+}
+.relative {
+  position: relative;
+}
+.recommend {
+  position: absolute;
+  background: #FF4544;
+  color: #fff;
+  padding: 0 25rpx;
+}
+.introduction {
+  padding: 10rpx 0 0 0;
+  font-size: 35rpx;
+  font-weight: 600;
+  color: #333;
+}
+.address {
+  color: #333;
+  font-size: 28rpx;
+}
+.phoneRow {
+  display: flex;
+  flex-direction: row;
+  color: #333;
+  font-size: 28rpx;
+  justify-content:space-between;
+}
+.outDate {
+  display:inline-block;
+  padding:.15em .4em;
+  min-width:8px;
+  border-radius:18px;
+  background-color:#888;
+  color:#fff;
+  line-height:1.2;
+  text-align:center;
+  font-size:12px;
+  vertical-align:middle;
+}
+
+.weui-badge {
+  background-color: #FF4544;
+}
+
+.banner {
+  height: 360rpx;
+}
+
+.banner navigator {
+  font-size: 0;
+  position: relative;
+  height: 100%;
+}
+
+.banner .slide-image {
+  width: 100%;
+  height: 100%;
+}
+
+.banner .slide-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 11pt;
+  display: none;
+}

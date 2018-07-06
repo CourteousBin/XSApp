@@ -1,0 +1,112 @@
+<view class="page">
+
+  <view>
+    <swiper class="banner" autoplay="true" interval="5000" duration="300" indicator-dots="true" circular="true">
+      <block>
+        <swiper-item>
+          <view class="slide-title">{{item.title}}</view>
+          <image src="/images/timg.jpg" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+
+        <swiper-item>
+          <view class="slide-title">{{item2.title}}</view>
+          <image src="/images/timg2.jpg" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+
+        <swiper-item>
+          <view class="slide-title">{{item3.title}}</view>
+          <image src="/images/timg3.jpg" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class="page__bd">
+
+    <view class="weui-flex" style='margin-top:50rpx;'>
+
+      <view class="weui-flex__item relative"  catchtap='toDetail'>
+        <view class='recommend'>推荐</view>
+        <view class='actPicBox'>
+          <image src='/images/timg.jpg' class='actPic'></image>
+        </view>
+
+        <view class='introduction'>
+          中国平安银行
+        </view>
+
+        <view class='address'>
+          地址:a撒地方撒地方是
+        </view>
+
+        <view class='phoneRow'>
+          <text>电话:123123456</text>
+          <view class='detialBtn'>
+            <button class="weui-btn mini-btn" type="warn" size="mini">详情</button>
+          </view>
+        </view>
+
+      </view>
+      
+
+    </view>
+
+    <view class="weui-flex" style='margin-top:25rpx;'>
+
+      <view class="weui-flex__item relative"  catchtap='toDetail'>
+        <view class='recommend'>推荐</view>
+        <view class='actPicBox'>
+          <image src='/images/timg.jpg' class='actPic'></image>
+        </view>
+
+        <view class='introduction'>
+          中国平安银行
+        </view>
+
+        <view class='address'>
+          地址:a撒地方撒地方是
+        </view>
+
+        <view class='phoneRow'>
+          <text>电话:123123456</text>
+          <view class='detialBtn'>
+            <button class="weui-btn mini-btn" type="warn" size="mini">详情</button>
+          </view>
+        </view>
+
+      </view>
+      
+
+    </view>
+
+    <view class="weui-flex" style='margin-top:25rpx;'>
+
+      <view class="weui-flex__item relative"  catchtap='toDetail'>
+        <view class='recommend'>推荐</view>
+        <view class='actPicBox'>
+          <image src='/images/timg.jpg' class='actPic'></image>
+        </view>
+
+        <view class='introduction'>
+          中国平安银行
+        </view>
+
+        <view class='address'>
+          地址:a撒地方撒地方是
+        </view>
+
+        <view class='phoneRow'>
+          <text>电话:123123456</text>
+          <view class='detialBtn'>
+            <button class="weui-btn mini-btn" type="warn" size="mini">详情</button>
+          </view>
+        </view>
+
+      </view>
+      
+
+    </view>
+
+  </view>
+
+</view>

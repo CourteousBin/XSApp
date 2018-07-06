@@ -1,0 +1,7 @@
+/* pages/news/news.wxss */
+@import "../../wxParse/wxParse.wxss";
+.news_container {
+  padding: 20rpx; 
+  font-size: 35rpx;
+  color: #353535;
+}

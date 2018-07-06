@@ -1,0 +1,699 @@
+<view class="page">
+
+  <view class='main'>
+
+ <view class="page__hd titleBg">
+    <image class='formBg' src='/images/formBg.png'></image>
+    <view class="page__title">资产咨询表 (第四页)</view>
+    <view class="page__desc">Asset consultation table</view>
+  </view>
+
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <!--五 还贷款  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问目前是否有偿还的贷款:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isRepayLoan" data-judge="isRepayLoan" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isRepayLoan == true}}">
+          
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问有多少笔贷款:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="loanAmount" data-dataList="loanAmount" data-arr="pickerLoanAmount" data-type="pickerLoanAmountIndex" bindchange="insuranceAmount" value="{{pickerLoanAmountIndex}}" 
+                range="{{pickerLoanAmount}}">
+                  <view class="weui-select">{{pickerLoanAmount[pickerLoanAmountIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <block wx:for="{{loanAmount}}" wx:for-item="itemLoan">
+
+            <block wx:if="{{itemLoan == 1}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex1}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex1]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice1}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost" type='digit'></input>
+                </view>
+                <view class='unit'>/万</view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:200%;'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate" mode="date" value="{{LoansDate1}}" 
+                    data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate1}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth" type='digit'></input>
+                </view>
+                <view class='unit'>/元</view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还款情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex1}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex1]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block> 
+
+            <block wx:if="{{itemLoan == 2}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex2}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex2]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice2}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/万</view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:200%;'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate2}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate2}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/元</view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还款情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex2}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex2]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+            <block wx:if="{{itemLoan == 3}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex3}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex3]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice3}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/万</view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:200%;'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate3}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate3}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/元</view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还款情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex3}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex3]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+            <block wx:if="{{itemLoan == 4}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex4}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex4]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice4}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/万</view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:200%;'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate4}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate4}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/元</view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还款情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex4}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex4]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+            <block wx:if="{{itemLoan == 5}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex5}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex5]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice5}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/万</view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:200%;'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate5}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate5}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='digit'></input>
+                </view>
+                <view class='unit'>/元</view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还款情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex5}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex5]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+          </block>
+
+           <!-- <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="HandleLoans" data-type="pickerHandleLoansIndex" bindchange="pickerChange" value="{{pickerHandleLoansIndex}}" range="{{pickerHandleLoans}}">
+                    <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷</view>
+            <view class="weui-cells weui-cells_after-title interval">
+              <radio-group name="LoanMethod" data-type="radioLoanChoice" bindchange="radioChange">
+                <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice}}" wx:key="value">
+                  <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                  <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                  <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="LoanWhere" type='text'></input>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder tipColor">请问贷款金额是多少:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="LoansCost" data-type="pickerLoanCostIndex" bindchange="pickerChange" value="{{pickerLoanCostIndex}}" range="{{pickerLoanCost}}">
+                    <view class="weui-select">{{pickerLoanCost[pickerLoanCostIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-cells weui-cells_after-title interval">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label tipColor">贷款日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker name="LoansDate" mode="date" value="{{date}}" data-type="LoansDate" bindchange="LoanDateChange">
+                    <view class="weui-input">{{date}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder tipColor">请问每月还款金额:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="LoansRepayMonth" data-type="pickerLoanRepayMonthInded" bindchange="pickerChange" value="{{pickerLoanRepayMonthInded}}" range="{{pickerLoanRepayMonth}}">
+                    <view class="weui-select">{{pickerLoanRepayMonth[pickerLoanRepayMonthInded]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">目前还贷是否正常:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class="weui-cell__ft placeholder">
+                  <switch name="isLoanOnTime" data-judge="isLoanOnTime" bindchange="switchJudge" />
+                </view>
+              </view>
+            </view> -->
+        </block>
+
+      </block>
+
+      <!--六 查征信  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问近期是否查过征信:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCheckCredit" data-judge="isCheckCredit" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCheckCredit == true}}">
+          <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问近两个月总查过多少次征信:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="CheckCreditMonth"  data-dataList="CheckCreditMonth" data-arr="pickerCheckCreditMonth" data-type="pickerCheckCreditMonthIndex" bindchange="insuranceAmount" value="{{pickerCheckCreditMonthIndex}}" range="{{pickerCheckCreditMonth}}">
+                    <view class="weui-select">{{pickerCheckCreditMonth[pickerCheckCreditMonthIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <block wx:for="{{CheckCreditMonth}}" wx:for-item="itemCredit"> 
+
+              <block wx:if="{{itemCredit == 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问哪里查(第{{itemCredit}}次):</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditMonth" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+              <block wx:if="{{itemCredit != 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问哪里查(第{{itemCredit}}次):</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditMonth{{itemCredit}}" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+            </block>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问近半年总查过多少次征信:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="CheckCreditYears" data-dataList="CheckCreditYears" data-arr="pickerCheckCreditYears" data-type="pickerCheckCreditYearsIndex" bindchange="insuranceAmount" value="{{pickerCheckCreditYearsIndex}}" range="{{pickerCheckCreditYears}}">
+                    <view class="weui-select">{{pickerCheckCreditYears[pickerCheckCreditYearsIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <block wx:for="{{CheckCreditYears}}" wx:for-item="itemCredit"> 
+
+              <block wx:if="{{itemCredit == 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问哪里查(第{{itemCredit}}次):</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditYears" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+              <block wx:if="{{itemCredit != 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问哪里查(第{{itemCredit}}次):</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditYears{{itemCredit}}" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+            </block>
+
+            
+        </block>
+      </block>
+
+      <view class="weui-flex">
+
+          <view class="weui-flex__item">
+            <view class="weui-btn-area">
+              <button class="weui-btn" catchtap='prePage' type="warn">上一页</button>
+            </view>
+          </view>
+
+          <view class="weui-flex__item">
+            <view class="weui-btn-area">
+              <button class="weui-btn" type="primary" formType="submit">下一页</button>
+            </view>
+          </view>
+
+      </view>
+
+    </form>
+
+  </view>
+
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-footer {{isFooter == false?'weui-footer_fixed-bottom':''}}">
+      <view class="weui-footer__links">
+        <navigator url="" class="weui-footer__link">底部链接</navigator>
+      </view>
+      <view class="weui-footer__text">Copyright © 佛山驰实网络科技有限公司</view>
+    </view>
+  </view>
+
+</view>
+

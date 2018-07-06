@@ -1,0 +1,52 @@
+<view>
+  <block>
+    <view class='secondary_headlines'>
+      <view class='headlines_green'></view>
+      <view class='headlines_white'></view>
+      <text class='headlines_title'>关于我们</text>
+    </view>
+    <view class='about_banner'>
+      <image src='/images/timg.jpg'></image>
+    </view>
+    <view class='about_summary'>
+      <view>轩盛咨询打造最优质的平民化金融信息服务平台。成立于2015年，为广大资金需求者提供一站式金融信息服务，助其筹措资金，事业腾飞。</view>
+      <view>我公司是国内唯一一家获得“医用康复治疗水疗浴槽”出口认证的产品，国际ROHS绿色环保认证产品，我公司是可以根据客户的自身需求为客户量身定做康复水疗设备，满足了客户个性化的需求。</view>
+<view>为客户提供的现场斟测沟通、专业的康复水疗知识的培训以及整个水疗设计的方案满足了客户实实在在的需求，深受广大康复机构的欢迎与认可。
+      </view>
+    </view>
+  </block>
+
+  <block>
+    <view class='secondary_headlines'>
+      <view class='headlines_green'></view>
+      <view class='headlines_white'></view>
+      <text class='headlines_title'>公司地址</text>
+    </view>
+    <view class='about_map'>
+      <map id="map" longitude="112.975860" latitude="22.960830" data-long="112.975860" data-lat="22.960830"  data-name="佛山市南海区轩盛信息咨询有限公司" scale="18" markers="{{markers}}" bindmarkertap="listenerBtnGetLocation" style="width: 100%; height: 300rpx;" />
+    </view>
+  </block>
+
+  <block>
+    <view class='secondary_headlines'>
+      <view class='headlines_green'></view>
+      <view class='headlines_white'></view>
+      <text class='headlines_title'>联系方式</text>
+    </view>
+
+     <view class='about_infomation'>
+      <text>公司名称:</text>
+      <text style='font-size:30rpx;'>佛山市南海区轩盛信息咨询有限公司</text>
+    </view> 
+    
+    <view class='about_infomation'>
+      <text>联系电话:</text>
+      <text data-phone="0757-86613200" catchtap='call'>0757-86613200</text>
+    </view>
+    
+    <view class='about_infomation' style="margin-bottom:50rpx;">
+      <text style='font-size:30rpx'>公司地址：</text>
+      <text  data-long="112.975860" data-lat="22.960830"  data-name="佛山市南海区轩盛信息咨询有限公司" catchtap='listenerBtnGetLocation' style='font-size:29rpx;'>佛山市南海区樵金中路启源广场壹幢四层402</text>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,54 @@
+.secondary_headlines {
+  padding: 12px 10px;
+  background: #F2F2F2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.headlines_green {
+  width: 15rpx;
+  height: 30rpx;
+  background: #FF4544;
+}
+.headlines_white {
+  width: 15rpx;
+  height: 30rpx;
+  background: #fff;
+}
+.headlines_title {
+  color: #4B4B4B;
+  font-weight: 700;
+  text-indent: 25rpx;
+  font-size: 30rpx;
+}
+
+/*关于我们  */
+.about_banner {
+  width: 100%;
+  height: 350rpx;
+}
+.about_banner image {
+  width: 100%;
+  height: 100%;
+}
+.about_summary {
+  color: #666;
+  line-height: 20pt;
+  padding: 20rpx;
+  font-size: 33rpx;
+  text-indent: 66rpx;
+}
+
+/*地图  */
+.about_map {
+  padding: 20rpx;
+}
+/*联系方式  */
+.about_infomation {
+  color: #666;
+  font-size: 35rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}

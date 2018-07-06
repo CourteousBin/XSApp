@@ -1,0 +1,3502 @@
+<view class="page">
+  <!--头部  -->
+  <view class="page__hd">
+    <view class="page__title">资产咨询表</view>
+    <view class="page__desc">Asset consultation table</view>
+  </view>
+
+  <view class='main'>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+    <!--一 基础内容  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">客户姓名:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="userName" type='text'></input>
+          </view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">联系电话:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="mobile" type='number' maxlength="11"></input>
+          </view>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title interval">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label tipColor">出生日期:</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker name="age" data-type="ageDate" mode="date" value="{{ageDate}}" bindchange="DateChange">
+                <view class="weui-input">{{ageDate}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">性别</view>
+        <view class="weui-cells weui-cells_after-title interval">
+          <radio-group name="sex" data-type="radioSex" bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioSex}}" wx:key="value">
+              <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+              <view class="weui-cell__bd tipColor">{{item.name}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+              </view>
+            </label>
+          </radio-group>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">学历:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class='degree'>
+              <picker name="degree" data-type="DegreeIndex" bindchange="pickerChange" value="{{DegreeIndex}}" range="{{pickerDegree}}">
+                <view class="weui-select">{{pickerDegree[DegreeIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">是否结婚:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isMarry" bindchange="isMarry" />
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-flex rowBg">
+          <view class="tipColor">
+            <view class="placeholder">户籍:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="userHousehold" type='text'></input>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">请问你是做生意还是上班呢?</view>
+        <view class="weui-cells weui-cells_after-title interval">
+          <radio-group name="job" data-type="radioJob" data-judge="isBusiness" bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioJob}}" wx:key="value">
+              <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+              <view class="weui-cell__bd tipColor">{{item.name}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+              </view>
+            </label>
+          </radio-group>
+        </view>
+      </block>
+
+     <!--如果客户选择了做生意  -->
+      <block wx:if="{{isBusiness == 1}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是否有营业执照:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="isLicense" data-judge="isLicense" bindchange="switchJudge" />
+              </view>
+            </view>
+          </view>
+
+        <!--如果有营业执照这段代码执行  -->
+        <block wx:if="{{isLicense == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">营业执照申请多久:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="license" data-type="LicenseInded" bindchange="pickerChange" value="{{LicenseInded}}" range="{{pickerLicense}}">
+                  <view class="weui-select">{{pickerLicense[LicenseInded]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">经营范围:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="operationScope" type='text'></input>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">厂房地段:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="plant" type='text'></input>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是否有单位固话:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="isWorkNumber" />
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">每月银行流水大概多少:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="bankFlow" data-type="BankFlow1Inded" bindchange="pickerChange" value="{{BankFlow1Inded}}" range="{{pickerBankFlow1}}">
+                  <view class="weui-select">{{pickerBankFlow1[BankFlow1Inded]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">每年开票额度是多少:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="invoiceAmount" data-type="InvoiceAmountInded" bindchange="pickerChange" value="{{InvoiceAmountInded}}" range="{{pickerInvoiceAmount}}">
+                  <view class="weui-select">{{pickerInvoiceAmount[InvoiceAmountInded]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是否在单位买社保:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="isSecurity1" data-judge="isSecurity1" bindchange="switchJudge" />
+              </view>
+            </view>
+          </view>
+
+          <view wx:if="{{isSecurity1 == true}}" class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">社保买了多久:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="security1" data-type="Security1Index" bindchange="pickerChange" value="{{Security1Index}}" range="{{pickerSecurity1}}">
+                  <view class="weui-select">{{pickerSecurity1[Security1Index]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是否在单位买公积金:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="isPublicFunds1" data-judge="isPublicFunds1" bindchange="switchJudge" />
+              </view>
+            </view>
+          </view>
+
+          <view wx:if="{{isPublicFunds1 == true}}" class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">公积金买了多久:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="publickFunds1" data-type="PublicFunds1Index" bindchange="pickerChange" value="{{PublicFunds1Index}}" range="{{pickerPublicFunds1}}">
+                  <view class="weui-select">{{pickerPublicFunds1[PublicFunds1Index]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+        </block>
+      </block>
+
+      <!-- 如果客户选择了上班 -->
+      <block wx:if="{{isBusiness == 2}}">
+        
+        <view class="weui-flex rowBg">
+          <view class="tipColor">
+            <view class="placeholder">在什么单位工作:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="companyName" type='text'></input>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">单位地址:</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea bindinput="companyAdderessChange" name="companyAdderess" class="weui-textarea" placeholder="请输入文本" style="height: 4em" maxlength='80' />
+                <view class="weui-textarea-counter">{{companyAdderessLen}}/80</view>
+              </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">工资是打卡还是收现金:</view>
+        <view class="weui-cells weui-cells_after-title interval">
+          <radio-group name="Salary" data-type="radioSalary" bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioSalary}}" wx:key="value">
+              <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+              <view class="weui-cell__bd tipColor">{{item.name}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+              </view>
+            </label>
+          </radio-group>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">每月银行流水大概多少:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="bankFlow" data-type="BankFlow2Inded" bindchange="pickerChange" value="{{BankFlow2Inded}}" range="{{pickerBankFlow2}}">
+                  <view class="weui-select">{{pickerBankFlow2[BankFlow2Inded]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是否在单位买社保:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="isSecurity2" data-judge="isSecurity2" bindchange="switchJudge" />
+              </view>
+            </view>
+          </view>
+
+          <view wx:if="{{isSecurity2 == true}}" class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">社保买了多久:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="security2" data-type="Security2Index" bindchange="pickerChange" value="{{Security2Index}}" range="{{pickerSecurity2}}">
+                  <view class="weui-select">{{pickerSecurity2[Security2Index]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是否在单位买公积金:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="isPublicFunds2" data-judge="isPublicFunds2" bindchange="switchJudge" />
+              </view>
+            </view>
+          </view>
+
+          <view wx:if="{{isPublicFunds2 == true}}" class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">公积金买了多久:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="publickFunds2" data-type="PublicFunds2Index" bindchange="pickerChange" value="{{PublicFunds2Index}}" range="{{pickerPublicFunds2}}">
+                  <view class="weui-select">{{pickerPublicFunds2[PublicFunds2Index]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+      </block>
+
+      <!--二 是否购买人寿  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="tooLong">请问你有买人寿保险吗(缴费期为3年或以上):</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isInsurance" data-judge="isInsurance" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+        
+        <block wx:if="{{isInsurance == true}}">
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问购买了多少份保险:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="insuranceAmount" data-dataList="insuranceAmountList" data-arr="pickerInsurance" data-type="pickerInsuranceIndex" bindchange="insuranceAmount" value="{{pickerInsuranceIndex}}" range="{{pickerInsurance}}">
+                  <view class="weui-select">{{pickerInsurance[pickerInsuranceIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+          <!--遍历选择  -->
+          <block wx:for="{{insuranceAmountList}}">
+
+             <block wx:if="{{item == 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问是什么公司的保险:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CompanyInsurance" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-cells weui-cells_after-title interval">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                      <view class="weui-label tipColor" style='width:200%;margin-right:10rpx;'>请问是什么时候购买:</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <picker name="insuranceBuyTime" data-type="insuranceBuyTimeDate" mode="date" value="{{insuranceBuyTimeDate}}" bindchange="DateChange">
+                        <view class="weui-input">{{insuranceBuyTimeDate}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问缴费方式是:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="InsurancePayType" data-type="pickerInsurancePayTypeIndex" bindchange="pickerChange" value="{{pickerInsurancePayTypeIndex}}" range="{{pickerInsurancePayType}}">
+                        <view class="weui-select">{{pickerInsurancePayType[pickerInsurancePayTypeIndex]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问期缴保费多少金额:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumAmount" type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问若缴清,缴清多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumPayfee" type='number'></input>
+                  </view>
+                </view>      
+
+            </block> 
+
+            <block wx:if="{{item == 2}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问是第{{item}}份是什么公司的保险:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CompanyInsurance{{item}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-cells weui-cells_after-title interval">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                      <view class="weui-label tipColor" style='width:200%;margin-right:10rpx;'>请问第{{item}}份是什么时候购买:</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <picker name="insuranceBuyTime{{item}}" data-type="insuranceBuyTimeDate{{item}}" mode="date" value="{{insuranceBuyTimeDate2}}" bindchange="DateChange">
+                        <view class="weui-input">{{insuranceBuyTimeDate2}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份缴费方式是:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="InsurancePayType{{item}}" data-type="pickerInsurancePayTypeIndex{{item}}" bindchange="pickerChange" value="{{pickerInsurancePayTypeIndex2}}" range="{{pickerInsurancePayType}}">
+                        <view class="weui-select">{{pickerInsurancePayType[pickerInsurancePayTypeIndex2]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份期缴保费多少金额:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumAmount{{item}}" type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份若缴清,缴清多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumPayfee{{item}}" type='number'></input>
+                  </view>
+                </view>      
+
+            </block> 
+
+            <block wx:if="{{item == 3}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问是第{{item}}份是什么公司的保险:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CompanyInsurance{{item}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-cells weui-cells_after-title interval">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                      <view class="weui-label tipColor" style='width:200%;margin-right:10rpx;'>请问第{{item}}份是什么时候购买:</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <picker name="insuranceBuyTime{{item}}" data-type="insuranceBuyTimeDate{{item}}" mode="date" value="{{insuranceBuyTimeDate3}}" bindchange="DateChange">
+                        <view class="weui-input">{{insuranceBuyTimeDate3}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份缴费方式是:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="InsurancePayType{{item}}" data-type="pickerInsurancePayTypeIndex{{item}}" bindchange="pickerChange" value="{{pickerInsurancePayTypeIndex3}}" range="{{pickerInsurancePayType}}">
+                        <view class="weui-select">{{pickerInsurancePayType[pickerInsurancePayTypeIndex3]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份期缴保费多少金额:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumAmount{{item}}" type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份若缴清,缴清多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumPayfee{{item}}" type='number'></input>
+                  </view>
+                </view>      
+
+            </block>
+
+            <block wx:if="{{item == 4}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问是第{{item}}份是什么公司的保险:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CompanyInsurance{{item}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-cells weui-cells_after-title interval">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                      <view class="weui-label tipColor" style='width:200%;margin-right:10rpx;'>请问第{{item}}份是什么时候购买:</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <picker name="insuranceBuyTime{{item}}" data-type="insuranceBuyTimeDate{{item}}" mode="date" value="{{insuranceBuyTimeDate4}}" bindchange="DateChange">
+                        <view class="weui-input">{{insuranceBuyTimeDate4}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份缴费方式是:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="InsurancePayType{{item}}" data-type="pickerInsurancePayTypeIndex{{item}}" bindchange="pickerChange" value="{{pickerInsurancePayTypeIndex4}}" range="{{pickerInsurancePayType}}">
+                        <view class="weui-select">{{pickerInsurancePayType[pickerInsurancePayTypeIndex4]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份期缴保费多少金额:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumAmount{{item}}" type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份若缴清,缴清多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumPayfee{{item}}" type='number'></input>
+                  </view>
+                </view>      
+
+            </block>
+
+            <block wx:if="{{item == 5}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问是第{{item}}份是什么公司的保险:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CompanyInsurance{{item}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-cells weui-cells_after-title interval">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                      <view class="weui-label tipColor" style='width:200%;margin-right:10rpx;'>请问第{{item}}份是什么时候购买:</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <picker name="insuranceBuyTime{{item}}" data-type="insuranceBuyTimeDate{{item}}" mode="date" value="{{insuranceBuyTimeDate5}}" bindchange="DateChange">
+                        <view class="weui-input">{{insuranceBuyTimeDate5}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份缴费方式是:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="InsurancePayType{{item}}" data-type="pickerInsurancePayTypeIndex{{item}}" bindchange="pickerChange" value="{{pickerInsurancePayTypeIndex5}}" range="{{pickerInsurancePayType}}">
+                        <view class="weui-select">{{pickerInsurancePayType[pickerInsurancePayTypeIndex5]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份期缴保费多少金额:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumAmount{{item}}" type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{item}}份若缴清,缴清多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="PremiumPayfee{{item}}" type='number'></input>
+                  </view>
+                </view>      
+
+            </block>
+
+            
+
+          </block>
+
+        </block>
+      </block>
+
+      <!--三 是否有小车  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问你有小车吗:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCar" data-judge="isCar" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCar == true}}">
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问有多少量车:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="carsAmount" data-dataList="carsAmount" data-arr="pickerCarAmount" data-type="pickerCarAmountIndex" bindchange="insuranceAmount" value="{{pickerCarAmountIndex}}" 
+                range="{{pickerCarAmount}}">
+                  <view class="weui-select">{{pickerCarAmount[pickerCarAmountIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <block wx:for="{{carsAmount}}" wx:for-item="itemCar">
+            <block wx:if="{{itemCar == 1}}">
+
+             <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问是什么车型:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="carBrand" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问发票价多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarBillPrice" placeholder='/元' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问买了多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarYears" placeholder='/年' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问是全款车还是按揭车</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList1"  data-judge="isBuyCarType" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList1}}" wx:key="value">
+                    <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view> 
+
+              <block wx:if="{{isBuyCarType == 2}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问首付多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarFirstPay" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问月供多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarMonthPay" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问供了多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="CarPayTimes" data-type="pickerCarPayTimesIndex" bindchange="pickerChange" value="{{pickerCarPayTimesIndex}}" range="{{pickerCarPayTimes}}">
+                        <view class="weui-select">{{pickerCarPayTimes[pickerCarPayTimesIndex]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问是否已经供完:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class="weui-cell__ft placeholder">
+                      <switch name="isCarSupply" data-judge="isCarSupply" bindchange="switchJudge" />
+                    </view>
+                  </view>
+                </view>
+
+                <block wx:if="{{isCarSupply == true}}">
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问供完多久:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <view class='degree'>
+                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex" bindchange="pickerChange" value="{{pickerCarSupplyIndex}}" range="{{pickerCarSupply}}">
+                          <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex]}}</view>
+                        </picker>
+                      </view>
+                    </view>
+                  </view>
+
+                </block>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问在哪一家银行按揭:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carWhichBank" type='text'></input>
+                  </view>
+                </view>
+
+              </block>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问有没有购买商业保险:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class="weui-cell__ft placeholder">
+                    <switch name="isCarInsurance" data-judge="isCarInsurance" bindchange="switchJudge" />
+                  </view>
+                </view>
+              </view>
+
+              <block wx:if="{{isCarInsurance == true}}">
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问在什么保险公司买:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carInsuranceCompany" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问保险费是多少钱:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarInsuranceCost" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+              </block>
+
+            </block>
+
+            <block wx:if="{{itemCar == 2}}">
+
+             <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量是什么车型:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="carBrand{{itemCar}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量发票价多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarBillPrice{{itemCar}}" placeholder='/元' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量买了多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarYears{{itemCar}}" placeholder='/年' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemCar}}量是全款车还是按揭车</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList2}}" wx:key="value">
+                    <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view> 
+
+              <block wx:if="{{isBuyCarType2 == 2}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量首付多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarFirstPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量月供多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarMonthPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量供了多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="CarPayTimes{{itemCar}}" data-type="pickerCarPayTimesIndex2" bindchange="pickerChange" value="{{pickerCarPayTimesIndex2}}" range="{{pickerCarPayTimes}}">
+                        <view class="weui-select">{{pickerCarPayTimes[pickerCarPayTimesIndex2]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量是否已经供完:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class="weui-cell__ft placeholder">
+                      <switch name="isCarSupply{{itemCar}}" data-judge="isCarSupply{{itemCar}}" bindchange="switchJudge" />
+                    </view>
+                  </view>
+                </view>
+
+                <block wx:if="{{isCarSupply2 == true}}">
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemCar}}量供完多久:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <view class='degree'>
+                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex2" bindchange="pickerChange" value="{{pickerCarSupplyIndex2}}" range="{{pickerCarSupply}}">
+                          <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex2]}}</view>
+                        </picker>
+                      </view>
+                    </view>
+                  </view>
+
+                </block>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在哪一家银行按揭:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carWhichBank{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+              </block>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量有没有购买商业保险:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class="weui-cell__ft placeholder">
+                    <switch name="isCarInsurance{{itemCar}}" data-judge="isCarInsurance{{itemCar}}" bindchange="switchJudge" />
+                  </view>
+                </view>
+              </view>
+
+              <block wx:if="{{isCarInsurance2 == true}}">
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在什么保险公司买:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carInsuranceCompany{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量保险费是多少钱:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarInsuranceCost{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+              </block>
+
+            </block>
+
+            <block wx:if="{{itemCar == 3}}">
+
+             <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量是什么车型:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="carBrand{{itemCar}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量发票价多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarBillPrice{{itemCar}}" placeholder='/元' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量买了多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarYears{{itemCar}}" placeholder='/年' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemCar}}量是全款车还是按揭车</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList3}}" wx:key="value">
+                    <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view> 
+
+              <block wx:if="{{isBuyCarType3 == 2}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量首付多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarFirstPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量月供多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarMonthPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量供了多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="CarPayTimes{{itemCar}}" data-type="pickerCarPayTimesIndex3" bindchange="pickerChange" value="{{pickerCarPayTimesIndex3}}" range="{{pickerCarPayTimes}}">
+                        <view class="weui-select">{{pickerCarPayTimes[pickerCarPayTimesIndex3]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量是否已经供完:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class="weui-cell__ft placeholder">
+                      <switch name="isCarSupply{{itemCar}}" data-judge="isCarSupply{{itemCar}}" bindchange="switchJudge" />
+                    </view>
+                  </view>
+                </view>
+
+                <block wx:if="{{isCarSupply3 == true}}">
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemCar}}量供完多久:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <view class='degree'>
+                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex3" bindchange="pickerChange" value="{{pickerCarSupplyIndex3}}" range="{{pickerCarSupply}}">
+                          <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex3]}}</view>
+                        </picker>
+                      </view>
+                    </view>
+                  </view>
+
+                </block>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在哪一家银行按揭:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carWhichBank{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+              </block>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量有没有购买商业保险:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class="weui-cell__ft placeholder">
+                    <switch name="isCarInsurance{{itemCar}}" data-judge="isCarInsurance{{itemCar}}" bindchange="switchJudge" />
+                  </view>
+                </view>
+              </view>
+
+              <block wx:if="{{isCarInsurance3 == true}}">
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在什么保险公司买:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carInsuranceCompany{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量保险费是多少钱:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarInsuranceCost{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+              </block>
+
+            </block>
+
+            <block wx:if="{{itemCar == 4}}">
+
+             <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量是什么车型:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="carBrand{{itemCar}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量发票价多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarBillPrice{{itemCar}}" placeholder='/元' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量买了多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarYears{{itemCar}}" placeholder='/年' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemCar}}量是全款车还是按揭车</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList4}}" wx:key="value">
+                    <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view> 
+
+              <block wx:if="{{isBuyCarType4 == 2}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量首付多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarFirstPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量月供多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarMonthPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量供了多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="CarPayTimes{{itemCar}}" data-type="pickerCarPayTimesIndex4" bindchange="pickerChange" value="{{pickerCarPayTimesIndex4}}" range="{{pickerCarPayTimes}}">
+                        <view class="weui-select">{{pickerCarPayTimes[pickerCarPayTimesIndex4]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量是否已经供完:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class="weui-cell__ft placeholder">
+                      <switch name="isCarSupply{{itemCar}}" data-judge="isCarSupply{{itemCar}}" bindchange="switchJudge" />
+                    </view>
+                  </view>
+                </view>
+
+                <block wx:if="{{isCarSupply4 == true}}">
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemCar}}量供完多久:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <view class='degree'>
+                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex4" bindchange="pickerChange" value="{{pickerCarSupplyIndex4}}" range="{{pickerCarSupply}}">
+                          <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex4]}}</view>
+                        </picker>
+                      </view>
+                    </view>
+                  </view>
+
+                </block>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在哪一家银行按揭:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carWhichBank{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+              </block>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量有没有购买商业保险:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class="weui-cell__ft placeholder">
+                    <switch name="isCarInsurance{{itemCar}}" data-judge="isCarInsurance{{itemCar}}" bindchange="switchJudge" />
+                  </view>
+                </view>
+              </view>
+
+              <block wx:if="{{isCarInsurance4 == true}}">
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在什么保险公司买:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carInsuranceCompany{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量保险费是多少钱:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarInsuranceCost{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+              </block>
+
+            </block>
+
+            <block wx:if="{{itemCar == 5}}">
+
+             <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量是什么车型:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="carBrand{{itemCar}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量发票价多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarBillPrice{{itemCar}}" placeholder='/元' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量买了多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="CarYears{{itemCar}}" placeholder='/年' type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemCar}}量是全款车还是按揭车</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList5}}" wx:key="value">
+                    <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view> 
+
+              <block wx:if="{{isBuyCarType5 == 2}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量首付多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarFirstPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量月供多少:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarMonthPay{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量供了多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="CarPayTimes{{itemCar}}" data-type="pickerCarPayTimesIndex5" bindchange="pickerChange" value="{{pickerCarPayTimesIndex5}}" range="{{pickerCarPayTimes}}">
+                        <view class="weui-select">{{pickerCarPayTimes[pickerCarPayTimesIndex5]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量是否已经供完:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class="weui-cell__ft placeholder">
+                      <switch name="isCarSupply{{itemCar}}" data-judge="isCarSupply{{itemCar}}" bindchange="switchJudge" />
+                    </view>
+                  </view>
+                </view>
+
+                <block wx:if="{{isCarSupply5 == true}}">
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemCar}}量供完多久:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <view class='degree'>
+                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex5" bindchange="pickerChange" value="{{pickerCarSupplyIndex5}}" range="{{pickerCarSupply}}">
+                          <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex5]}}</view>
+                        </picker>
+                      </view>
+                    </view>
+                  </view>
+
+                </block>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在哪一家银行按揭:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carWhichBank{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+              </block>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemCar}}量有没有购买商业保险:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class="weui-cell__ft placeholder">
+                    <switch name="isCarInsurance{{itemCar}}" data-judge="isCarInsurance{{itemCar}}" bindchange="switchJudge" />
+                  </view>
+                </view>
+              </view>
+
+              <block wx:if="{{isCarInsurance5 == true}}">
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量在什么保险公司买:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="carInsuranceCompany{{itemCar}}" type='text'></input>
+                  </view>
+                </view>
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问第{{itemCar}}量保险费是多少钱:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="CarInsuranceCost{{itemCar}}" placeholder='/元' type='number'></input>
+                  </view>
+                </view>
+
+              </block>
+
+            </block>
+
+          </block>
+
+          <!-- <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">是什么车型:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="carBrand" type='text'></input>
+            </view>
+          </view>
+
+          <view class="weui-cells__title">是全款车还是按揭车</view>
+          <view class="weui-cells weui-cells_after-title interval">
+            <radio-group name="BuyCarType" data-type="radioBuyCarType"  data-judge="isBuyCarType" bindchange="radioChange">
+              <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarType}}" wx:key="value">
+                <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                </view>
+              </label>
+            </radio-group>
+          </view> -->
+
+          <!--如果是按揭  -->
+          <!-- <block wx:if="{{isBuyCarType == 3}}">
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">供了多久:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="CarPayTimes" data-type="pickerCarPayTimesIndex" bindchange="pickerChange" value="{{pickerCarPayTimesIndex}}" range="{{pickerCarPayTimes}}">
+                    <view class="weui-select">{{pickerCarPayTimes[pickerCarPayTimesIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">是否已经供完:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class="weui-cell__ft placeholder">
+                  <switch name="isCarSupply" data-judge="isCarSupply" bindchange="switchJudge" />
+                </view>
+              </view>
+            </view> -->
+
+            <!--如果已经供完  -->
+            <!-- <block wx:if="{{isCarSupply == true}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">供完多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex" bindchange="pickerChange" value="{{pickerCarSupplyIndex}}" range="{{pickerCarSupply}}">
+                      <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+            </block>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">在哪一家银行按揭:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="carWhichBank" type='text'></input>
+              </view>
+            </view>
+
+          </block>
+
+          <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">有没有购买商业保险:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCarInsurance" data-judge="isCarInsurance" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCarInsurance == true}}">
+          <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">在什么保险公司买:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="carInsuranceCompany" type='text'></input>
+              </view>
+            </view>
+
+        </block> -->
+
+        </block>
+
+      </block>
+
+      <!--四 房产 -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问你或直系亲属名下有房产吗:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isHouse" data-judge="isHouse" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isHouse == true}}">
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问有多少套房产:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="HouseAmount" data-dataList="HouseAmount" data-arr="pickerHouseAmount" data-type="pickerHouseAmountIndex" bindchange="insuranceAmount" value="{{pickerHouseAmountIndex}}" 
+                range="{{pickerHouseAmount}}">
+                  <view class="weui-select">{{pickerHouseAmount[pickerHouseAmountIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+            <block wx:for="{{HouseAmount}}" wx:for-item="itemHouse"> 
+                
+              <block wx:if="{{itemHouse == 1}}">
+
+                <view class="weui-cells__title">请问商品房还是自建房</view>
+                  <view class="weui-cells weui-cells_after-title interval">
+                    <radio-group name="houseType" data-type="radioHouseType{{itemHouse}}" bindchange="radioChange">
+                      <label class="weui-cell weui-check__label" wx:for="{{radioHouseType1}}" wx:key="value">
+                        <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                        <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                          <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                        </view>
+                      </label>
+                    </radio-group>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问地段在哪里:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseAddress" type='text'></input>
+                    </view>
+                  </view>
+
+                  <!-- <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问买了或建了多久:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseDegree" type='text'></input>
+                    </view>
+                  </view>  -->
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问面积是多少平方米:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseSize"  type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问价值是多少:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseCost" type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-cells__title">请问是全款房还是按揭房</view>
+                    <view class="weui-cells weui-cells_after-title interval">
+                      <radio-group name="houseType" data-type="radioBuyHouseType{{itemHouse}}" data-judge="isbuyHouseType{{itemHouse}}" bindchange="radioChange">
+                        <label class="weui-cell weui-check__label" wx:for="{{radioBuyHouseType1}}" wx:key="value">
+                          <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                          <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                            <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                          </view>
+                        </label>
+                      </radio-group>
+                  </view>
+
+                  <block wx:if="{{isbuyHouseType1 == 1}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问买了或建了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex1}}" range="{{pickerhouseDegree}}">
+                            <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex1]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+                  </block>
+
+                  <block wx:if="{{isbuyHouseType1 == 2}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问首付多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="houseFirstPay" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问月供多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseMonthPay" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问供了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HousePayTimes" data-type="pickerHousePayTimesIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHousePayTimesIndex1}}" range="{{pickerHousePayTimes}}">
+                            <view class="weui-select">{{pickerHousePayTimes[pickerHousePayTimesIndex1]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问在哪一家银行按揭:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseWhichBank" type='text'></input>
+                      </view>
+                    </view>
+
+                    <!-- <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseLoanWho" type='text'></input>
+                      </view>
+                    </view> -->
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HouseLoanWho" data-type="pickerHouseLoanWhoIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseLoanWhoIndex1}}" range="{{pickerHouseLoanWho}}">
+                            <view class="weui-select">{{pickerHouseLoanWho[pickerHouseLoanWhoIndex1]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问是否已经供完:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class="weui-cell__ft placeholder">
+                          <switch name="isHouseSupply" data-judge="isHouseSupply{{itemHouse}}" bindchange="switchJudge" />
+                        </view>
+                      </view>
+                    </view>
+
+                    <block wx:if="{{isHouseSupply1 == true}}">
+                      <view class="weui-flex rowBg interval">
+                        <view class="tipColor">
+                          <view class="placeholder">请问供完多久:</view>
+                        </view>
+                        <view class="weui-flex__item">
+                          <view class='degree'>
+                            <picker name="HouseSupplyTime" data-type="pickerHouseSupplyIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseSupplyIndex1}}" range="{{pickerHouseSupply}}">
+                              <view class="weui-select">{{pickerHouseSupply[pickerHouseSupplyIndex1]}}</view>
+                            </picker>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+
+                  </block>
+
+                <view class="weui-cells__title">请问是否有房产证或购房合同</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseContract" data-type="radioHouseProve{{itemHouse}}"  bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseProve1}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>
+
+                <view class="weui-cells__title">请问是共有还是个人</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseBelong" data-type="radioHouseBelong{{itemHouse}}" bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseBelong1}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>      
+
+              </block>
+
+              <block wx:if="{{itemHouse == 2}}">
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套商品房还是自建房</view>
+                  <view class="weui-cells weui-cells_after-title interval">
+                    <radio-group name="houseType{{itemHouse}}" data-type="radioHouseType{{itemHouse}}" bindchange="radioChange">
+                      <label class="weui-cell weui-check__label" wx:for="{{radioHouseType2}}" wx:key="value">
+                        <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                        <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                          <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                        </view>
+                      </label>
+                    </radio-group>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套地段在哪里:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseAddress{{itemHouse}}" type='text'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套面积是多少平方米:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseSize{{itemHouse}}"  type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套价值是多少:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseCost{{itemHouse}}" type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-cells__title">请问第{{itemHouse}}套是全款房还是按揭房</view>
+                    <view class="weui-cells weui-cells_after-title interval">
+                      <radio-group name="houseType{{itemHouse}}" data-type="radioBuyHouseType{{itemHouse}}" data-judge="isbuyHouseType{{itemHouse}}" bindchange="radioChange">
+                        <label class="weui-cell weui-check__label" wx:for="{{radioBuyHouseType2}}" wx:key="value">
+                          <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                          <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                            <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                          </view>
+                        </label>
+                      </radio-group>
+                  </view>
+
+                  <block wx:if="{{isbuyHouseType2 == 1}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套房买了或建了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex2}}" range="{{pickerhouseDegree}}">
+                            <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex2]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+                  </block>
+
+                  <block wx:if="{{isbuyHouseType2 == 2}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套首付多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="houseFirstPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套月供是多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseMonthPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套供了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HousePayTimes{{itemHouse}}" data-type="pickerHousePayTimesIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHousePayTimesIndex2}}" range="{{pickerHousePayTimes}}">
+                            <view class="weui-select">{{pickerHousePayTimes[pickerHousePayTimesIndex2]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套在哪一家银行按揭:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseWhichBank{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view>
+
+                    <!-- <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseLoanWho{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view> -->
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HouseLoanWho{{itemHouse}}" data-type="pickerHouseLoanWhoIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseLoanWhoIndex2}}" range="{{pickerHouseLoanWho}}">
+                            <view class="weui-select">{{pickerHouseLoanWho[pickerHouseLoanWhoIndex2]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套是否已经供完:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class="weui-cell__ft placeholder">
+                          <switch name="isHouseSupply{{itemHouse}}" data-judge="isHouseSupply{{itemHouse}}" bindchange="switchJudge" />
+                        </view>
+                      </view>
+                    </view>
+
+                    <block wx:if="{{isHouseSupply2 == true}}">
+                      <view class="weui-flex rowBg interval">
+                        <view class="tipColor">
+                          <view class="placeholder">请问第{{itemHouse}}套供完多久:</view>
+                        </view>
+                        <view class="weui-flex__item">
+                          <view class='degree'>
+                            <picker name="HouseSupplyTime{{itemHouse}}" data-type="pickerHouseSupplyIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseSupplyIndex2}}" range="{{pickerHouseSupply}}">
+                              <view class="weui-select">{{pickerHouseSupply[pickerHouseSupplyIndex2]}}</view>
+                            </picker>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+
+                  </block>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}是否有房产证或购房合同</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseContract{{itemHouse}}" data-type="radioHouseProve{{itemHouse}}"  bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseProve2}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套是共有还是个人</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseBelong{{itemHouse}}" data-type="radioHouseBelong{{itemHouse}}" bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseBelong2}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>      
+
+              </block>
+
+              <block wx:if="{{itemHouse == 3}}">
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套商品房还是自建房</view>
+                  <view class="weui-cells weui-cells_after-title interval">
+                    <radio-group name="houseType{{itemHouse}}" data-type="radioHouseType{{itemHouse}}" bindchange="radioChange">
+                      <label class="weui-cell weui-check__label" wx:for="{{radioHouseType3}}" wx:key="value">
+                        <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                        <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                          <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                        </view>
+                      </label>
+                    </radio-group>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套地段在哪里:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseAddress{{itemHouse}}" type='text'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套面积是多少平方米:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseSize{{itemHouse}}"  type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套价值是多少:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseCost{{itemHouse}}" type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-cells__title">请问第{{itemHouse}}套是全款房还是按揭房</view>
+                    <view class="weui-cells weui-cells_after-title interval">
+                      <radio-group name="houseType{{itemHouse}}" data-type="radioBuyHouseType{{itemHouse}}" data-judge="isbuyHouseType{{itemHouse}}" bindchange="radioChange">
+                        <label class="weui-cell weui-check__label" wx:for="{{radioBuyHouseType3}}" wx:key="value">
+                          <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                          <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                            <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                          </view>
+                        </label>
+                      </radio-group>
+                  </view>
+
+                  <block wx:if="{{isbuyHouseType3 == 1}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套房买了或建了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex3}}" range="{{pickerhouseDegree}}">
+                            <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex3]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+                  </block>
+
+                  <block wx:if="{{isbuyHouseType3 == 2}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套首付多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="houseFirstPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套月供是多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseMonthPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套供了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HousePayTimes{{itemHouse}}" data-type="pickerHousePayTimesIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHousePayTimesIndex3}}" range="{{pickerHousePayTimes}}">
+                            <view class="weui-select">{{pickerHousePayTimes[pickerHousePayTimesIndex3]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套在哪一家银行按揭:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseWhichBank{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view>
+
+                    <!-- <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseLoanWho{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view> -->
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HouseLoanWho{{itemHouse}}" data-type="pickerHouseLoanWhoIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseLoanWhoIndex3}}" range="{{pickerHouseLoanWho}}">
+                            <view class="weui-select">{{pickerHouseLoanWho[pickerHouseLoanWhoIndex3]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套是否已经供完:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class="weui-cell__ft placeholder">
+                          <switch name="isHouseSupply{{itemHouse}}" data-judge="isHouseSupply{{itemHouse}}" bindchange="switchJudge" />
+                        </view>
+                      </view>
+                    </view>
+
+                    <block wx:if="{{isHouseSupply3 == true}}">
+                      <view class="weui-flex rowBg interval">
+                        <view class="tipColor">
+                          <view class="placeholder">请问第{{itemHouse}}套供完多久:</view>
+                        </view>
+                        <view class="weui-flex__item">
+                          <view class='degree'>
+                            <picker name="HouseSupplyTime{{itemHouse}}" data-type="pickerHouseSupplyIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseSupplyIndex3}}" range="{{pickerHouseSupply}}">
+                              <view class="weui-select">{{pickerHouseSupply[pickerHouseSupplyIndex3]}}</view>
+                            </picker>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+
+                  </block>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}是否有房产证或购房合同</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseContract{{itemHouse}}" data-type="radioHouseProve{{itemHouse}}"  bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseProve3}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套是共有还是个人</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseBelong{{itemHouse}}" data-type="radioHouseBelong{{itemHouse}}" bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseBelong3}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>      
+
+              </block>
+
+              <block wx:if="{{itemHouse == 4}}">
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套商品房还是自建房</view>
+                  <view class="weui-cells weui-cells_after-title interval">
+                    <radio-group name="houseType{{itemHouse}}" data-type="radioHouseType{{itemHouse}}" bindchange="radioChange">
+                      <label class="weui-cell weui-check__label" wx:for="{{radioHouseType4}}" wx:key="value">
+                        <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                        <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                          <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                        </view>
+                      </label>
+                    </radio-group>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套地段在哪里:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseAddress{{itemHouse}}" type='text'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套面积是多少平方米:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseSize{{itemHouse}}"  type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套价值是多少:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseCost{{itemHouse}}" type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-cells__title">请问第{{itemHouse}}套是全款房还是按揭房</view>
+                    <view class="weui-cells weui-cells_after-title interval">
+                      <radio-group name="houseType{{itemHouse}}" data-type="radioBuyHouseType{{itemHouse}}" data-judge="isbuyHouseType{{itemHouse}}" bindchange="radioChange">
+                        <label class="weui-cell weui-check__label" wx:for="{{radioBuyHouseType4}}" wx:key="value">
+                          <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                          <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                            <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                          </view>
+                        </label>
+                      </radio-group>
+                  </view>
+
+                  <block wx:if="{{isbuyHouseType4 == 1}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套房买了或建了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex4}}" range="{{pickerhouseDegree}}">
+                            <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex4]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+                  </block>
+
+                  <block wx:if="{{isbuyHouseType4 == 2}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套首付多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="houseFirstPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套月供是多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseMonthPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套供了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HousePayTimes{{itemHouse}}" data-type="pickerHousePayTimesIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHousePayTimesIndex4}}" range="{{pickerHousePayTimes}}">
+                            <view class="weui-select">{{pickerHousePayTimes[pickerHousePayTimesIndex4]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套在哪一家银行按揭:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseWhichBank{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view>
+
+                    <!-- <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseLoanWho{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view> -->
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HouseLoanWho{{itemHouse}}" data-type="pickerHouseLoanWhoIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseLoanWhoIndex4}}" range="{{pickerHouseLoanWho}}">
+                            <view class="weui-select">{{pickerHouseLoanWho[pickerHouseLoanWhoIndex4]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套是否已经供完:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class="weui-cell__ft placeholder">
+                          <switch name="isHouseSupply{{itemHouse}}" data-judge="isHouseSupply{{itemHouse}}" bindchange="switchJudge" />
+                        </view>
+                      </view>
+                    </view>
+
+                    <block wx:if="{{isHouseSupply4 == true}}">
+                      <view class="weui-flex rowBg interval">
+                        <view class="tipColor">
+                          <view class="placeholder">请问第{{itemHouse}}套供完多久:</view>
+                        </view>
+                        <view class="weui-flex__item">
+                          <view class='degree'>
+                            <picker name="HouseSupplyTime{{itemHouse}}" data-type="pickerHouseSupplyIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseSupplyIndex4}}" range="{{pickerHouseSupply}}">
+                              <view class="weui-select">{{pickerHouseSupply[pickerHouseSupplyIndex4]}}</view>
+                            </picker>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+
+                  </block>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}是否有房产证或购房合同</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseContract{{itemHouse}}" data-type="radioHouseProve{{itemHouse}}"  bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseProve4}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套是共有还是个人</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseBelong{{itemHouse}}" data-type="radioHouseBelong{{itemHouse}}" bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseBelong4}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>      
+
+              </block>
+
+              <block wx:if="{{itemHouse == 5}}">
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套商品房还是自建房</view>
+                  <view class="weui-cells weui-cells_after-title interval">
+                    <radio-group name="houseType{{itemHouse}}" data-type="radioHouseType{{itemHouse}}" bindchange="radioChange">
+                      <label class="weui-cell weui-check__label" wx:for="{{radioHouseType5}}" wx:key="value">
+                        <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                        <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                          <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                        </view>
+                      </label>
+                    </radio-group>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套地段在哪里:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseAddress{{itemHouse}}" type='text'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套面积是多少平方米:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseSize{{itemHouse}}"  type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-flex rowBg interval">
+                    <view class="tipColor">
+                      <view class="placeholder">请问第{{itemHouse}}套价值是多少:</view>
+                    </view>
+                    <view class="weui-flex__item">
+                      <input class='placeholder' name="houseCost{{itemHouse}}" type='number'></input>
+                    </view>
+                  </view>
+
+                  <view class="weui-cells__title">请问第{{itemHouse}}套是全款房还是按揭房</view>
+                    <view class="weui-cells weui-cells_after-title interval">
+                      <radio-group name="houseType{{itemHouse}}" data-type="radioBuyHouseType{{itemHouse}}" data-judge="isbuyHouseType{{itemHouse}}" bindchange="radioChange">
+                        <label class="weui-cell weui-check__label" wx:for="{{radioBuyHouseType5}}" wx:key="value">
+                          <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                          <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                            <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                          </view>
+                        </label>
+                      </radio-group>
+                  </view>
+
+                  <block wx:if="{{isbuyHouseType5 == 1}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套房买了或建了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex5}}" range="{{pickerhouseDegree}}">
+                            <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex5]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+                  </block>
+
+                  <block wx:if="{{isbuyHouseType5 == 2}}">
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套首付多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="houseFirstPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套月供是多少:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseMonthPay{{itemHouse}}" type='number'></input>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套供了多久:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HousePayTimes{{itemHouse}}" data-type="pickerHousePayTimesIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHousePayTimesIndex5}}" range="{{pickerHousePayTimes}}">
+                            <view class="weui-select">{{pickerHousePayTimes[pickerHousePayTimesIndex5]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套在哪一家银行按揭:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseWhichBank{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view>
+
+                    <!-- <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <input class='placeholder' name="HouseLoanWho{{itemHouse}}" type='text'></input>
+                      </view>
+                    </view> -->
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套谁是主贷方:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class='degree'>
+                          <picker name="HouseLoanWho{{itemHouse}}" data-type="pickerHouseLoanWhoIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseLoanWhoIndex5}}" range="{{pickerHouseLoanWho}}">
+                            <view class="weui-select">{{pickerHouseLoanWho[pickerHouseLoanWhoIndex5]}}</view>
+                          </picker>
+                        </view>
+                      </view>
+                    </view>
+
+                    <view class="weui-flex rowBg interval">
+                      <view class="tipColor">
+                        <view class="placeholder">请问第{{itemHouse}}套是否已经供完:</view>
+                      </view>
+                      <view class="weui-flex__item">
+                        <view class="weui-cell__ft placeholder">
+                          <switch name="isHouseSupply{{itemHouse}}" data-judge="isHouseSupply{{itemHouse}}" bindchange="switchJudge" />
+                        </view>
+                      </view>
+                    </view>
+
+                    <block wx:if="{{isHouseSupply5 == true}}">
+                      <view class="weui-flex rowBg interval">
+                        <view class="tipColor">
+                          <view class="placeholder">请问第{{itemHouse}}套供完多久:</view>
+                        </view>
+                        <view class="weui-flex__item">
+                          <view class='degree'>
+                            <picker name="HouseSupplyTime{{itemHouse}}" data-type="pickerHouseSupplyIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerHouseSupplyIndex5}}" range="{{pickerHouseSupply}}">
+                              <view class="weui-select">{{pickerHouseSupply[pickerHouseSupplyIndex5]}}</view>
+                            </picker>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+
+                  </block>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}是否有房产证或购房合同</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseContract{{itemHouse}}" data-type="radioHouseProve{{itemHouse}}"  bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseProve5}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>
+
+                <view class="weui-cells__title">请问第{{itemHouse}}套是共有还是个人</view>
+                <view class="weui-cells weui-cells_after-title interval">
+                  <radio-group name="houseBelong{{itemHouse}}" data-type="radioHouseBelong{{itemHouse}}" bindchange="radioChange">
+                    <label class="weui-cell weui-check__label" wx:for="{{radioHouseBelong5}}" wx:key="value">
+                      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                      <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                        <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                      </view>
+                    </label>
+                  </radio-group>
+                </view>      
+
+              </block>
+
+            </block>
+        
+
+          <!-- <view class="weui-cells__title">请问商品房还是自建房</view>
+          <view class="weui-cells weui-cells_after-title interval">
+            <radio-group name="houseType" data-type="radioHouseType" bindchange="radioChange">
+              <label class="weui-cell weui-check__label" wx:for="{{radioHouseType}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                </view>
+              </label>
+            </radio-group>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问地段在哪里:</view>
+            </view>
+            <view class="weui-flex__item">
+              <input class='placeholder' name="houseAddress" type='text'></input>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问面积是多少平方米:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="houseSize" data-type="pickerHouseSizeIndex" bindchange="pickerChange" value="{{pickerHouseSizeIndex}}" range="{{pickerHouseSize}}">
+                  <view class="weui-select">{{pickerHouseSize[pickerHouseSizeIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问价值是多少:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="houseCost" data-type="pickerHouseCostIndex" bindchange="pickerChange" value="{{pickerHouseCostIndex}}" range="{{pickerHouseCost}}">
+                  <view class="weui-select">{{pickerHouseCost[pickerHouseCostIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-cells__title">是全款房还是按揭房</view>
+          <view class="weui-cells weui-cells_after-title interval">
+            <radio-group name="houseType" data-type="radioBuyHouseType" data-judge="isbuyHouseType" bindchange="radioChange">
+              <label class="weui-cell weui-check__label" wx:for="{{radioBuyHouseType}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                </view>
+              </label>
+            </radio-group>
+          </view> -->
+
+          <!--如果按揭房  -->
+          <!-- <block wx:if="{{isbuyHouseType == 2}}">
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问首付多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="houseFirstPay" data-type="pickHouseFistPayIndex" bindchange="pickerChange" value="{{pickHouseFistPayIndex}}" range="{{pickHouseFistPay}}">
+                      <view class="weui-select">{{pickHouseFistPay[pickHouseFistPayIndex]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问供了多久:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HousePayTimes" data-type="pickerHousePayTimesIndex" bindchange="pickerChange" value="{{pickerHousePayTimesIndex}}" range="{{pickerHousePayTimes}}">
+                      <view class="weui-select">{{pickerHousePayTimes[pickerHousePayTimesIndex]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问在哪一家银行按揭:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="HouseWhichBank" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问是否已经供完:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class="weui-cell__ft placeholder">
+                    <switch name="isHouseSupply" data-judge="isHouseSupply" bindchange="switchJudge" />
+                  </view>
+                </view>
+              </view> -->
+
+              <!--如果已经供完  -->
+              <!-- <block wx:if="{{isHouseSupply == true}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">请问供完多久:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <view class='degree'>
+                      <picker name="HouseSupplyTime" data-type="pickerHouseSupplyIndex" bindchange="pickerChange" value="{{pickerHouseSupplyIndex}}" range="{{pickerHouseSupply}}">
+                        <view class="weui-select">{{pickerHouseSupply[pickerHouseSupplyIndex]}}</view>
+                      </picker>
+                    </view>
+                  </view>
+                </view>
+
+              </block>
+
+              
+          </block>
+
+          <view class="weui-flex rowBg">
+            <view class="tipColor">
+              <view class="placeholder">是否有房产证或购房合同:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-cell__ft placeholder">
+                <switch name="houseContract" data-judge="isHouseContract" bindchange="switchJudge" />
+              </view>
+            </view>
+          </view>
+
+          <block wx:if="{{isHouseContract == true}}">
+            <view class="weui-cells__title">请问是共有还是个人</view>
+            <view class="weui-cells weui-cells_after-title interval">
+              <radio-group name="houseBelong" data-type="radioHouseBelong" bindchange="radioChange">
+                <label class="weui-cell weui-check__label" wx:for="{{radioHouseBelong}}" wx:key="value">
+                  <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                  <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                  <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                  </view>
+                </label>
+              </radio-group>
+            </view> 
+          </block> -->
+
+        </block>
+
+        
+
+      </block>
+
+      <!--五 还贷款  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问目前是否有偿还贷款:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isRepayLoan" data-judge="isRepayLoan" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isRepayLoan == true}}">
+          
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问有多少贷款数量:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="loanAmount" data-dataList="loanAmount" data-arr="pickerLoanAmount" data-type="pickerLoanAmountIndex" bindchange="insuranceAmount" value="{{pickerLoanAmountIndex}}" 
+                range="{{pickerLoanAmount}}">
+                  <view class="weui-select">{{pickerLoanAmount[pickerLoanAmountIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <block wx:for="{{loanAmount}}" wx:for-item="itemLoan">
+
+            <block wx:if="{{itemLoan == 1}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问请问用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex1}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex1]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问请问抵押贷还是信用贷</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice1}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor">贷款日期</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate" mode="date" value="{{LoansDate1}}" 
+                    data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate1}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问还贷情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex1}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex1]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block> 
+
+            <block wx:if="{{itemLoan == 2}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex2}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex2]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice2}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:180%'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate2}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate2}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还贷情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex2}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex2]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+            <block wx:if="{{itemLoan == 3}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex3}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex3]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice3}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:180%'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate3}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate3}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还贷情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex3}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex3]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+            <block wx:if="{{itemLoan == 4}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex4}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex4]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice4}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:180%'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate4}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate4}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还贷情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex4}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex4]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+            <block wx:if="{{itemLoan == 5}}">
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="HandleLoans{{itemLoan}}" data-type="pickerHandleLoansIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerHandleLoansIndex5}}" range="{{pickerHandleLoans}}">
+                      <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex5]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷:</view>
+              <view class="weui-cells weui-cells_after-title interval">
+                <radio-group name="LoanMethod{{itemLoan}}" data-type="radioLoanChoice{{itemLoan}}" bindchange="radioChange">
+                  <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice5}}" wx:key="value">
+                    <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                    <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                      <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                    </view>
+                  </label>
+                </radio-group>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoanWhere{{itemLoan}}" type='text'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份贷款金额是多少:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansCost{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-cells weui-cells_after-title interval">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label tipColor" style='width:180%'>第{{itemLoan}}份贷款日期:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker name="LoansDate{{itemLoan}}" mode="date" value="{{LoansDate5}}" data-type="LoansDate{{itemLoan}}" bindchange="DateChange">
+                      <view class="weui-input">{{LoansDate5}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份每月还款金额:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <input class='placeholder' name="LoansRepayMonth{{itemLoan}}" type='number'></input>
+                </view>
+              </view>
+
+              <view class="weui-flex rowBg interval">
+                <view class="tipColor">
+                  <view class="placeholder">请问第{{itemLoan}}份还贷情况:</view>
+                </view>
+                <view class="weui-flex__item">
+                  <view class='degree'>
+                    <picker name="isLoanOnTime{{itemLoan}}" data-type="pickerLoanRepayIndex{{itemLoan}}" bindchange="pickerChange" value="{{pickerLoanRepayIndex5}}" range="{{pickerLoanRepay}}">
+                      <view class="weui-select">{{pickerLoanRepay[pickerLoanRepayIndex5]}}</view>
+                    </picker>
+                  </view>
+                </view>
+              </view>
+              
+            </block>
+
+          </block>
+
+           <!-- <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问第{{itemLoan}}份用什么办理的贷款:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="HandleLoans" data-type="pickerHandleLoansIndex" bindchange="pickerChange" value="{{pickerHandleLoansIndex}}" range="{{pickerHandleLoans}}">
+                    <view class="weui-select">{{pickerHandleLoans[pickerHandleLoansIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-cells__title">请问第{{itemLoan}}份抵押贷还是信用贷</view>
+            <view class="weui-cells weui-cells_after-title interval">
+              <radio-group name="LoanMethod" data-type="radioLoanChoice" bindchange="radioChange">
+                <label class="weui-cell weui-check__label" wx:for="{{radioLoanChoice}}" wx:key="value">
+                  <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                  <view class="weui-cell__bd tipColor">{{item.name}}</view>
+                  <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="18"></icon>
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问第{{itemLoan}}份在哪个机构贷款:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="LoanWhere" type='text'></input>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder tipColor">请问贷款金额是多少:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="LoansCost" data-type="pickerLoanCostIndex" bindchange="pickerChange" value="{{pickerLoanCostIndex}}" range="{{pickerLoanCost}}">
+                    <view class="weui-select">{{pickerLoanCost[pickerLoanCostIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-cells weui-cells_after-title interval">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label tipColor">贷款日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker name="LoansDate" mode="date" value="{{date}}" data-type="LoansDate" bindchange="LoanDateChange">
+                    <view class="weui-input">{{date}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder tipColor">请问每月还款金额:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="LoansRepayMonth" data-type="pickerLoanRepayMonthInded" bindchange="pickerChange" value="{{pickerLoanRepayMonthInded}}" range="{{pickerLoanRepayMonth}}">
+                    <view class="weui-select">{{pickerLoanRepayMonth[pickerLoanRepayMonthInded]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">目前还贷是否正常:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class="weui-cell__ft placeholder">
+                  <switch name="isLoanOnTime" data-judge="isLoanOnTime" bindchange="switchJudge" />
+                </view>
+              </view>
+            </view> -->
+        </block>
+
+      </block>
+
+      <!--六 查征信  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问近期是否查过征信:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCheckCredit" data-judge="isCheckCredit" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCheckCredit == true}}">
+          <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问近两个月总查过多少次征信:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="CheckCreditMonth"  data-dataList="CheckCreditMonth" data-arr="pickerCheckCreditMonth" data-type="pickerCheckCreditMonthIndex" bindchange="insuranceAmount" value="{{pickerCheckCreditMonthIndex}}" range="{{pickerCheckCreditMonth}}">
+                    <view class="weui-select">{{pickerCheckCreditMonth[pickerCheckCreditMonthIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <block wx:for="{{CheckCreditMonth}}" wx:for-item="itemCredit"> 
+
+              <block wx:if="{{itemCredit == 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">哪里查:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditMonth" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+              <block wx:if="{{itemCredit != 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">哪里查(第{{itemCredit}}次):</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditMonth{{itemCredit}}" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+            </block>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问近半年总查过多少次征信:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="CheckCreditYears" data-dataList="CheckCreditYears" data-arr="pickerCheckCreditYears" data-type="pickerCheckCreditYearsIndex" bindchange="insuranceAmount" value="{{pickerCheckCreditYearsIndex}}" range="{{pickerCheckCreditYears}}">
+                    <view class="weui-select">{{pickerCheckCreditYears[pickerCheckCreditYearsIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <block wx:for="{{CheckCreditYears}}" wx:for-item="itemCredit"> 
+
+              <block wx:if="{{itemCredit == 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">哪里查:</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditMonth" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+              <block wx:if="{{itemCredit != 1}}">
+
+                <view class="weui-flex rowBg interval">
+                  <view class="tipColor">
+                    <view class="placeholder">哪里查(第{{itemCredit}}次):</view>
+                  </view>
+                  <view class="weui-flex__item">
+                    <input class='placeholder' name="WhereCheckCreditMonth{{itemCredit}}" type='text'></input>
+                  </view>
+                </view>
+                
+              </block>
+
+            </block>
+
+            
+        </block>
+      </block>
+
+      <!--七 信用卡  -->
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问是否有使用信用卡:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCreditCard" data-judge="isCreditCard" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCreditCard == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问共几张信用卡:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="CreditCardNumber" data-type="pickerCreditCardNumberInded" bindchange="pickerChange" value="{{pickerCreditCardNumberInded}}" range="{{pickerCreditCardNumber}}">
+                  <view class="weui-select">{{pickerCreditCardNumber[pickerCreditCardNumberInded]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">持有信用卡总额度:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="CreditCardLimitMax" type='number'></input>
+              </view>
+            </view>
+
+            <view class="weui-cells weui-cells_after-title interval">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label tipColor">开卡时间:</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker name="CreditCardDate" data-type="CreditCardDate" mode="date" value="{{CreditCardDate}}" bindchange="DateChange">
+                    <view class="weui-input">{{CreditCardDate}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问共尚欠几钱:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="needToLoanMoney" type='number'></input>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问还贷情况:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="isCreditCardNormal" data-type="pickerCreditCardRepayIndex" bindchange="pickerChange" value="{{pickerCreditCardRepayIndex}}" range="{{pickerCreditCardRepay}}">
+                    <view class="weui-select">{{pickerCreditCardRepay[pickerCreditCardRepayIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            
+        </block>
+      </block>
+
+      <block>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问大概需要借贷多少钱:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="needToLoanMoney" type='number'></input>
+          </view>
+        </view>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问需要贷多少时间:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="needToLoanTime" type='text'></input>
+          </view>
+        </view>
+
+        <!-- <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">大概需要借贷多少钱:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class='degree'>
+              <picker name="needToLoanMoney" data-type="pickerNeedToLoanIndex" bindchange="pickerChange" value="{{pickerNeedToLoanIndex}}" range="{{pickerNeedToLoan}}">
+                <view class="weui-select">{{pickerNeedToLoan[pickerNeedToLoanIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view> 
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">需要贷多少时间:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class='degree'>
+              <picker name="needToLoanTime" data-type="pickerNeedLoanTimeIndex" bindchange="pickerChange" value="{{pickerNeedLoanTimeIndex}}" range="{{pickerNeedLoanTime}}">
+                <view class="weui-select">{{pickerNeedLoanTime[pickerNeedLoanTimeIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>-->
+      </block>
+
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit">确定</button>
+      </view>
+
+    </form>
+    
+  </view>
+
+  <!--尾部  -->
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-footer">
+      <view class="weui-footer__links">
+        <navigator url="" class="weui-footer__link">底部链接</navigator>
+      </view>
+      <view class="weui-footer__text">Copyright © 佛山驰实网络科技有限公司</view>
+    </view>
+  </view>
+</view>

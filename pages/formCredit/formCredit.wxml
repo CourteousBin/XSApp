@@ -1,0 +1,156 @@
+<view class="page">
+
+  <view class='main'>
+
+  <view class="page__hd titleBg">
+    <image class='formBg' src='/images/formBg.png'></image>
+    <view class="page__title">资产咨询表 (第五页)</view>
+    <view class="page__desc">Asset consultation table</view>
+  </view>
+
+    <form bindsubmit="formSubmit" bindreset="formReset">
+
+      <block>
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问是否有使用信用卡:</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-cell__ft placeholder">
+              <switch name="isCreditCard" data-judge="isCreditCard" bindchange="switchJudge" />
+            </view>
+          </view>
+        </view>
+
+        <block wx:if="{{isCreditCard == true}}">
+          <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问共几张信用卡:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="CreditCardNumber" data-type="pickerCreditCardNumberInded" bindchange="pickerChange" value="{{pickerCreditCardNumberInded}}" range="{{pickerCreditCardNumber}}">
+                  <view class="weui-select">{{pickerCreditCardNumber[pickerCreditCardNumberInded]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">持有信用卡总额度:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="CreditCardLimitMax" type='digit'></input>
+              </view>
+              <view class='unit'>/万</view>
+            </view>
+
+            <view class="weui-cells weui-cells_after-title interval">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label tipColor" style='width:200%;'>请问现用最长开卡时间:</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker name="CreditCardDate" data-type="CreditCardDate" mode="date" value="{{CreditCardDate}}" bindchange="DateChange">
+                    <view class="weui-input">{{CreditCardDate}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问共尚欠几钱:</view>
+              </view>
+              <view class="weui-flex__item">
+                <input class='placeholder' name="totalOweMoney" type='digit'></input>
+              </view>
+              <view class='unit'>/万</view>
+            </view>
+
+            <view class="weui-flex rowBg interval">
+              <view class="tipColor">
+                <view class="placeholder">请问还款情况:</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class='degree'>
+                  <picker name="isCreditCardNormal" data-type="pickerCreditCardRepayIndex" bindchange="pickerChange" value="{{pickerCreditCardRepayIndex}}" range="{{pickerCreditCardRepay}}">
+                    <view class="weui-select">{{pickerCreditCardRepay[pickerCreditCardRepayIndex]}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+
+            
+        </block>
+      </block>
+
+      <block>
+
+        <view class="weui-flex rowBg interval">
+          <view class="tipColor">
+            <view class="placeholder">请问大概需要借款多少钱:</view>
+          </view>
+          <view class="weui-flex__item">
+            <input class='placeholder' name="needToLoanMoney" type='digit'></input>
+          </view>
+          <view class='unit'>/万</view>
+        </view>
+
+
+         <view class="weui-flex rowBg interval">
+            <view class="tipColor">
+              <view class="placeholder">请问需要贷多长时间:</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class='degree'>
+                <picker name="needToLoanTime" data-type="pickerLoanTimeIndex" bindchange="pickerChange" value="{{pickerLoanTimeIndex}}" range="{{pickerLoanTime}}">
+                  <view class="weui-select">{{pickerLoanTime[pickerLoanTimeIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+        <view class="weui-cells__title">客户留言:</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea bindinput="companyAdderessChange" name="Feedback" class="weui-textarea" data-value="Feedback" placeholder="" style="height: 4em" maxlength='80' cursor-spacing="60" />
+                <view  class="weui-textarea-counter">{{Feedback}}/80</view>
+              </view>
+            </view>
+          </view>
+      </block>
+
+      <view class="weui-flex">
+
+          <view class="weui-flex__item">
+            <view class="weui-btn-area">
+              <button class="weui-btn" catchtap='prePage' type="warn">上一页</button>
+            </view>
+          </view>
+
+          <view class="weui-flex__item">
+            <view class="weui-btn-area">
+              <button class="weui-btn" type="primary" formType="submit">提交</button>
+            </view>
+          </view>
+
+      </view>
+
+    </form>
+
+  </view>
+
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-footer">
+      <view class="weui-footer__links">
+        <navigator url="" class="weui-footer__link">底部链接</navigator>
+      </view>
+      <view class="weui-footer__text">Copyright © 佛山驰实网络科技有限公司</view>
+    </view>
+  </view>
+
+</view>
+

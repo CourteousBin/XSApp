@@ -1,0 +1,52 @@
+<view class="page">
+  
+  <view class='userContainer'>
+    <image class='userBg' src='/images/img-user-bg.png'></image>
+    <view class='userInfo'>
+      <view class='userImg'>
+        <image src='{{avatarUrl?avatarUrl:"/images/noLogin.png"}}'></image>
+      </view>
+      <view class='userName'>{{nickName?nickName:"体验用户"}}</view>
+      <view class='userLevel' wx:if="{{avatarUrl}}">
+        <image src='/images/icon-user-level.png'></image>
+        <text>普通用户</text>
+      </view>
+    </view>
+  </view>
+
+  <view style='margin-top:50rpx;padding:100rpx 0 ;' class="page__bd_spacing">
+    <view class="weui-flex">
+        <view class="weui-flex__item">
+          <view class="choiceTop ">
+            <view catchtap='toMyOrder' class='choiceLeft border-right border-bottom marginLeft'>
+              <image src='/images/icon-order-1.png'></image>
+              <text>我的订单</text>
+            </view>
+            <view catchtap='toMyTeamLogin' class='choiceRight border-bottom'>
+              <image src='/images/icon-order-3.png'></image>
+              <text>我的团队</text>
+            </view>
+            <!-- <view class='choiceRight border-bottom'>
+              <image src='/images/icon-order-2.png'></image>
+              <text>订单进度</text>
+            </view> -->
+          </view>
+          <!-- <view class="choiceTop ">
+            <view class='choiceLeft border-right marginLeft' catchtap='toMyTeamLogin'>
+              <image src='/images/icon-order-3.png'></image>
+              <text>我的团队</text>
+            </view>
+            <view class='choiceRight'>
+              <image src='/images/customerService.png'></image>
+              <text>联系客服</text>
+            </view>
+          </view>  -->
+        </view>
+    </view>
+  </view>
+
+  <view class="weui-flex">
+    <button class="weui-btn" bindgetuserinfo='getUserInfo' type="warn" open-type="getUserInfo">授权登入</button>
+  </view>
+
+</view>

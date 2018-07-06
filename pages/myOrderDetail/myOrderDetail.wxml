@@ -1,0 +1,37 @@
+<view class="page">
+  <view class='orderInfo'>
+    <view class='proPic'>
+       <image src='/images/timg.jpg' class='proImg'></image> 
+    </view>
+    <view class='infoDetail'>
+      <view class='orderNumber'>
+        <text class='leftText'>订单名称:</text>
+        <text class='rightText'>阿斯顿发生打发斯蒂芬</text>
+      </view>
+      <view class='orderNumber'>
+        <text class='leftText'>订单编号:</text>
+        <text class='rightText'>132123123</text>
+      </view>
+      <view class='actOrderDate'>
+        <text class='leftText'>下单日期:</text>
+        <text class='rightText'>2018-5-5</text>
+      </view>
+      <view class='orderState'>
+        <text class='leftText'>订单状态:</text>
+        <text class='rightText redColor'>审核中</text>
+      </view>
+    </view>
+  </view>
+
+
+  <zan-panel title="订单进度">
+    <zan-cell-group>
+      <zan-cell>
+        <zan-steps type="vertical" hasDesc steps="{{steps}}"></zan-steps>
+      </zan-cell>
+    </zan-cell-group>
+  </zan-panel>
+
+
+
+</view>

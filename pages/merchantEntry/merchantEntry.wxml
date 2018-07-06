@@ -1,0 +1,92 @@
+<view class="page">
+  <view class='banner'>
+    <image src='/images/timg.jpg'></image>
+  </view>
+
+    <view class='main interval'>
+      <form bindsubmit="formSubmit" bindreset="formReset">
+
+        <view class="weui-cells__title">表单</view>
+        <view class="weui-cells weui-cells_after-title">
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">联系人:</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type='text' placeholder="请输入您的姓名" />
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">联系电话:</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type='number' placeholder="请输入您的手机号码" />
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">主营项目:</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type='text' placeholder="项目名称" />
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+          </view>
+
+          <view class="weui-cells__title" style='color:black;font-size:33rpx'>客户留言:</view> 
+          <view class="weui-cells weui-cells_after-title" style='margin-top:.5em;'>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea bindinput="remarksChange" name="remarks" data-value="remarksNumber" class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" maxlength='200' cursor-spacing="60" />
+                <view class="weui-textarea-counter">{{remarksNumber}}/200</view>
+              </view>
+            </view>
+          </view> 
+
+
+        </view>
+
+        <view class="weui-cells__title">请认真填写联系方式，以便我们能够尽快联系到你</view> 
+
+        <checkbox-group bindchange="bindAgreeChange">
+          <label class="weui-agree" for="weuiAgree">
+            <view class="weui-agree__text">
+              <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+              <view class="weui-agree__checkbox-icon">
+                <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+              </view>
+              阅读并同意
+              <navigator url="" class="weui-agree__link">《相关条款》</navigator>
+            </view>
+          </label>
+        </checkbox-group>
+
+        <view class="weui-flex">
+
+          <view class="weui-flex__item">
+            <view class="weui-btn-area">
+              <button class="weui-btn" type="primary" formType="submit">提交</button>
+            </view>
+          </view>
+
+      </view>
+
+      </form>
+    </view> 
+
+    <view class="page__bd page__bd_spacing">
+    <view class="weui-footer">
+      <view class="weui-footer__links">
+        <!-- <navigator url="" class="weui-footer__link">底部链接</navigator> -->
+      </view>
+      <view class="weui-footer__text">Copyright © 佛山驰实网络科技有限公司</view>
+    </view>
+  </view> 
+
+</view>

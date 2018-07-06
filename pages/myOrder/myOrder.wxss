@@ -1,0 +1,107 @@
+@import '/style/weui.wxss';
+page{
+    background-color: #fff;
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.page__hd {
+    padding: 40px;
+}
+.page__bd {
+    padding-bottom: 40px;
+}
+.page__bd_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.page__ft{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.page__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.page__desc {
+    margin-top: 5px;
+    color: #888888;
+    text-align: left;
+    font-size: 14px;
+}
+/*滚动条与字体  */
+.weui-bar__item_on {
+  color: #FF4544!important;
+}
+.weui-navbar__slider {
+  background-color: #FF4544;
+}
+.weui-navbar {
+  background: #fff;
+}
+
+.padding {
+  padding: 0 30rpx;
+}
+.orderItem {
+  margin: 35rpx 0;
+  border-radius: 25rpx;
+  overflow: hidden;
+  box-shadow:0 5px 10px #eee;
+}
+.ItemTop {
+  background: #FBE5E5;
+  display: flex;
+  flex-direction: row;
+}
+.ItemBottom {
+  border: 1px solid #eee;
+  border-radius: 0 0 25rpx 25rpx;
+  display: flex;
+  flex-direction: row;
+  padding: 25rpx 20rpx;
+  justify-content: flex-end;
+}
+.proPic {
+  padding: 30rpx 0 20rpx 30rpx;
+}
+.proImg {
+  width: 140rpx;
+  height: 140rpx;
+}
+.proInfo {
+   padding: 30rpx 30rpx 20rpx 30rpx;
+}
+.proName {
+  color: #333;
+  font-size: 30rpx;
+}
+.proOrderNumber {
+  margin-top: 10rpx;
+  color: #888888;
+  font-size: 27rpx;
+}
+.orderState {
+  border: 1px solid #eee;
+  padding: 10rpx 15rpx;
+  font-size: 25rpx;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+
+}
+.redColor {
+  color: #FD605F; 
+}
+.greenColor {
+  color: #86DD50;
+}
+.toDetail{
+  border: 1px solid #FF4544;
+  padding: 10rpx 15rpx;
+  font-size: 25rpx;
+  border-radius: 10rpx;
+  color: #FF4544;
+}

@@ -1,0 +1,11 @@
+<checkbox-group bindchange="checkboxChange">
+  <label class="checkbox" wx:for="{{items}}">
+    <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+  </label>
+</checkbox-group>
+
+<input type='text'></input>
+
+<navigator url="/pages/form/form" open-type="navigate">带数据返回</navigator>
+
+<navigator url="/pages/test2/test2" open-type="navigate">test新页面</navigator>

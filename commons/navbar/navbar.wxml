@@ -1,0 +1,64 @@
+<!-- <block wx:if="{{_navbar && _navbar.navs && _navbar.navs.length>0}}">
+    <view class="navbar flex-row" style="background-image: url({{_navbar.background_image}})">
+        <navigator wx:for="{{_navbar.navs}}"
+                   class="flex-grow-1 flex-y-center"
+                   url="{{item.url}}"
+                   open-type="redirect">
+            <view>
+                <image class="navbar-icon"
+                       src="{{item.active?item.active_icon:item.icon}}"></image>
+                <view class="navbar-text"
+                      style="color: {{item.active?item.active_color:item.color}};">{{item.text}}
+                </view>
+            </view>
+        </navigator>
+    </view>
+</block> -->
+<block>
+  <view class="navbar flex-row" style="background-image: url({{_navbar.background_image}})">
+    <navigator class="flex-grow-1 flex-y-center" url="/pages/index/index" open-type="redirect">
+      <view>
+        <image class="navbar-icon" src="/images/home.png"></image>
+        <view class="navbar-text" style="color: {{item.active?item.active_color:item.color}};">
+          商城
+        </view>
+      </view>
+    </navigator>
+
+    <navigator class="flex-grow-1 flex-y-center" url="/pages/index/index" open-type="redirect">
+      <view>
+        <image class="navbar-icon" src="/images/classify.png"></image>
+        <view class="navbar-text" style="color: {{item.active?item.active_color:item.color}};">
+          分类
+        </view>
+      </view>
+    </navigator>
+
+    <navigator class="flex-grow-1 flex-y-center" url="/pages/index/index" open-type="redirect">
+      <view>
+        <image class="navbar-icon" src="/images/store.png"></image>
+        <view class="navbar-text" style="color: {{item.active?item.active_color:item.color}};">
+          商家
+        </view>
+      </view>
+    </navigator>
+
+    <navigator class="flex-grow-1 flex-y-center" url="/pages/index/index" open-type="redirect">
+      <view>
+        <image class="navbar-icon" src="/images/shopCar.png"></image>
+        <view class="navbar-text" style="color: {{item.active?item.active_color:item.color}};">
+          购物车
+        </view>
+      </view>
+    </navigator>
+
+    <navigator class="flex-grow-1 flex-y-center" url="/pages/index/index" open-type="redirect">
+      <view>
+        <image class="navbar-icon" src="/images/my.png"></image>
+        <view class="navbar-text" style="color: {{item.active?item.active_color:item.color}};">
+          我的
+        </view>
+      </view>
+    </navigator>
+  </view>
+</block>
