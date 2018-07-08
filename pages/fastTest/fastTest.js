@@ -1,5 +1,6 @@
 var formUtil = require('../../utils/formUtils.js');
 var util = require('../../utils/util.js');
+var app = getApp();
 
 // pages/formBase/formBase.js
 Page({
@@ -145,12 +146,16 @@ Page({
 
       if (parseInt(objTotal) < 30000){
         util.toastTip('数值低于30000', 'none', 1500);
+
       } else if (parseInt(objTotal) >= 500000){
         var maxTotal = 500000;
         util.toPages("/pages/fastProgramme/fastProgramme?classfiy=" + objClassfiy + "&total=" + maxTotal + "&job=" + objJob);
       }else {
         util.toPages("/pages/fastProgramme/fastProgramme?classfiy=" + objClassfiy + "&total=" + objTotal + "&job=" + objJob);
       }
+
+      // 传递客户信息
+      this.postInfo(e.detail.value)
       
     }  
   },
@@ -254,6 +259,18 @@ Page({
     } else {
       return true;
     }
+  },
+
+  // 发生客户资料给后台
+  postInfo:function(formData){
+    // formData 表示传入的 客户信息
+    var url = app.globalData.apiUrl;
+    var that = this;
+    // 把 openId 插入 formData 一并提交到后台
+    formData.openId = app.globalData.openId;
+    util.requestHttp(url + 'fastTastInfo', 'POST', formData,function(data){
+      
+    })
   },
 
   /**

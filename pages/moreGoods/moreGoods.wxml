@@ -30,21 +30,7 @@
             <view bindtap="sortClick" data-sort="1" class="flex-grow-1 flex-x-center flex-y-center sort-item {{sort==1 ? 'active':''}}">最新
             </view>
 
-            <view bindtap="sortClick" data-sort="2" data-default_sort_type="0" class="flex-grow-1 flex-x-center flex-row sort-item {{sort==2 ? 'active':''}}">
-                <view class="flex-y-center">价格</view>
-                <view class="flex-y-center sort-icon-box">
-                    <view>
-                        <view>
-                            <image wx:if="{{sort==2 && sort_type==0}}" class="sort-icon-up" src="/images/icon-sort-up-active.png"></image>
-                            <image wx:else="{{sort==2 && sort_type==0}}" class="sort-icon-up" src="/images/icon-sort-up.png"></image>
-                        </view>
-                        <view>
-                            <image wx:if="{{sort==2 && sort_type==1}}" class="sort-icon-up" src="/images/icon-sort-down-active.png"></image>
-                            <image wx:else="{{sort==2 && sort_type==1}}" class="sort-icon-up" src="/images/icon-sort-down.png"></image>
-                        </view>
-                    </view>
-                </view>
-            </view>
+            
 
             <view bindtap="sortClick" data-sort="3" class="flex-grow-1 flex-x-center flex-y-center sort-item {{sort==3 ? 'active':''}}">销量
             </view>
@@ -59,32 +45,11 @@
                 <text class="mb-10 text-more-2" style='height:2.8em;line-height:1.4;'>12312313212312312312312323123123123safasfasdfasdfsa1213</text>
                 <view class='flex-row'>
                     <view class='flex-grow-1' style='color:#ff334b'>商品名字</view>
-                    <!-- <view class='flex-grow-0 fs-sm' style='color:#999;'>已售{{item.sales}}</view> -->
+                     <view class='flex-grow-0 fs-sm' style='color:#999;'>已售{{item.sales}}</view> 
                 </view>
             </view>
         </navigator>
 
-        <navigator url="/pages/goods/goods?id={{item.id}}" open-type="navigate" class="goods-item" style='font-size:11pt;'>
-            <image class="goods-pic" src="/images/timg2.jpg" mode="aspectFill" />
-            <view class="goods-info" style='padding:5rpx 20rpx;'>
-                <text class="mb-10 text-more-2" style='height:2.8em;line-height:1.4;'>12312313212312312312312323123123123safasfasdfasdfsa1213</text>
-                <view class='flex-row'>
-                    <view class='flex-grow-1' style='color:#ff334b'>商品名字</view>
-                    <!-- <view class='flex-grow-0 fs-sm' style='color:#999;'>已售{{item.sales}}</view> -->
-                </view>
-            </view>
-        </navigator>
-
-        <navigator url="/pages/goods/goods?id={{item.id}}" open-type="navigate" class="goods-item" style='font-size:11pt;'>
-            <image class="goods-pic" src="/images/timg3.jpg" mode="aspectFill" />
-            <view class="goods-info" style='padding:5rpx 20rpx;'>
-                <text class="mb-10 text-more-2" style='height:2.8em;line-height:1.4;'>12312313212312312312312323123123123safasfasdfasdfsa1213</text>
-                <view class='flex-row'>
-                    <view class='flex-grow-1' style='color:#ff334b'>商品名字</view>
-                    <!-- <view class='flex-grow-0 fs-sm' style='color:#999;'>已售{{item.sales}}</view> -->
-                </view>
-            </view>
-        </navigator>
     </view>
     <view class="loading-bar {{show_loading_bar?'active':''}}" style="text-align: center">
         <image style="width: 160rpx;height: 80rpx" src="/images/loading.svg"></image>

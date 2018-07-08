@@ -2,7 +2,7 @@
   <!--banner  -->
   <view>
     <swiper class="banner" autoplay="true" interval="5000" duration="300" indicator-dots="true" circular="true">
-      <block wx:for="{{banner}}">
+      <block wx:for="{{banner}}" wx:key="*this">
         <swiper-item>
           <view class="slide-title">{{item.ad_name}}</view>
           <image src="{{item.ad_pic}}" class="slide-image" mode="aspectFill" />
@@ -91,12 +91,12 @@
   <!--贷款分类  -->
   <view>
     <swiper style='height:200rpx;' interval="5000" duration="300" indicator-dots="true">
-      <block wx:for="{{target}}">
+      <block wx:for="{{target}}" wx:key="*this">
         <swiper-item>
           <view class="nav-icon-list flex-row">
-            <block wx:for="{{item}}" wx:for-item="itemName">
+            <block wx:for="{{item}}" wx:for-item="itemName" wx:key="*this">
               <view class="flex-grow-0 nav-icon-1">
-                <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../moreGoods/moreGoods" open-type="navigate">
+                <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="../moreGoods/moreGoods?cat_id={{itemName.cat_id}}" open-type="navigate">
                   <image src="{{itemName.cat_pic}}"></image>
                   <view>{{itemName.cat_name}}</view>
                 </navigator>
@@ -168,7 +168,7 @@
                   <view class="title-line"></view>
               </view>
               <!--产品大纲  -->
-              <block wx:for="{{product}}">
+              <block wx:for="{{product}}" wx:key="*this">
                 <view class='hotProductTitle'>
                   <view style='margin-left:10rpx;font-size:30rpx'>{{index}}</view>
                   <view class='productMore'>
@@ -179,7 +179,7 @@
                   </view>
                   </view>
                 <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
-                  <block wx:for="{{item}}" wx:for-item="itemProduct" wx:for-index="idx">
+                  <block wx:for="{{item}}" wx:for-item="itemProduct" wx:for-index="idx" wx:key="*this">
                     <view class="flex-grow-0">
                         <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
                             <!-- <image src="{{itemProduct.pic}}" bindload="imageOnLoad" mode="aspectFill" /> -->
@@ -206,41 +206,18 @@
                       <text class='sellText'>猜你喜欢</text>
                   </view>
                   <view class="title-line"></view>
-                  <navigator class="flex-y-center" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
-                      <text>更多</text>
-                      <image src="/images/icon-jiantou-r.png" />
-                  </navigator>
+                  
               </view>
 
               <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
+                <block wx:for="{{guessLike}}" wx:for-item="itemProduct" wx:for-index="idx" wx:key="*this">
                   <view class="flex-grow-0">
-                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
-                          <image src="/images/timg.jpg" mode="aspectFill" />
-                          <text>商品名称</text>
+                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{item.id}}">
+                          <image src="{{arr[itemProduct.id]?arr[itemProduct.id]:'/images/loading.png'}}" data-id="{{itemProduct.id}}" bindload="imageOnLoad" mode="aspectFill" data-imgUrl="{{itemProduct.pic}}" />
+                          <text>{{itemProduct.name}}</text>
                       </navigator>
                   </view>
-
-                  <view class="flex-grow-0">
-                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
-                          <image src="/images/timg2.jpg" mode="aspectFill" />
-                          <text>商品名称</text>
-                      </navigator>
-                  </view>
-
-                  <view class="flex-grow-0">
-                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
-                          <image src="/images/timg.jpg" mode="aspectFill" />
-                          <text>商品名称</text>
-                      </navigator>
-                  </view>
-
-                  <view class="flex-grow-0">
-                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
-                          <image src="/images/timg.jpg" mode="aspectFill" />
-                          <text>商品名称</text>
-                      </navigator>
-                  </view>
-                  
+                </block>
               </view>
           </view>
       </block>

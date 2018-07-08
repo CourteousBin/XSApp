@@ -110,22 +110,17 @@ Page({
         * 4.loan
         * 5.credit
     */
-    this.setData({
-      formBaseData: e.detail.value
-    });
     
-    // 验证
+    // 验证插件
     if (!this.WxValidate.checkForm(e)) {
       const error = this.WxValidate.errorList[0]
       this.showModal(error)
       return false
     }
 
-    // this.showModal({
-    //   msg: '提交成功',
-    // })
-
-    // console.log(this.WxValidate);
+    this.setData({
+      formBaseData: e.detail.value
+    });
 
     util.toPages("/pages/formInsurance/formInsurance");
   },
@@ -136,7 +131,7 @@ Page({
     })
   },
   initValidate(){
-
+    // 验证规则
     var rules = {
       userName:{
         required:true
@@ -145,19 +140,23 @@ Page({
         required: true
       },
       age: {
+        required:true,
         age:true
       }
     }
-
+    // 错误提示信息
     var messages = {
       userName:{
         required:'请完善客户姓名'
       },
       mobile: {
         required: '请完善联系电话'
+      },
+      age:{
+        required:'请完善出生日期'
       }
     }
-
+    // 初始化插件
     this.WxValidate = new WxValidate(rules, messages)
 
     // 自定义验证规则
@@ -190,7 +189,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    
   },
 
   /**

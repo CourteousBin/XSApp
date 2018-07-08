@@ -1,5 +1,7 @@
 var formUtil = require('../../utils/formUtils.js');
 var util = require('../../utils/util.js');
+var app = getApp();
+
 // pages/formLoan/formLoan.js
 Page({
 
@@ -67,10 +69,56 @@ Page({
   },
   // 提交表单
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value);
 
+    this.setData({
+      formCreditData: e.detail.value
+    })
+
+    // 获得 页面栈
     var PagesData = getCurrentPages();
-    console.log(PagesData);
+
+    // 获取所有分页的 formData
+    var formData = this.allFormData(PagesData)
+
+    // 传送数据
+    this.postInfo(formData)
+
+  },
+  // 获得客户填写的资料(所有,包括前面页面)
+  allFormData: function (PagesData){
+
+    // 当前页面
+    var creditPage = PagesData[PagesData.length - 1].data.formCreditData;
+
+    // loan
+    var loanPage = PagesData[PagesData.length - 2].data.formLoanData;
+
+    // house
+    var housePage = PagesData[PagesData.length - 3].data.formHorseData;
+   
+    // Insurance
+    var insurancePage = PagesData[PagesData.length - 4].data.formInsuranceData;
+
+    // base
+    var basePage = PagesData[PagesData.length - 5].data.formBaseData;
+    
+
+    // 将所有 formData 合并在一起
+      // Object.assign() 合并所有可枚举对象的属性,同时改变该对象
+    var allFormData = Object.assign(basePage, insurancePage, housePage, loanPage, creditPage)
+    
+    return allFormData
+
+  },
+  postInfo: function (formData) {
+    // formData 表示传入的 客户信息
+    var url = app.globalData.apiUrl;
+    var that = this;
+    // 把 openId 插入 formData 一并提交到后台
+    formData.openId = app.globalData.openId;
+    util.requestHttp(url + 'order', 'POST', formData, function (data) {
+      console.log(data)
+    })
   },
 
   /**

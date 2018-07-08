@@ -39,6 +39,8 @@ Page({
     that.getNews()
     // 请求商品
     that.getProduct()
+    // 猜你喜欢
+    that.guessLike()
 
   },
   getBanner:function(){
@@ -102,11 +104,10 @@ Page({
       that.setData({
         product: dataList
       })
-      wx.hideLoading()
     })
   },
   imageOnLoad:function(e){
-    console.log(e.target.dataset.id)
+
     var id = e.target.dataset.id;
     var imgUrl = e.target.dataset.imgurl;
     var arr = 'arr' + '[' + id + ']';
@@ -118,12 +119,24 @@ Page({
         this.setData({ [arr]: data.src })
     })
   },
-
+  // 猜你喜欢
+  guessLike:function(){
+    var that = this;
+    var url = app.globalData.apiUrl;
+    util.requestHttp(url + 'guessLike', 'GET', '', function (data) {
+      var dataList = data.data
+      console.log(dataList)
+      that.setData({
+        guessLike: dataList
+      })
+      wx.hideLoading()
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**

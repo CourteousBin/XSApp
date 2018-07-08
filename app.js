@@ -16,8 +16,9 @@ App({
   },
   // 处理返回openId
   processOpenId:function(data){
-    console.log(data);
+    
     this.globalData.openId = data.data.openid;
+    console.log(this.globalData.openId);
   },
   globalData:{
     apiUrl:'https://mp.csnet.net.cn/api/jrapi/',

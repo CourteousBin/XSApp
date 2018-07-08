@@ -2,17 +2,17 @@
 	<view class="content-container">
 		<scroll-view class="classify-container" scroll-y="true">
 			<view class="classify {{classifySeleted==classify.id?'active':''}}" wx:for="{{goodsList}}" wx:for-item="classify" wx:key="id" data-id="{{classify.id}}" bindtap="tapClassify">
-				<view class="name">{{classify.classifyName}}</view>
+				<view class="name">{{classify.cat_name}}</view>
 			</view>
 		</scroll-view>
 		<scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll">
 			<view wx:for="{{goodsList}}" wx:for-item="classify" wx:key="id" id="{{classify.id}}">
-				<view class="title">{{classify.classifyName}}</view>
+				<view class="title">{{classify.cat_name}}</view>
 				<view class="goods" wx:for="{{classify.goods}}" wx:for-item="id" wx:key="*this" catchtap='toDetail'>
 					<image class="pic" src="{{goods[id].pic}}"></image>
 					<view class="name ellipsis">{{goods[id].name}}</view>
-					<view class="sold">25-55周岁{{goods[id].sold}}</view>
-					<view class="price">{{goods[id].price}}</view>
+					<view class="sold">{{goods[id].aga}}周岁</view>
+					<view class="price">{{goods[id].price}}万</view>
 					<!-- <view class="addCart" bindtap="tapAddCart" data-id="{{id}}">
 						<image src="/images/love.png"></image>
 					</view> -->

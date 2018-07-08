@@ -1,9 +1,18 @@
 {
   "pages":[
+    "pages/moreGoods/moreGoods",
     "pages/index/index",
+    "pages/newsMore/newsMore",
+    "pages/classify/classify",
+    
+    "pages/productMix/productMix",
     "pages/formBase/formBase",
-    "pages/fastTest/fastTest",
+    "pages/formCredit/formCredit",
+    "pages/formLoan/formLoan",
+    "pages/formHouse/formHouse",
+    "pages/formInsurance/formInsurance",
     "pages/fastProgramme/fastProgramme",
+    "pages/fastTest/fastTest",
     "pages/brandPartner/brandPartner",
     "pages/quarterly/quarterly",
     "pages/myTeam/myTeam",
@@ -13,23 +22,19 @@
     "pages/myTeamLogin/myTeamLogin",
     "pages/my/my",
     "pages/activity/activity",
-    "pages/formInsurance/formInsurance",
-    "pages/formLoan/formLoan",
     "pages/shopCar/shopCar",
     "pages/order/order",
     "pages/customized/customized",
-    "pages/formHouse/formHouse",
     "pages/about/about",
-    "pages/productMix/productMix",
+    
     "pages/merchantEntry/merchantEntry",
-    "pages/newsMore/newsMore",
+    
     "pages/newsDetail/newsDetail",
     "pages/goods/goods",
-    "pages/moreGoods/moreGoods",
-    "pages/formCredit/formCredit",
+    
     "pages/form/form",
     "pages/test/test",
-    "pages/classify/classify",
+    
     "pages/store/store",
     "pages/test2/test2",
     "pages/logs/logs"
