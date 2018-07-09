@@ -1,10 +1,10 @@
 {
   "pages":[
-    "pages/moreGoods/moreGoods",
+    "pages/goods/goods",
     "pages/index/index",
+    "pages/moreGoods/moreGoods",
     "pages/newsMore/newsMore",
     "pages/classify/classify",
-    
     "pages/productMix/productMix",
     "pages/formBase/formBase",
     "pages/formCredit/formCredit",
@@ -26,15 +26,10 @@
     "pages/order/order",
     "pages/customized/customized",
     "pages/about/about",
-    
     "pages/merchantEntry/merchantEntry",
-    
     "pages/newsDetail/newsDetail",
-    "pages/goods/goods",
-    
     "pages/form/form",
     "pages/test/test",
-    
     "pages/store/store",
     "pages/test2/test2",
     "pages/logs/logs"

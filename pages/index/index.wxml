@@ -172,7 +172,7 @@
                 <view class='hotProductTitle'>
                   <view style='margin-left:10rpx;font-size:30rpx'>{{index}}</view>
                   <view class='productMore'>
-                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{cat.id}}">
+                    <navigator class="" bindtap="hideGetCoupon" url="/pages/moreGoods/moreGoods?cat_id={{item[0].cat_id}}">
                       <text style='font-size:30rpx;'>更多</text>
                        <image src="/images/icon-jiantou-r.png" /> 
                     </navigator>
@@ -181,7 +181,8 @@
                 <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
                   <block wx:for="{{item}}" wx:for-item="itemProduct" wx:for-index="idx" wx:key="*this">
                     <view class="flex-grow-0">
-                        <navigator class="goods-item productText" url="/pages/goods/goods?id={{goods.id}}">
+                        <navigator class="goods-item productText" 
+                        url="/pages/goods/goods?cat_id={{itemProduct.cat_id}}">
                             <!-- <image src="{{itemProduct.pic}}" bindload="imageOnLoad" mode="aspectFill" /> -->
                             <image src="{{arr[itemProduct.id]?arr[itemProduct.id]:'/images/loading.png'}}" data-id="{{itemProduct.id}}" bindload="imageOnLoad" mode="aspectFill" data-imgUrl="{{itemProduct.pic}}" />
                             <text>{{itemProduct.name}}</text>

@@ -1,14 +1,6 @@
-// goods.js
-// var api = require('../../template/api.js');
-// var utils = require('../../template/utils.js');
-// var app = require('../../template/index.js');
-
 var myUtils = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
-var p = 1;
-var is_loading_comment = false;
-var is_more_comment = true;
-var share_count = 0;
+
 Page({
 
   /**
@@ -46,34 +38,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // app.pageOnLoad(this);
-    // console.log(wx.getSystemInfoSync());
-    // share_count = 0;
-    // p = 1;
-    // is_loading_comment = false;
-    // is_more_comment = true;
-    // this.setData({
-    //   store: wx.getStorageSync('store'),
-    // });
-
-    // var parent_id = 0;
-    // var user_id = options.user_id;
-    // console.log("options=>" + JSON.stringify(options));
-    // var scene = decodeURIComponent(options.scene);
-    // if (user_id != undefined) {
-    //   parent_id = user_id;
-    // } else if (scene != undefined) {
-    //   console.log("scene string=>" + scene);
-    //   var scene_obj = utils.scene_decode(scene);
-    //   console.log("scene obj=>" + JSON.stringify(scene_obj));
-    //   if (scene_obj.uid && scene_obj.gid) {
-    //     parent_id = scene_obj.uid;
-    //     options.id = scene_obj.gid;
-    //   } else {
-    //     parent_id = scene;
-    //   }
-    // }
-    // app.loginBindParent({ parent_id: parent_id });
     // var page = this;
     // page.setData({
     //   id: options.id,
@@ -178,122 +142,6 @@ Page({
     });
   },
 
-  numberBlur: function (e) {
-    var page = this;
-    var num = e.detail.value;
-    num = parseInt(num);
-    if (isNaN(num))
-      num = 1;
-    if (num <= 0)
-      num = 1;
-    page.setData({
-      form: {
-        number: num,
-      }
-    });
-  },
-
-  addCart: function () {
-    this.submit('ADD_CART');
-  },
-
-  buyNow: function () {
-    this.submit('BUY_NOW');
-  },
-
-  submit: function (type) {
-    var page = this;
-    if (!page.data.show_attr_picker) {
-      page.setData({
-        show_attr_picker: true,
-      });
-      return true;
-    }
-    if (page.data.miaosha_data && page.data.miaosha_data.rest_num > 0 && page.data.form.number > page.data.miaosha_data.rest_num) {
-      wx.showToast({
-        title: "商品库存不足，请选择其它规格或数量",
-        image: "/images/icon-warning.png",
-      });
-      return true;
-    }
-
-    if (page.data.form.number > page.data.goods.num) {
-      wx.showToast({
-        title: "商品库存不足，请选择其它规格或数量",
-        image: "/images/icon-warning.png",
-      });
-      return true;
-    }
-    var attr_group_list = page.data.attr_group_list;
-    var checked_attr_list = [];
-    for (var i in attr_group_list) {
-      var attr = false;
-      for (var j in attr_group_list[i].attr_list) {
-        if (attr_group_list[i].attr_list[j].checked) {
-          attr = {
-            attr_id: attr_group_list[i].attr_list[j].attr_id,
-            attr_name: attr_group_list[i].attr_list[j].attr_name,
-          };
-          break;
-        }
-      }
-      if (!attr) {
-        wx.showToast({
-          title: "请选择" + attr_group_list[i].attr_group_name,
-          image: "/images/icon-warning.png",
-        });
-        return true;
-      } else {
-        checked_attr_list.push({
-          attr_group_id: attr_group_list[i].attr_group_id,
-          attr_group_name: attr_group_list[i].attr_group_name,
-          attr_id: attr.attr_id,
-          attr_name: attr.attr_name,
-        });
-      }
-    }
-    if (type == 'ADD_CART') {//加入购物车
-      wx.showLoading({
-        title: "正在提交",
-        mask: true,
-      });
-      app.request({
-        url: api.cart.add_cart,
-        method: "POST",
-        data: {
-          goods_id: page.data.id,
-          attr: JSON.stringify(checked_attr_list),
-          num: page.data.form.number,
-        },
-        success: function (res) {
-          wx.showToast({
-            title: res.msg,
-            duration: 1500
-          });
-          wx.hideLoading();
-          page.setData({
-            show_attr_picker: false,
-          });
-
-        }
-      });
-    }
-    if (type == 'BUY_NOW') {//立即购买
-      page.setData({
-        show_attr_picker: false,
-      });
-      wx.redirectTo({
-        url: "/pages/order-submit/order-submit?goods_info=" + JSON.stringify({
-          goods_id: page.data.id,
-          attr: checked_attr_list,
-          num: page.data.form.number,
-        }),
-      });
-    }
-
-  },
-
-
   favoriteAdd: function () {
     // var page = this;
     // app.request({
@@ -361,16 +209,6 @@ Page({
       });
     }
   },
-  commentPicView: function (e) {
-    console.log(e);
-    var page = this;
-    var index = e.currentTarget.dataset.index;
-    var pic_index = e.currentTarget.dataset.picIndex;
-    wx.previewImage({
-      current: page.data.comment_list[index].pic_list[pic_index],
-      urls: page.data.comment_list[index].pic_list,
-    });
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -434,40 +272,8 @@ Page({
     };
     return res;
   },
-  play: function (e) {
-    var url = e.target.dataset.url;//获取视频链接
-    this.setData({
-      url: url,
-      hide: '',
-      show: true,
-    });
-    var videoContext = wx.createVideoContext('video');
-    videoContext.play();
-  },
-
-  close: function (e) {
-    if (e.target.id == 'video') {
-      return true;
-    }
-    this.setData({
-      hide: "hide",
-      show: false
-    });
-    var videoContext = wx.createVideoContext('video');
-    videoContext.pause();
-  },
-  hide: function (e) {
-    if (e.detail.current == 0) {
-      this.setData({
-        img_hide: ""
-      });
-    } else {
-      this.setData({
-        img_hide: "hide"
-      });
-    }
-  },
-
+ 
+// 分享
   showShareModal: function () {
     var page = this;
     page.setData({
@@ -475,7 +281,7 @@ Page({
       no_scroll: true,
     });
   },
-
+// 分享
   shareModalClose: function () {
     var page = this;
     page.setData({
@@ -484,116 +290,6 @@ Page({
     });
   },
 
-  goodsQrcodeClose: function () {
-    var page = this;
-    page.setData({
-      goods_qrcode_active: "",
-      no_scroll: false,
-    });
-  },
-
-  saveGoodsQrcode: function () {
-    var page = this;
-    if (!wx.saveImageToPhotosAlbum) {
-      // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
-      wx.showModal({
-        title: '提示',
-        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
-        showCancel: false,
-      });
-      return;
-    }
-
-    wx.showLoading({
-      title: "正在保存图片",
-      mask: false,
-    });
-
-    wx.downloadFile({
-      url: page.data.goods_qrcode,
-      success: function (e) {
-        wx.showLoading({
-          title: "正在保存图片",
-          mask: false,
-        });
-        wx.saveImageToPhotosAlbum({
-          filePath: e.tempFilePath,
-          success: function () {
-            wx.showModal({
-              title: '提示',
-              content: '商品海报保存成功',
-              showCancel: false,
-            });
-          },
-          fail: function (e) {
-            wx.showModal({
-              title: '图片保存失败',
-              content: e.errMsg,
-              showCancel: false,
-            });
-          },
-          complete: function (e) {
-            console.log(e);
-            wx.hideLoading();
-          }
-        });
-      },
-      fail: function (e) {
-        wx.showModal({
-          title: '图片下载失败',
-          content: e.errMsg + ";" + page.data.goods_qrcode,
-          showCancel: false,
-        });
-      },
-      complete: function (e) {
-        console.log(e);
-        wx.hideLoading();
-      }
-    });
-
-  },
-
-  goodsQrcodeClick: function (e) {
-    var src = e.currentTarget.dataset.src;
-    wx.previewImage({
-      urls: [src],
-    });
-  },
-  closeCouponBox: function (e) {
-    this.setData({
-      get_coupon_list: ""
-    });
-  },
-
-  setMiaoshaTimeOver: function () {
-    var page = this;
-
-    function _init() {
-      var time_over = page.data.goods.miaosha.end_time - page.data.goods.miaosha.now_time;
-      time_over = time_over < 0 ? 0 : time_over;
-      page.data.goods.miaosha.now_time++;
-      page.setData({
-        goods: page.data.goods,
-        miaosha_end_time_over: secondToTime(time_over),
-      });
-    }
-
-    _init();
-    setInterval(function () {
-      _init();
-    }, 1000);
-
-    function secondToTime(second) {
-      var _h = parseInt(second / 3600);
-      var _m = parseInt((second % 3600) / 60);
-      var _s = second % 60;
-
-      return {
-        h: _h < 10 ? ("0" + _h) : ("" + _h),
-        m: _m < 10 ? ("0" + _m) : ("" + _m),
-        s: _s < 10 ? ("0" + _s) : ("" + _s),
-      };
-    }
-  },
+  
 
 });
