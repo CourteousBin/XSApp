@@ -1,6 +1,7 @@
-var myUtils = require('../../utils/util.js');
+// var myUtils = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
-
+var util = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -38,51 +39,54 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var page = this;
-    // page.setData({
-    //   id: options.id,
-    // });
-    // page.getGoods();
-    // page.getCommentList();
+    // 真实数据
+    // var cat_id = options.cat_id;
+    // 调试数据
+    var goods_id = this.data.goods_id = 60
+
+    // 获取数据
+    this.getGoods({ goods_id: goods_id })
+
+    // 是否喜欢的商品
+    this.isFavorite()
   },
   actOrder:function(e){
     myUtils.toPages('../formBase/formBase');
   },
-  getGoods: function () {
-    var page = this;
-    app.request({
-      url: api.default.goods,
-      data: {
-        id: page.data.id
-      },
-      success: function (res) {
-        if (res.code == 0) {
-          var detail = res.data.detail;
-          WxParse.wxParse("detail", "html", detail, page);
-          page.setData({
-            goods: res.data,
-            attr_group_list: res.data.attr_group_list,
-          });
-          if (page.data.goods.miaosha)
-            page.setMiaoshaTimeOver();
-          page.selectDefaultAttr();
-        }
-        if (res.code == 1) {
-          wx.showModal({
-            title: "提示",
-            content: res.msg,
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                wx.switchTab({
-                  url: "/pages/index/index"
-                });
-              }
-            }
-          });
-        }
+  isFavorite:function(){
+    var that = this
+    var url = app.globalData.apiUrl;
+    // var open_id = app.globalData.openId;
+    // 模拟数据
+    var open_id = 'ok-z54p4oIgtstl_is_t-RBxU76s'; 
+    var goods_id = this.data.goods_id;
+
+    util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id, control: 0 }, function (data) {
+      var dataList = data.data
+      if (dataList == 1) {
+        var goods = that.data.goods;
+        goods.is_favorite = 1;
+        that.setData({
+          goods: goods,
+        });
       }
-    });
+    })
+  },
+  getGoods: function (data) {
+    var that = this
+    var url = app.globalData.apiUrl;
+    
+
+    util.requestHttp(url + 'goodsDetail', 'POST', data, function (data) {
+      var dataList = data.data[0]
+      var content = dataList.content
+      that.setData({
+        dataList:dataList
+      })
+      WxParse.wxParse('content', 'html', content, that, 5);
+      console.log(dataList)
+    })
+
   },
   selectDefaultAttr: function () {
     var page = this;
@@ -96,35 +100,6 @@ Page({
     }
     page.setData({
       attr_group_list: page.data.attr_group_list,
-    });
-  },
-  getCommentList: function (more) {
-    var page = this;
-    if (more && page.data.tab_comment != "active")
-      return;
-    if (is_loading_comment)
-      return;
-    if (!is_more_comment)
-      return;
-    is_loading_comment = true;
-    app.request({
-      url: api.default.comment_list,
-      data: {
-        goods_id: page.data.id,
-        page: p,
-      },
-      success: function (res) {
-        if (res.code != 0)
-          return;
-        is_loading_comment = false;
-        p++;
-        page.setData({
-          comment_count: res.data.comment_count,
-          comment_list: more ? page.data.comment_list.concat(res.data.list) : res.data.list,
-        });
-        if (res.data.list.length == 0)
-          is_more_comment = false;
-      }
     });
   },
 
@@ -143,55 +118,84 @@ Page({
   },
 
   favoriteAdd: function () {
-    // var page = this;
+    var that = this;
+    var url = app.globalData.apiUrl;
+    var open_id = app.globalData.openId;
+    var goods_id = this.data.goods_id;
+
+    util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id,control:1}, function (data) {
+      var dataList = data.data
+      console.log(dataList)
+      // if (res.code == 1) {
+      //   var goods = that.data.goods;
+      //   goods.is_favorite = 1;
+      //   that.setData({
+      //     goods: goods,
+      //   });
+      // }
+    })
+
+
     // app.request({
     //   url: api.user.favorite_add,
     //   method: "post",
     //   data: {
-    //     goods_id: page.data.goods.id,
+    //     goods_id: that.data.goods.id,
     //   },
     //   success: function (res) {
     //     if (res.code == 0) {
-    //       var goods = page.data.goods;
+    //       var goods = that.data.goods;
     //       goods.is_favorite = 1;
-    //       page.setData({
+    //       that.setData({
     //         goods: goods,
     //       });
     //     }
     //   }
     // });
-    var page = this;
-    var goods = page.data.goods;
-    goods.is_favorite = 1;
-    page.setData({
-      goods: goods,
-    });
+
   },
 
   favoriteRemove: function () {
-    var page = this;
+    var that = this;
+    var url = app.globalData.apiUrl;
+    var open_id = app.globalData.openId;
+    var goods_id = this.data.goods_id;
+
+    util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id, control: 2 }, function (data) {
+      var dataList = data.data
+
+      // if (dataList == 1) {
+      //   var goods = that.data.goods;
+      //   goods.is_favorite = 1;
+      //   that.setData({
+      //     goods: goods,
+      //   });
+      // }
+    })
+
+
     // app.request({
     //   url: api.user.favorite_remove,
     //   method: "post",
     //   data: {
-    //     goods_id: page.data.goods.id,
+    //     goods_id: that.data.goods.id,
     //   },
     //   success: function (res) {
     //     if (res.code == 0) {
-    //       var goods = page.data.goods;
+    //       var goods = that.data.goods;
     //       goods.is_favorite = 0;
-    //       page.setData({
+    //       that.setData({
     //         goods: goods,
     //       });
     //     }
     //   }
     // });
 
-    var goods = page.data.goods;
-    goods.is_favorite = 0;
-    page.setData({
-      goods: goods,
-    });
+    // var goods = page.data.goods;
+    // goods.is_favorite = 0;
+    // page.setData({
+    //   goods: goods,
+    // });
   },
 
   tabSwitch: function (e) {

@@ -110,12 +110,12 @@
                   </view>
                   <view class="weui-flex__item">
                     <view class="weui-cell__ft placeholder">
-                      <switch name="isPremiumPayfee{{item}}" data-judge="isPremiumPayfee{{item}}" bindchange="switchJudge" />
+                      <switch name="isPremiumPayfee" data-judge="isPremiumPayfee{{item}}" bindchange="switchJudge" />
                     </view>
                   </view>
                 </view>
 
-                <block wx:if="{{isPremiumPayfee1 == true}}">
+                <block wx:if="{{isPremiumPayfee == true}}">
 
                   <view class="weui-flex rowBg interval">
                     <view class="tipColor">
@@ -733,7 +733,7 @@
 
               <view class="weui-cells__title">请问第{{itemCar}}辆是全款车还是按揭车</view>
               <view class="weui-cells weui-cells_after-title interval">
-                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                <radio-group name="BuyCarType{{itemCar}}" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
                   <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList2}}" wx:key="value">
                     <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
 
@@ -798,7 +798,7 @@
                     </view>
                     <view class="weui-flex__item">
                       <view class='degree'>
-                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex2" bindchange="pickerChange" value="{{pickerCarSupplyIndex2}}" range="{{pickerCarSupply}}">
+                        <picker name="CarSupplyTime{{itemCar}}" data-type="pickerCarSupplyIndex2" bindchange="pickerChange" value="{{pickerCarSupplyIndex2}}" range="{{pickerCarSupply}}">
                           <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex2]}}</view>
                         </picker>
                       </view>
@@ -885,7 +885,7 @@
 
               <view class="weui-cells__title">请问第{{itemCar}}辆是全款车还是按揭车</view>
               <view class="weui-cells weui-cells_after-title interval">
-                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                <radio-group name="BuyCarType{{itemCar}}" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
                   <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList3}}" wx:key="value">
                     <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
 
@@ -950,7 +950,7 @@
                     </view>
                     <view class="weui-flex__item">
                       <view class='degree'>
-                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex3" bindchange="pickerChange" value="{{pickerCarSupplyIndex3}}" range="{{pickerCarSupply}}">
+                        <picker name="CarSupplyTime{{itemCar}}" data-type="pickerCarSupplyIndex3" bindchange="pickerChange" value="{{pickerCarSupplyIndex3}}" range="{{pickerCarSupply}}">
                           <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex3]}}</view>
                         </picker>
                       </view>
@@ -1036,7 +1036,7 @@
 
               <view class="weui-cells__title">请问第{{itemCar}}辆是全款车还是按揭车</view>
               <view class="weui-cells weui-cells_after-title interval">
-                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                <radio-group name="BuyCarType{{itemCar}}" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
                   <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList4}}" wx:key="value">
                     <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
 
@@ -1101,7 +1101,7 @@
                     </view>
                     <view class="weui-flex__item">
                       <view class='degree'>
-                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex4" bindchange="pickerChange" value="{{pickerCarSupplyIndex4}}" range="{{pickerCarSupply}}">
+                        <picker name="CarSupplyTime{{itemCar}}" data-type="pickerCarSupplyIndex4" bindchange="pickerChange" value="{{pickerCarSupplyIndex4}}" range="{{pickerCarSupply}}">
                           <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex4]}}</view>
                         </picker>
                       </view>
@@ -1187,7 +1187,7 @@
 
               <view class="weui-cells__title">请问第{{itemCar}}辆是全款车还是按揭车</view>
               <view class="weui-cells weui-cells_after-title interval">
-                <radio-group name="BuyCarType" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
+                <radio-group name="BuyCarType{{itemCar}}" data-type="radioBuyCarTypeList{{itemCar}}"  data-judge="isBuyCarType{{itemCar}}" bindchange="radioChange">
                   <label class="weui-cell weui-check__label" wx:for="{{radioBuyCarTypeList5}}" wx:key="value">
                     <radio  class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
 
@@ -1246,13 +1246,13 @@
 
                 <block wx:if="{{isCarSupply5 == true}}">
 
-                  <view class="weui-flex rowBg interval">
+                  <view class="weui-flex rowBg     interval">
                     <view class="tipColor">
                       <view class="placeholder">请问第{{itemCar}}辆供完多久:</view>
                     </view>
                     <view class="weui-flex__item">
                       <view class='degree'>
-                        <picker name="CarSupplyTime" data-type="pickerCarSupplyIndex5" bindchange="pickerChange" value="{{pickerCarSupplyIndex5}}" range="{{pickerCarSupply}}">
+                        <picker name="CarSupplyTime{{itemCar}}" data-type="pickerCarSupplyIndex5" bindchange="pickerChange" value="{{pickerCarSupplyIndex5}}" range="{{pickerCarSupply}}">
                           <view class="weui-select">{{pickerCarSupply[pickerCarSupplyIndex5]}}</view>
                         </picker>
                       </view>

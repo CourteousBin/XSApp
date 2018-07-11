@@ -36,9 +36,13 @@ Page({
     radioHouseProve5: [{ name: '房产证', value: '1' }, { name: '购房合同', value: '2' }, { name: '集体土地证', value: '3' }, { name: '其他', value: '4' }],
     // 是否共有
     radioHouseBelong1: [{ name: '夫妻共有', value: '1' }, { name: '与父母共有', value: '2' },{ name: '与子女共有', value: '3' }, { name: '个人', value: '4' },{ name: '其他', value: '5' }],
-    radioHouseBelong2: [{ name: '夫妻共有', value: '1' }, { name: '其他', value: '5' }, { name: '与子女共有', value: '3' }, { name: '个人', value: '4' }, { name: '其他', value: '5' }],
+
+    radioHouseBelong2: [{ name: '夫妻共有', value: '1' }, { name: '与父母共有', value: '2' }, { name: '与子女共有', value: '3' }, { name: '个人', value: '4' }, { name: '其他', value: '5' }],
+
     radioHouseBelong3: [{ name: '夫妻共有', value: '1' }, { name: '与父母共有', value: '2' }, { name: '与子女共有', value: '3' }, { name: '个人', value: '4' }, { name: '其他', value: '5' }],
+
     radioHouseBelong4: [{ name: '夫妻共有', value: '1' }, { name: '与父母共有', value: '2' }, { name: '与子女共有', value: '3' }, { name: '个人', value: '4' }, { name: '其他', value: '5' }],
+    
     radioHouseBelong5: [{ name: '夫妻共有', value: '1' }, { name: '与父母共有', value: '2' }, { name: '与子女共有', value: '3' }, { name: '个人', value: '4' }, { name: '其他', value: '5'}],
     // 谁是主贷方
     pickerHouseLoanWho: ['本人', '配偶', '爸爸', '妈妈', '其他'],

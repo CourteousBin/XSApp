@@ -76,6 +76,7 @@ Page({
 
     // 获得 页面栈
     var PagesData = getCurrentPages();
+    console.log(PagesData)
 
     // 获取所有分页的 formData
     var formData = this.allFormData(PagesData)

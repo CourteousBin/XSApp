@@ -302,7 +302,7 @@
                       </view>
                       <view class="weui-flex__item">
                         <view class='degree'>
-                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex2}}" range="{{pickerhouseDegree}}">
+                          <picker name="houseDegree{{itemHouse}}" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex2}}" range="{{pickerhouseDegree}}">
                             <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex2]}}</view>
                           </picker>
                         </view>
@@ -498,7 +498,7 @@
                       </view>
                       <view class="weui-flex__item">
                         <view class='degree'>
-                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex3}}" range="{{pickerhouseDegree}}">
+                          <picker name="houseDegree{{itemHouse}}" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex3}}" range="{{pickerhouseDegree}}">
                             <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex3]}}</view>
                           </picker>
                         </view>
@@ -694,7 +694,7 @@
                       </view>
                       <view class="weui-flex__item">
                         <view class='degree'>
-                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex4}}" range="{{pickerhouseDegree}}">
+                          <picker name="houseDegree{{itemHouse}}" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex4}}" range="{{pickerhouseDegree}}">
                             <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex4]}}</view>
                           </picker>
                         </view>
@@ -889,7 +889,7 @@
                       </view>
                       <view class="weui-flex__item">
                         <view class='degree'>
-                          <picker name="houseDegree" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex5}}" range="{{pickerhouseDegree}}">
+                          <picker name="houseDegree{{itemHouse}}" data-type="pickerhouseDegreeIndex{{itemHouse}}" bindchange="pickerChange" value="{{pickerhouseDegreeIndex5}}" range="{{pickerhouseDegree}}">
                             <view class="weui-select">{{pickerhouseDegree[pickerhouseDegreeIndex5]}}</view>
                           </picker>
                         </view>

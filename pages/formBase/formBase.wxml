@@ -171,12 +171,10 @@
 
           <view class="weui-flex rowBg interval" style='margin-top:25px;'>
             <view class="tipColor">
-              <view class="placeholder">是否有单位固话:</view>
+              <view class="placeholder">单位固话:</view>
             </view>
             <view class="weui-flex__item">
-              <view class="weui-cell__ft placeholder">
-                <switch name="isWorkNumber" />
-              </view>
+              <input class='placeholder' name="isWorkNumber" type='number' maxlength="11"></input>
             </view>
           </view>
 

@@ -2,11 +2,11 @@
   "pages":[
     "pages/goods/goods",
     "pages/index/index",
+    "pages/formBase/formBase",
     "pages/moreGoods/moreGoods",
     "pages/newsMore/newsMore",
     "pages/classify/classify",
     "pages/productMix/productMix",
-    "pages/formBase/formBase",
     "pages/formCredit/formCredit",
     "pages/formLoan/formLoan",
     "pages/formHouse/formHouse",

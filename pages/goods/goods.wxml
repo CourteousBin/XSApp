@@ -4,30 +4,20 @@
     <swiper class="goods-image-swiper" autoplay="{{autoplay}}" interval="5000" duration="300" indicator-dots="true" circular="true" bindchange="hide">
       <block>
         <swiper-item>
-          <image bindtap="onGoodsImageClick" data-index="{{index}}" class="goods-image" src="/images/timg.jpg" mode="aspectFill" />
+          <image bindtap="onGoodsImageClick" data-index="{{index}}" class="goods-image" src="{{dataList.pic}}" mode="aspectFill" />
         </swiper-item>
       </block>
 
     </swiper>
 
     <view class="goods-info" style="background: #fff;padding:32rpx 24rpx;border-bottom: 1rpx solid #eee ">
-      <view style="font-weight: bold;margin-bottom: 24rpx;line-height: 1.7">利息地址7.8里 40万超高额度 最快当天放款</view>
+      <view style="font-weight: bold;margin-bottom: 24rpx;line-height: 1.7">{{dataList.introduce}}</view>
       <view class="flex-row flex-y-center">
         <view class="flex-grow-1 flex-row flex-y-bottom">
-          <block wx:if="{{1}}">
+          <block>
             <view class="flex-grow-0" style="font-weight: bold;color: #ff4544;margin-right: 32rpx">
               <!-- <text style="font-size: 9pt;">￥</text> -->
-              <text style="font-size: 13pt">汽车贷款</text>
-            </view>
-          </block>
-          <block wx:else>
-            <view class="flex-grow-0" style="font-weight: bold;color: #ff4544;margin-right: 32rpx">
-              <text style="font-size: 9pt;">￥</text>
-              <text style="font-size: 13pt">56789</text>
-            </view>
-            <view class="flex-grow-0" style="margin-right: 32rpx">
-              <text style="font-size: 9pt;color: #888;text-decoration: line-through">￥999
-                            </text>
+              <text style="font-size: 13pt">{{dataList.name}}</text>
             </view>
           </block>
 
@@ -53,18 +43,18 @@
         <view bindtap="tabSwitch" data-tab="detail" class="flex-grow-1 flex-x-center tab-group-item {{tab_detail}}">
           <text class="flex-y-center">商品详情</text>
         </view>
-        <view bindtap="tabSwitch" data-tab="comment" class="flex-grow-1 flex-x-center tab-group-item {{tab_comment}}">
+        <!-- <view bindtap="tabSwitch" data-tab="comment" class="flex-grow-1 flex-x-center tab-group-item {{tab_comment}}">
           <text class="flex-y-center">评价</text>
-        </view>
+        </view> -->
       </view>
       <view class="tab-group-body">
         <view class="tab-group-item {{tab_detail}}">
           <view class="goods-detail">
             <import src="../../wxParse/wxParse.wxml" />
-            <template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+            <template is="wxParse" data="{{wxParseData:content.nodes}}" />
           </view>
         </view>
-        <view class="tab-group-item {{tab_comment}}">
+        <!-- <view class="tab-group-item {{tab_comment}}">
           <view class="comment-count flex-row">
             <view class="comment-count-item flex-grow-1 flex-x-center flex-col">
               <view>全部</view>
@@ -82,7 +72,7 @@
               <view>差评</view>
               <view>({{comment_count.score_1>999?'999+':comment_count.score_1}})</view>
             </view>
-          </view>
+          </view> 
           <view class="comment-list">
             <view class="comment-item flex-row" wx:for="{{comment_list}}">
               <view class="flex-grow-0" style="overflow: visible">
@@ -101,9 +91,8 @@
               </view>
             </view>
           </view>
+        </view>-->
 
-
-        </view>
       </view>
     </view>
 
