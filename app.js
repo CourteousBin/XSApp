@@ -22,6 +22,12 @@ App({
   },
   globalData:{
     apiUrl:'https://mp.csnet.net.cn/api/jrapi/',
+    
+    // 记录从哪个页面跳转到 资产咨询表
+      // 如果从商品跳转 直接传 商品id
+      // 如果从 快速测试跳转 则 传入 'fastTest'
+      // 如果从 定制服务 则 传入 'Customized'
+    wherePage:null,
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow

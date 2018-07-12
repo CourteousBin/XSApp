@@ -1,5 +1,5 @@
 var util = require('../../utils/util.js');
-// pages/activity/activity.js
+var app = getApp();
 Page({
 
   /**
@@ -13,11 +13,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
-  toDetail:function(){
-    util.toPages('../newsDetail/newsDetail');
+  toDetail:function(e){
+    var id = e.dataset.id;
+    util.toPages('../newsDetail/newsDetail?activity=');
+  },
+
+  getActivity:function(){
+    var url = app.globalData.apiUrl;
+    var that = this;
+    util.requestHttp(url + 'activity', 'GET', '', function (data) {
+      var dataList = data.data;
+      console.log(dataList)
+      that.setData({
+        dataList: dataList
+      })
+    })
   },
 
   /**
@@ -31,7 +44,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getActivity()
   },
 
   /**

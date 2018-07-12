@@ -40,25 +40,40 @@ Page({
    */
   onLoad: function (options) {
     // 真实数据
-    // var cat_id = options.cat_id;
+    var goods_id = this.data.goods_id = options.goods_id;
+  
     // 调试数据
-    var goods_id = this.data.goods_id = 60
+    // var goods_id = this.data.goods_id = 60
 
     // 获取数据
     this.getGoods({ goods_id: goods_id })
 
     // 是否喜欢的商品
     this.isFavorite()
+
+    // 获取最新联系客服电话号码
+    this.getPhone()
+
   },
   actOrder:function(e){
+
+    var goods_id = this.data.goods_id;
+
+    // 记录从哪个页面跳转到 资产咨询表
+      // 如果从商品跳转 直接传 商品id
+      // 如果从 快速测试跳转 则 传入 'fastTest'
+      // 如果从 定制服务 则 传入 'Customized'
+    var wherePage = app.globalData.wherePage = goods_id;
+
     myUtils.toPages('../formBase/formBase');
+    
   },
   isFavorite:function(){
     var that = this
     var url = app.globalData.apiUrl;
-    // var open_id = app.globalData.openId;
+    var open_id = app.globalData.openId;
     // 模拟数据
-    var open_id = 'ok-z54p4oIgtstl_is_t-RBxU76s'; 
+    // var open_id = 'ok-z54p4oIgtstl_is_t-RBxU76s'; 
     var goods_id = this.data.goods_id;
 
     util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id, control: 0 }, function (data) {
@@ -76,7 +91,6 @@ Page({
     var that = this
     var url = app.globalData.apiUrl;
     
-
     util.requestHttp(url + 'goodsDetail', 'POST', data, function (data) {
       var dataList = data.data[0]
       var content = dataList.content
@@ -84,7 +98,7 @@ Page({
         dataList:dataList
       })
       WxParse.wxParse('content', 'html', content, that, 5);
-      console.log(dataList)
+  
     })
 
   },
@@ -107,7 +121,7 @@ Page({
     var page = this;
     var urls = [];
     var index = e.currentTarget.dataset.index;
-    //console.log(page.data.goods.pic_list);
+
     for (var i in page.data.goods.pic_list) {
       urls.push(page.data.goods.pic_list[i].pic_url);
     }
@@ -126,32 +140,15 @@ Page({
     util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id,control:1}, function (data) {
       var dataList = data.data
       console.log(dataList)
-      // if (res.code == 1) {
-      //   var goods = that.data.goods;
-      //   goods.is_favorite = 1;
-      //   that.setData({
-      //     goods: goods,
-      //   });
-      // }
+      if (dataList == 1) {
+        util.toastTip('操作成功', 'success', 800)
+        var goods = that.data.goods;
+        goods.is_favorite = 1;
+        that.setData({
+          goods: goods,
+        });
+      }
     })
-
-
-    // app.request({
-    //   url: api.user.favorite_add,
-    //   method: "post",
-    //   data: {
-    //     goods_id: that.data.goods.id,
-    //   },
-    //   success: function (res) {
-    //     if (res.code == 0) {
-    //       var goods = that.data.goods;
-    //       goods.is_favorite = 1;
-    //       that.setData({
-    //         goods: goods,
-    //       });
-    //     }
-    //   }
-    // });
 
   },
 
@@ -164,38 +161,16 @@ Page({
     util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id, control: 2 }, function (data) {
       var dataList = data.data
 
-      // if (dataList == 1) {
-      //   var goods = that.data.goods;
-      //   goods.is_favorite = 1;
-      //   that.setData({
-      //     goods: goods,
-      //   });
-      // }
+      if (dataList == 1) {
+        util.toastTip('操作成功', 'success', 800)
+        var goods = that.data.goods;
+        goods.is_favorite = 0;
+        that.setData({
+          goods: goods,
+        });
+      }
     })
 
-
-    // app.request({
-    //   url: api.user.favorite_remove,
-    //   method: "post",
-    //   data: {
-    //     goods_id: that.data.goods.id,
-    //   },
-    //   success: function (res) {
-    //     if (res.code == 0) {
-    //       var goods = that.data.goods;
-    //       goods.is_favorite = 0;
-    //       that.setData({
-    //         goods: goods,
-    //       });
-    //     }
-    //   }
-    // });
-
-    // var goods = page.data.goods;
-    // goods.is_favorite = 0;
-    // page.setData({
-    //   goods: goods,
-    // });
   },
 
   tabSwitch: function (e) {
@@ -213,10 +188,60 @@ Page({
       });
     }
   },
-
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 用户点击右上角分享
    */
+  onShareAppMessage: function () {
+    var page = this;
+    var res = {
+      path: "/pages/goods/goods?id=" + this.data.goods_id,
+      success: function (e) {
+        page.shareModalClose()
+      },
+      title: page.data.dataList.introduce,
+      imageUrl: page.data.dataList.pic,
+    };
+    return res;
+  },
+ 
+// 分享
+  showShareModal: function () {
+    var page = this;
+    page.setData({
+      share_modal_active: "active",
+      no_scroll: true,
+    });
+  },
+// 分享
+  shareModalClose: function () {
+    var page = this;
+    page.setData({
+      share_modal_active: "",
+      no_scroll: false,
+    });
+  },
+  // 获取最新电话号码
+  getPhone:function(){
+    var that = this;
+    var url = app.globalData.apiUrl;
+    util.requestHttp(url + 'companyInfo', 'GET','', function (data) {
+      var phone = data.data[0].phone
+      
+      that.setData({
+        phone:phone
+      })
+    })
+  },
+  // 联系客服
+  contactCS:function(){
+
+    var phone = this.data.phone
+    
+    util.call(phone);
+  },
+  /**
+ * 生命周期函数--监听页面初次渲染完成
+ */
   onReady: function () {
 
   },
@@ -248,52 +273,5 @@ Page({
   onPullDownRefresh: function () {
 
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    var page = this;
-    page.getCommentList(true);
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    var page = this;
-    var user_info = wx.getStorageSync("user_info");
-    var res = {
-      path: "/pages/goods/goods?id=" + this.data.id + "&user_id=" + user_info.id,
-      success: function (e) {
-        console.log(e);
-        share_count++;
-        if (share_count == 1)
-          app.shareSendCoupon(page);
-      },
-      title: page.data.goods.name,
-      imageUrl: page.data.goods.pic_list[0].pic_url,
-    };
-    return res;
-  },
- 
-// 分享
-  showShareModal: function () {
-    var page = this;
-    page.setData({
-      share_modal_active: "active",
-      no_scroll: true,
-    });
-  },
-// 分享
-  shareModalClose: function () {
-    var page = this;
-    page.setData({
-      share_modal_active: "",
-      no_scroll: false,
-    });
-  },
-
-  
 
 });

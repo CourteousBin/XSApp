@@ -1,7 +1,9 @@
 {
   "pages":[
-    "pages/goods/goods",
+    "pages/activity/activity",
     "pages/index/index",
+    "pages/about/about",
+    "pages/goods/goods",
     "pages/formBase/formBase",
     "pages/moreGoods/moreGoods",
     "pages/newsMore/newsMore",
@@ -21,11 +23,9 @@
     "pages/myOrder/myOrder",
     "pages/myTeamLogin/myTeamLogin",
     "pages/my/my",
-    "pages/activity/activity",
     "pages/shopCar/shopCar",
     "pages/order/order",
     "pages/customized/customized",
-    "pages/about/about",
     "pages/merchantEntry/merchantEntry",
     "pages/newsDetail/newsDetail",
     "pages/form/form",

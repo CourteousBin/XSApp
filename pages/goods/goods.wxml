@@ -129,7 +129,7 @@
 
     </view>
     <view class="flex-grow-1 flex-row">
-      <view class="flex-grow-1 flex-y-center flex-x-center add-cart" bindtap="">联系客服</view>
+      <view class="flex-grow-1 flex-y-center flex-x-center add-cart" bindtap="contactCS">联系客服</view>
       <view class="flex-grow-1 flex-y-center flex-x-center buy-now" bindtap="actOrder">立即下单</view>
     </view>
   </view>

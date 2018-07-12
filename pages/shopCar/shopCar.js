@@ -1,3 +1,5 @@
+var util = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -13,6 +15,20 @@ Page({
   onLoad: function (options) {
     
   },
+  // 获取收藏商品
+  getCollection:function(){
+    var url = app.globalData.apiUrl;
+    var that = this;
+    var user_id = app.globalData.openId;
+    util.requestHttp(url + 'collection', 'POST', { user_id: user_id}, function (data) {
+      var dataList = data.data;
+      console.log(dataList)
+      that.setData({
+        dataList: dataList
+      })
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -25,7 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getCollection()
   },
 
   /**

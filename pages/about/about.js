@@ -1,5 +1,6 @@
 var util = require('../../utils/util.js');
 var app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -21,23 +22,20 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    this.getBanner();
+    this.getCompanyInfo();
   },
-  getBanner: function () {
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.RuquestUrl + 'Pages',
-    //   method: 'POST',
-    //   data: {
-    //     'pages': 'about'
-    //   },
-    //   success: function (res) {
-    //     var data = res.data;
-    //     that.setData({
-    //       banner: data
-    //     })
-    //   }
-    // })
+  getCompanyInfo: function () {
+    var that = this;
+    var url = app.globalData.apiUrl;
+
+    util.requestHttp(url + 'companyInfo', 'GET', '', function (data) {
+      var dataList = data.data[0]
+      var content = dataList.content
+      that.setData({
+        dataList: dataList
+      })
+      WxParse.wxParse('content', 'html', content, that, 5);
+    })
   },
   call: function (e) {
     var phone = e.target.dataset.phone;
