@@ -17,8 +17,9 @@ Page({
   },
 
   toDetail:function(e){
-    var id = e.dataset.id;
-    util.toPages('../newsDetail/newsDetail?activity=');
+    var id = e.currentTarget.dataset.id;
+
+    util.toPages('../newsDetail/newsDetail?id=' + id);
   },
 
   getActivity:function(){

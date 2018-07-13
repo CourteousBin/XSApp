@@ -1,6 +1,6 @@
 <view class="page">
   <view class='banner'>
-    <image src='/images/timg.jpg'></image>
+    <image src='{{dataList.ad_pic}}'></image>
   </view>
 
     <view class='main interval'>
@@ -14,7 +14,7 @@
               <view class="weui-label">联系人:</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type='text' placeholder="请输入您的姓名" />
+              <input class="weui-input" name="name" type='text' placeholder="请输入您的姓名" />
             </view>
           </view>
 
@@ -23,7 +23,7 @@
               <view class="weui-label">联系电话:</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type='number' placeholder="请输入您的手机号码" />
+              <input class="weui-input" name="phone" maxlength='11' type='number' placeholder="请输入您的手机号码" />
             </view>
           </view>
 
@@ -32,7 +32,7 @@
               <view class="weui-label">主营项目:</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type='text' placeholder="项目名称" />
+              <input class="weui-input" name="job" type='text' placeholder="项目名称" />
             </view>
           </view>
 
@@ -43,8 +43,8 @@
           <view class="weui-cells weui-cells_after-title" style='margin-top:.5em;'>
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea bindinput="remarksChange" name="remarks" data-value="remarksNumber" class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" maxlength='200' cursor-spacing="60" />
-                <view class="weui-textarea-counter">{{remarksNumber}}/200</view>
+                <textarea bindinput="remarksChange" name="content" data-value="remarksNumber" class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" maxlength='80' cursor-spacing="60" />
+                <view class="weui-textarea-counter">{{remarksNumber}}/80</view>
               </view>
             </view>
           </view> 
@@ -54,7 +54,7 @@
 
         <view class="weui-cells__title">请认真填写联系方式，以便我们能够尽快联系到你</view> 
 
-        <checkbox-group bindchange="bindAgreeChange">
+        <!-- <checkbox-group bindchange="bindAgreeChange">
           <label class="weui-agree" for="weuiAgree">
             <view class="weui-agree__text">
               <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
@@ -65,7 +65,7 @@
               <navigator url="" class="weui-agree__link">《相关条款》</navigator>
             </view>
           </label>
-        </checkbox-group>
+        </checkbox-group> -->
 
         <view class="weui-flex">
 

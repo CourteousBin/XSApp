@@ -1,3 +1,5 @@
+var util = require('../../utils/util.js');
+var app = getApp();
 // pages/businessTeam/businessTeam.js
 Page({
 
@@ -12,7 +14,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getTeamInfo()
+  },
+  getTeamInfo: function () {
+    var that = this;
+    var url = app.globalData.apiUrl;
+
+    util.requestHttp(url + 'teamInfo', 'GET', '', function (data) {
+      var dataList = data.data
+      that.setData({
+        dataList: dataList
+      })
+    })
   },
 
   /**

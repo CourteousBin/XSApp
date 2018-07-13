@@ -1,3 +1,5 @@
+var util = require('../../utils/util.js');
+var app = getApp();
 var WxParse = require('../../wxParse/wxParse.js');
 // pages/newsDetail/newsDetail.js
 Page({
@@ -13,9 +15,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetchData();
-  },
+    var id = options.id;
+    this.getDetailInfo({ id: id})
 
+  },
+  // 请求数据
+  getDetailInfo(data){
+    var url = app.globalData.apiUrl;
+    var that = this;
+    
+    util.requestHttp(url + 'detailPages', 'POST', data, function (data) {
+      var dataList = data.data;
+      console.log(dataList)
+      var content = dataList.content;
+      WxParse.wxParse('content', 'html', content, that, 5);
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

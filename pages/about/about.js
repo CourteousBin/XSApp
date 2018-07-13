@@ -29,7 +29,7 @@ Page({
     var url = app.globalData.apiUrl;
 
     util.requestHttp(url + 'companyInfo', 'GET', '', function (data) {
-      var dataList = data.data[0]
+      var dataList = data.data
       var content = dataList.content
       that.setData({
         dataList: dataList

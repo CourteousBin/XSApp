@@ -1,7 +1,7 @@
 <view class="page">
     <view class="weui-msg">
         <view class="weui-msg__icon-area">
-            <icon type="warn"  size="93"></icon>
+            <!-- <icon type="warn"  size="93"></icon> -->
         </view>
         <view class="weui-msg__text-area">
             <view class="weui-msg__title">定制服务</view>
@@ -9,7 +9,7 @@
               为了更加好提供专业化和个性化服务，请您认真填写资产咨询表。
             </view>
         </view>
-        <view class="weui-msg__opr-area">
+        <view class="weui-msg__opr-area" style='margin-top:100rpx'>
             <view class="weui-btn-area">
                 <button class="weui-btn btnRed" catchtap='toForm' type="">填写资产咨询表</button>
                 <button class="weui-btn" type="default">取消</button>

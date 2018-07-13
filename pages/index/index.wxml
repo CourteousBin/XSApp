@@ -126,21 +126,21 @@
     </view>
     <view class='newMain'>
 
-      <view catchtap='toNewsDetail' class='newMainRow'>
+      <view catchtap='toNewsDetail' data-id='{{news[0].id}}' class='newMainRow'>
         <view class='newMainImg'>
           <image src='/images/newArrow.png'></image>
         </view>
         <text>{{news[0].title}}</text>
       </view>
 
-      <view catchtap='toNewsDetail' class='newMainRow'>
+      <view catchtap='toNewsDetail' data-id='{{news[1].id}}' class='newMainRow'>
         <view class='newMainImg'>
           <image src='/images/newArrow2.png'></image>
         </view>
         <text>{{news[1].title}}</text>
       </view>
 
-      <view catchtap='toNewsDetail' class='newMainRow'>
+      <view catchtap='toNewsDetail' data-id='{{news[2].id}}' class='newMainRow'>
         <view class='newMainImg'>
           <image src='/images/newArrow3.png'></image>
         </view>

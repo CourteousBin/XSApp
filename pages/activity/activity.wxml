@@ -2,9 +2,9 @@
   <view class="page__bd">
 
     <block wx:for="{{dataList}}">
-      <view class="weui-flex" style='margin-top:25rpx;' data-id="{{item.id}}">
+      <view class="weui-flex" style='margin-top:25rpx;' >
 
-        <view class="weui-flex__item" catchtap='toDetail'>
+        <view class="weui-flex__item" catchtap='toDetail' data-id="{{item.id}}">
 
           <view class="actTitle">
             {{item.title}}

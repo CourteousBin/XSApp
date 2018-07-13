@@ -1,5 +1,5 @@
 var util = require('../../utils/util.js');
-// pages/customized/customized.js
+var app = getApp();
 Page({
 
   /**
@@ -16,7 +16,15 @@ Page({
   
   },
   toForm:function(){
+    // 记录从哪个页面跳转到 资产咨询表
+      // 如果从商品跳转 直接传 商品id
+      // 如果从 快速测试跳转 则 传入 'fastTest'
+      // 如果从 定制服务 则 传入 'Customized'
+
+    var wherePage = app.globalData.wherePage = 'Customized';
+
     util.toPages('../formBase/formBase');
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

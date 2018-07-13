@@ -22,7 +22,8 @@ Page({
     util.toPages('../newsMore/newsMore');
   },
   toNewsDetail:function(e){
-    util.toPages('../newsDetail/newsDetail');
+    var id = e.currentTarget.dataset.id;
+    util.toPages('../newsDetail/newsDetail?id='+id);
   },
   fastTest:function(e){
     util.toPages('../fastTest/fastTest');

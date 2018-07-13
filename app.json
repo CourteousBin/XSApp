@@ -1,7 +1,10 @@
 {
   "pages":[
-    "pages/activity/activity",
     "pages/index/index",
+    "pages/merchantEntry/merchantEntry",
+    "pages/brandPartner/brandPartner",
+    "pages/newsDetail/newsDetail",
+    "pages/activity/activity",
     "pages/about/about",
     "pages/goods/goods",
     "pages/formBase/formBase",
@@ -15,7 +18,6 @@
     "pages/formInsurance/formInsurance",
     "pages/fastProgramme/fastProgramme",
     "pages/fastTest/fastTest",
-    "pages/brandPartner/brandPartner",
     "pages/quarterly/quarterly",
     "pages/myTeam/myTeam",
     "pages/businessTeam/businessTeam",
@@ -26,8 +28,6 @@
     "pages/shopCar/shopCar",
     "pages/order/order",
     "pages/customized/customized",
-    "pages/merchantEntry/merchantEntry",
-    "pages/newsDetail/newsDetail",
     "pages/form/form",
     "pages/test/test",
     "pages/store/store",
