@@ -86,6 +86,14 @@ function showLoading(mask){
   });
 }
 
+// 提示框带确定
+function showModal(msg){
+  wx.showModal({
+    content: msg,
+    showCancel: false,
+  })
+}
+
 // 小数点两位
 function toDecimal(x) {
   var f = parseFloat(x);
@@ -136,5 +144,6 @@ module.exports = {
   requestHttp: requestHttp,
   getNowFormatDate: getNowFormatDate,
   dateSubtract: dateSubtract,
-  showLoading: showLoading
+  showLoading: showLoading,
+  showModal: showModal,
 }

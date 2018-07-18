@@ -10,7 +10,7 @@
       <view class="weui-flex">
           <view class="weui-flex__item">
             <view class="zh">
-              <input type='text' name="userZh" placeholder='请输入账号'></input>
+              <input type='text' name="user_name" placeholder='请输入账号'></input>
             </view>
           </view>
       </view>
@@ -18,7 +18,7 @@
       <view class="weui-flex" style='margin-top:40rpx;'>
           <view class="weui-flex__item">
             <view class="zh">
-              <input password="true" name="userPsw" placeholder='请输入密码'></input>
+              <input password="true" name="password" placeholder='请输入密码'></input>
             </view>
           </view>
       </view>

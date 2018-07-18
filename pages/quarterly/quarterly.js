@@ -21,12 +21,15 @@ Page({
     });
   },
   createSimulationData: function () {
+    // X轴日期
     var categories = [];
+    // 数值
     var data = [];
-    for (var i = 0; i < 10; i++) {
-      categories.push('20170-' + (i + 1));
+    for (var i = 0; i < 12; i++) {
+      categories.push('2017-' + (i + 1));
       data.push(Math.random() * (20 - 10) + 10);
     }
+    console.log(data)
     return {
       categories: categories,
       data: data
@@ -45,11 +48,24 @@ Page({
     lineChart = new wxCharts({
       canvasId: 'lineCanvas',
       type: 'line',
+      // x轴日期
       categories: simulationData.categories,
-      animation: false,
+      animation: true,
       series: [{
-        name: '成交量1',
+        // 最下面注释
+        name: '访问量',
+        // 值
         data: simulationData.data,
+        // 单位
+        format: function (val, name) {
+          return val.toFixed(2) + '万';
+        }
+      }, {
+        // 最下面注释
+        name: '提交咨询表量',
+        // 值
+        data: [1,2,3,4,5,6,7,8,9,10,11,12],
+        // 单位
         format: function (val, name) {
           return val.toFixed(2) + '万';
         }

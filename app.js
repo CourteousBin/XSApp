@@ -28,6 +28,12 @@ App({
       // 如果从 快速测试跳转 则 传入 'fastTest'
       // 如果从 定制服务 则 传入 'Customized'
     wherePage:null,
+
+  // 登入团队页面
+    // 第一次登入后以后不再登入
+    g_login:false,
+    // 保存Id
+    g_loginId:null,
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow

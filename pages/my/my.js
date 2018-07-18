@@ -1,4 +1,5 @@
 var util = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -15,13 +16,27 @@ Page({
     
   },
   toMyTeamLogin:function(){
-    util.toPages('../myTeamLogin/myTeamLogin')
+    // 先判断全局变量
+      // g_login: false,
+      // g_loginId:null,
+    var g_login = app.globalData.g_login;
+
+    if (g_login !== true){
+      // 如果没登入过,进行登入
+      util.toPages('../myTeamLogin/myTeamLogin')
+    } else if (g_login === true){
+      // 登入过直接跳转
+      util.toPages('../myTeam/myTeam')
+    }
+
+    
   },
   toMyOrder:function(){
     util.toPages('../myOrder/myOrder')
   },
   getUserInfo:function(e){
     var userInfo = e.detail.userInfo;
+    console.log(userInfo)
     this.setData({
       avatarUrl: userInfo.avatarUrl,
       nickName: userInfo.nickName

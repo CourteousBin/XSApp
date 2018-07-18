@@ -1,4 +1,5 @@
 var util = require('../../utils/util.js');
+var app = getApp();
 // pages/myTeam/myTeam.js
 Page({
 
@@ -13,10 +14,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
   toQuarterly:function(){
     util.toPages('../quarterly/quarterly')
+  },
+  getData(){
+    var that = this
+    var url = app.globalData.apiUrl;
+    var userId = app.globalData.g_loginId;
+
+    util.requestHttp(url + 'userinfo', 'POST', { userId: userId}, function (data) {
+      console.log(data)
+    })
   },
 
   /**
@@ -30,7 +40,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getData()
   },
 
   /**
