@@ -45,7 +45,7 @@
     </view>
   </view>
 
-  <view class="weui-flex">
+  <view class="weui-flex" wx:if="{{button}}">
     <button class="weui-btn" bindgetuserinfo='getUserInfo' type="warn" open-type="getUserInfo">授权登入</button>
   </view>
 
