@@ -1,4 +1,5 @@
 var util = require('../../utils/util.js');
+var app = getApp();
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
@@ -11,6 +12,7 @@ Page({
   },
   onLoad: function () {
     this.template();
+    this.getOrder();
   },
   toOrderDetail:function(){
     util.toPages('../myOrderDetail/myOrderDetail');
@@ -41,5 +43,16 @@ Page({
     setTimeout(function () {
       wx.hideNavigationBarLoading()
     }, 800)
-  }
+  },
+  getOrder:function(){
+    util.showLoading(true);
+    var url = app.globalData.apiUrl;
+    // var openid = app.globalData.openId;
+    var openId = "023QJgi02zbAuZ0hp4g02vq7i02QJgiX";
+    var that = this;
+    util.requestHttp(url + 'orderList', 'POST', { openId: openId}, function (data) {
+      var dataList = data.data;
+      console.log(dataList)
+    })
+  },
 });

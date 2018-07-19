@@ -17,8 +17,6 @@
 
           <view class="weui-panel weui-panel_access">
             <view class="weui-panel__bd">
-
-
                 <view class="weui-flex">
                     <view class="weui-flex__item padding">
                       <view class="orderItem">

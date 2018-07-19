@@ -25,7 +25,7 @@
       <view class="flex-grow-0 nav-icon-1">
         <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="{{item.url}}" open-type="{{item.open_type}}">
           <image src="/images/posmachine.png"></image>
-          <view>Pos机</view>
+          <view>Android</view>
         </navigator>
       </view>
 

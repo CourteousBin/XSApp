@@ -158,6 +158,7 @@ Page({
       this.postInfo(e.detail.value)
       
     }  
+    
   },
 
   total: function (classflyStr, classfly,b,c,job){
@@ -268,7 +269,7 @@ Page({
     var that = this;
     // 把 openId 插入 formData 一并提交到后台
     formData.openId = app.globalData.openId;
-    util.requestHttp(url + 'fastTastInfo', 'POST', formData,function(data){
+    util.requestHttp(url + 'speedinessOrder', 'POST', formData,function(data){
       
     })
   },

@@ -1,6 +1,8 @@
 {
   "pages":[
+    "pages/myOrder/myOrder",
     "pages/index/index",
+    "pages/fastTest/fastTest",
     "pages/my/my",
     "pages/myTeamLogin/myTeamLogin",
     "pages/quarterly/quarterly",
@@ -20,11 +22,10 @@
     "pages/formHouse/formHouse",
     "pages/formInsurance/formInsurance",
     "pages/fastProgramme/fastProgramme",
-    "pages/fastTest/fastTest",
     "pages/myTeam/myTeam",
     "pages/businessTeam/businessTeam",
     "pages/myOrderDetail/myOrderDetail",
-    "pages/myOrder/myOrder",
+    
     "pages/shopCar/shopCar",
     "pages/order/order",
     "pages/customized/customized",
