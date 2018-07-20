@@ -76,10 +76,16 @@ Page({
 
     // 获得 页面栈
     var PagesData = getCurrentPages();
-    console.log(PagesData)
 
     // 获取所有分页的 formData
     var formData = this.allFormData(PagesData)
+
+    var wherePage = app.globalData.wherePage
+    var wherePageImg = app.globalData.wherePageImg
+    
+    // 从哪一页进来写进数据库
+    formData.wherePage = wherePage;
+    formData.pic = wherePageImg;
 
     // 传送数据
     this.postInfo(formData)
@@ -103,7 +109,6 @@ Page({
     // base
     var basePage = PagesData[PagesData.length - 5].data.formBaseData;
     
-
     // 将所有 formData 合并在一起
       // Object.assign() 合并所有可枚举对象的属性,同时改变该对象
     var allFormData = Object.assign(basePage, insurancePage, housePage, loanPage, creditPage)

@@ -16,33 +16,43 @@
           <scroll-view class='scrollContainer' style="height:{{scrollHeight}}rpx;" scroll-y="{{true}}" bindscrolltolower="onScrollLower">
 
           <view class="weui-panel weui-panel_access">
+          
             <view class="weui-panel__bd">
+              <block wx:for="{{dataList}}" wx:for-index="idx" wx:for-item="orderList">
                 <view class="weui-flex">
                     <view class="weui-flex__item padding">
                       <view class="orderItem">
                         <view class='ItemTop'>
                           <view class='proPic'>
-                            <image class='proImg' src='/images/timg.jpg'></image>
+                            <image class='proImg' src='{{orderList.pic}}'></image>
                           </view>
                           <view class='proInfo'>
                             <view class='proName'>
-                              <text>目测是的法师打发斯蒂芬凯撒的缴费</text>
+                              <text>{{orderList.wherePage}}</text>
                             </view>
                             <view class='proOrderNumber'>
-                              <text>订单编号: 1231321321231132</text>
+                              <text>订单编号: {{orderList.order_sn}}</text>
                             </view>
                           </view>
                         </view>
                         <view class='ItemBottom'>
-                          <view class='orderState redColor'>订单处理中</view>
-                          <view catchtap='toOrderDetail' class='toDetail'>查看详情</view>
+                          <!-- 判断订单是否完成 , 完成的状态码未定  -->
+                          <block wx:if="{{orderList.order_status != '100'}}">
+                            <view class='orderState redColor'>订单处理中</view>
+                          </block>
+                          
+                          <block wx:if="{{orderList.order_status == '100'}}">
+                            <view class='orderState greenColor'>订单已完成</view>
+                          </block>
+                          
+                          <view catchtap='toOrderDetail' data-orderId='{{orderList.order_sn}}' class='toDetail'>查看详情</view>
                         </view>
                       </view>
                     </view>
                 </view>
+              </block>  
 
-
-                <view class="weui-flex">
+                <!-- <view class="weui-flex">
                     <view class="weui-flex__item padding">
                       <view class="orderItem">
                         <view class='ItemTop'>
@@ -64,7 +74,7 @@
                         </view>
                       </view>
                     </view>
-                </view>
+                </view> -->
 
             </view>
         </view>
@@ -79,26 +89,34 @@
           <view class="weui-panel weui-panel_access">
             <view class="weui-panel__bd">
 
-              <block wx:for="{{dataList}}">
-                  <view class="weui-flex">
+              <block wx:for="{{dataList}}" wx:for-index="idx" wx:for-item="orderList">
+                <view class="weui-flex">
                     <view class="weui-flex__item padding">
                       <view class="orderItem">
                         <view class='ItemTop'>
                           <view class='proPic'>
-                            <image class='proImg' src='/images/timg.jpg'></image>
+                            <image class='proImg' src='{{orderList.pic}}'></image>
                           </view>
                           <view class='proInfo'>
                             <view class='proName'>
-                              <text>目测是的法师打发斯蒂芬凯撒的缴费</text>
+                              <text>{{orderList.wherePage}}</text>
                             </view>
                             <view class='proOrderNumber'>
-                              <text>订单编号: 1231321321231132</text>
+                              <text>订单编号: {{orderList.order_sn}}</text>
                             </view>
                           </view>
                         </view>
                         <view class='ItemBottom'>
-                          <view class='orderState greenColor'>订单已完成</view>
-                          <view catchtap='toOrderDetail' class='toDetail'>查看详情</view>
+                          <!-- 判断订单是否完成 , 完成的状态码未定  -->
+                          <block wx:if="{{orderList.order_status != '100'}}">
+                            <view class='orderState redColor'>订单处理中</view>
+                          </block>
+                          
+                          <block wx:if="{{orderList.order_status == '100'}}">
+                            <view class='orderState greenColor'>订单已完成</view>
+                          </block>
+                          
+                          <view catchtap='toOrderDetail' data-orderId='{{orderList.order_sn}}' class='toDetail'>查看详情</view>
                         </view>
                       </view>
                     </view>

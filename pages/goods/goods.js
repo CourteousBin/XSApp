@@ -57,23 +57,23 @@ Page({
   },
   actOrder:function(e){
 
-    var goods_id = this.data.goods_id;
+    var goods_name = this.data.dataList.name;
+    var goods_img = this.data.dataList.pic;
 
     // 记录从哪个页面跳转到 资产咨询表
-      // 如果从商品跳转 直接传 商品id
-      // 如果从 快速测试跳转 则 传入 'fastTest'
-      // 如果从 定制服务 则 传入 'Customized'
-    var wherePage = app.globalData.wherePage = goods_id;
+      // 如果从商品跳转 直接传 商品名称
+      // 如果从 快速测试跳转 则 传入 '快速测试'
+      // 如果从 定制服务 则 传入 ' '
+    var wherePage = app.globalData.wherePage = goods_name;
+    var wherePageImg = app.globalData.wherePageImg = goods_img;
 
-    myUtils.toPages('../formBase/formBase');
+    util.toPages('../formBase/formBase');
     
   },
   isFavorite:function(){
     var that = this
     var url = app.globalData.apiUrl;
     var open_id = app.globalData.openId;
-    // 模拟数据
-    // var open_id = 'ok-z54p4oIgtstl_is_t-RBxU76s'; 
     var goods_id = this.data.goods_id;
 
     util.requestHttp(url + 'goodsLove', 'POST', { open_id: open_id, goods_id: goods_id, control: 0 }, function (data) {
@@ -225,7 +225,7 @@ Page({
     var that = this;
     var url = app.globalData.apiUrl;
     util.requestHttp(url + 'companyInfo', 'GET','', function (data) {
-      var phone = data.data[0].phone
+      var phone = data.data.phone
       
       that.setData({
         phone:phone

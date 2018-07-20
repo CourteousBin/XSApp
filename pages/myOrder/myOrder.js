@@ -18,10 +18,34 @@ Page({
     util.toPages('../myOrderDetail/myOrderDetail');
   },
   tabClick: function (e) {
-    this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
-    });
+    // 当前的 页面id
+    var nowIndex = parseInt(this.data.activeIndex)
+    // 点击的 页面id
+    var clcickIndex = parseInt(e.currentTarget.id)
+
+    if (nowIndex !== clcickIndex){
+      console.log('不一样')
+      this.setData({
+        sliderOffset: e.currentTarget.offsetLeft,
+        activeIndex: e.currentTarget.id
+      });
+
+      if (clcickIndex == 0){
+        this.getOrder()
+      }else {
+        this.getCompleteOrder()
+      }
+    }
+
+    // this.setData({
+    //   sliderOffset: e.currentTarget.offsetLeft,
+    //   activeIndex: e.currentTarget.id
+    // });
+
+    // 点击 加载数据
+    // var activeIndex = this.data.activeIndex;
+    // 如果 当前的码数 和 点击的码数不做操作
+
   },
   template: function () {
     var that = this;
@@ -44,15 +68,34 @@ Page({
       wx.hideNavigationBarLoading()
     }, 800)
   },
+  // 加载全部订单
   getOrder:function(){
     util.showLoading(true);
     var url = app.globalData.apiUrl;
     // var openid = app.globalData.openId;
-    var openId = "023QJgi02zbAuZ0hp4g02vq7i02QJgiX";
+    var openId = "ok-z54p4oIgtstl_is_t-RBxU76s";
     var that = this;
     util.requestHttp(url + 'orderList', 'POST', { openId: openId}, function (data) {
       var dataList = data.data;
-      console.log(dataList)
+      that.setData({
+        dataList: dataList
+      })
     })
+    wx.hideLoading();
+  },
+  // 加载完成了的订单
+  getCompleteOrder:function(){
+    util.showLoading(true);
+    var url = app.globalData.apiUrl;
+    // var openid = app.globalData.openId;
+    var openId = "ok-z54p4oIgtstl_is_t-RBxU76s";
+    var that = this;
+    util.requestHttp(url + 'completeOrder', 'POST', { openId: openId }, function (data) {
+      var dataList = data.data;
+      that.setData({
+        dataList: dataList
+      })
+    })
+    wx.hideLoading();
   },
 });

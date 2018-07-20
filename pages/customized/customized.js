@@ -17,11 +17,14 @@ Page({
   },
   toForm:function(){
     // 记录从哪个页面跳转到 资产咨询表
-      // 如果从商品跳转 直接传 商品id
-      // 如果从 快速测试跳转 则 传入 'fastTest'
-      // 如果从 定制服务 则 传入 'Customized'
+      // 如果从商品跳转 直接传 商品名称
+      // 如果从 快速测试跳转 则 传入 '快速测试'
+      // 如果从 定制服务 则 传入 '定制服务'
 
-    var wherePage = app.globalData.wherePage = 'Customized';
+    app.globalData.wherePage = '定制服务';
+
+    // 图片路径
+    app.globalData.wherePageImg = 'https://mp.csnet.net.cn/static/admin/images/Customized.png';
 
     util.toPages('../formBase/formBase');
     

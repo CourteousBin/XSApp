@@ -207,13 +207,12 @@
                       <text class='sellText'>猜你喜欢</text>
                   </view>
                   <view class="title-line"></view>
-                  
               </view>
 
               <view class="goods-list flex-row goods-list-cols-{{cat_goods_cols}}">
                 <block wx:for="{{guessLike}}" wx:for-item="itemProduct" wx:for-index="idx" wx:key="*this">
                   <view class="flex-grow-0">
-                      <navigator class="goods-item productText" url="/pages/goods/goods?id={{item.id}}">
+                      <navigator class="goods-item productText" url="/pages/goods/goods?goods_id={{itemProduct.id}}">
                           <image src="{{arr[itemProduct.id]?arr[itemProduct.id]:'/images/loading.png'}}" data-id="{{itemProduct.id}}" bindload="imageOnLoad" mode="aspectFill" data-imgUrl="{{itemProduct.pic}}" />
                           <text>{{itemProduct.name}}</text>
                       </navigator>
