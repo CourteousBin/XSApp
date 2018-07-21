@@ -161,7 +161,7 @@ Page({
     var url = app.globalData.apiUrl;
     util.requestHttp(url + 'matterGoods', 'GET', '', function (data) {
       var dataList = data.data;
-      console.log(dataList)
+
       that.setData({
         goods: dataList
       })
@@ -173,7 +173,7 @@ Page({
     var url = app.globalData.apiUrl;
     util.requestHttp(url + 'getMatterClassify', 'GET', '', function (data) {
       var dataList = data.data;
-      console.log(dataList)
+
       that.setData({
         goodsList: dataList
       })
@@ -223,9 +223,11 @@ Page({
 
 
   },
-  toDetail: function () {
+  toDetail: function (e) {
+
+    var goods_id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../goods/goods'
+      url: '../goods/goods?goods_id=' + goods_id
     })
   }
 });

@@ -32,7 +32,7 @@
       <view class="flex-grow-0 nav-icon-1">
         <navigator bindtap="navigatorClick" data-url="{{item.url}}" data-open_type="{{item.open_type}}" url="{{item.url}}" open-type="{{item.open_type}}">
           <image src="/images/creditCard.png"></image>
-          <view>信用卡</view>
+          <view>会员卡</view>
         </navigator>
       </view>
 
@@ -113,7 +113,8 @@
   <view catchtap='fastTest' style='margin-bottom:20rpx;'>
     <swiper class="banner" style='height:250rpx;'>
       <swiper-item>
-        <image src="/images/testFast.jpg" class="slide-image" />
+           <!-- /images/testFast.jpg -->
+        <image src="/images/formBg.png" class="slide-image" />
       </swiper-item>
     </swiper>
   </view>

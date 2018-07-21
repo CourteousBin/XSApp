@@ -2,7 +2,8 @@
 
   <!--头部  -->
   <view class="page__hd titleBg">
-    <image class='formBg' src='/images/testFast.jpg'></image>
+  <!-- /images/testFast.jpg  -->
+    <image class='formBg' src='/images/timg.jpg'></image>
   </view>
 
   <view class='main'>
