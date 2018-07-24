@@ -1,4 +1,6 @@
 // pages/myOrderDetail/myOrderDetail.js
+var util = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -44,7 +46,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var orderId = this.data.orderId = options.orderId
+    var openId = app.globalData.openId;
+    this.getOrder(orderId,openId)
+
+  },
+  // 加载完成了的订单
+  getOrder: function (orderId, openId) {
+    util.showLoading(true);
+    var url = app.globalData.apiUrl;
+    var that = this;
+    util.requestHttp(url + 'orderDetail', 'POST', { orderId: orderId, openId: openId }, function (data) {
+      var dataList = data.data;
+      console.log(dataList)
+      that.setData({
+        dataList: dataList
+      })
+    })
+    wx.hideLoading();
   },
 
   /**

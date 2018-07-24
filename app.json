@@ -1,8 +1,9 @@
 {
   "pages":[
-    
     "pages/index/index",
     "pages/myOrder/myOrder",
+    "pages/formBase/formBase",
+    "pages/fastProgramme/fastProgramme",
     "pages/fastTest/fastTest",
     "pages/my/my",
     "pages/myTeamLogin/myTeamLogin",
@@ -13,7 +14,6 @@
     "pages/activity/activity",
     "pages/about/about",
     "pages/goods/goods",
-    "pages/formBase/formBase",
     "pages/moreGoods/moreGoods",
     "pages/newsMore/newsMore",
     "pages/classify/classify",
@@ -22,15 +22,12 @@
     "pages/formLoan/formLoan",
     "pages/formHouse/formHouse",
     "pages/formInsurance/formInsurance",
-    "pages/fastProgramme/fastProgramme",
     "pages/myTeam/myTeam",
     "pages/businessTeam/businessTeam",
     "pages/myOrderDetail/myOrderDetail",
-    
     "pages/shopCar/shopCar",
     "pages/order/order",
     "pages/customized/customized",
-    "pages/form/form",
     "pages/test/test",
     "pages/store/store",
     "pages/test2/test2",
@@ -39,7 +36,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#FF4544",
-    "navigationBarTitleText": "貳9貳金融顾问",
+    "navigationBarTitleText": "貳9貳资产配置",
     "navigationBarTextStyle":"white"
   },
   "tabBar": {

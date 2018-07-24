@@ -62,3 +62,6 @@ page{
 .redColor {
   color: #FF4544;
 }
+.greenColor {
+  color: #86DD50;
+}

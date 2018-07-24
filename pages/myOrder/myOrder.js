@@ -14,8 +14,10 @@ Page({
     this.template();
     this.getOrder();
   },
-  toOrderDetail:function(){
-    util.toPages('../myOrderDetail/myOrderDetail');
+  toOrderDetail:function(e){
+    var orderId = e.currentTarget.dataset.orderid;
+
+    util.toPages('../myOrderDetail/myOrderDetail?orderId=' + orderId);
   },
   tabClick: function (e) {
     // 当前的 页面id
@@ -98,4 +100,37 @@ Page({
     })
     wx.hideLoading();
   },
+  // 删除订单
+  deleteOrderModal:function(e){
+    var orderId = e.currentTarget.dataset.orderid;
+    var openid = app.globalData.openId;
+    var that = this;
+    wx.showModal({
+      title:'删除订单',
+      content:'您确定要删除该订单吗，删除后无法获取订单最新信息！',
+      showCancel:true,
+      success:function(res){
+        if (res.confirm){
+          that.deleteOrder(orderId, openid)
+        }
+      }
+
+    })
+  },
+  deleteOrder: function (orderId, openId){
+    var that = this;
+    var url = app.globalData.apiUrl;
+    util.requestHttp(url + 'deleteOrder', 'POST', { orderId: orderId, openId: openId }, function (data) {
+      if (data.data == '1'){
+        // 判断当前页,加载全部订单 还是 完成订单
+        var nowIndex = parseInt(that.data.activeIndex)
+        if (nowIndex == 0){
+          that.getOrder()
+        }else {
+          that.getCompleteOrder()
+        }
+      }
+    })
+
+  }
 });

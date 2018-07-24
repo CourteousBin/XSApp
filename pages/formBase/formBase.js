@@ -1,5 +1,6 @@
 var formUtil = require('../../utils/formUtils.js');
 var util = require('../../utils/util.js');
+var app = getApp();
 import WxValidate from '../../utils/WxValidate';
 // pages/formBase/formBase.js
 Page({
@@ -73,6 +74,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.checkOrder()
     this.initValidate()
   },
   // 时间选择
@@ -169,6 +171,47 @@ Page({
         return true;
       }
     }, '您的年龄还未到18周岁')
+  },
+  // 判断客户是否填写过信息,没则让客户填写,有则让客户选择是否填写
+  checkOrder:function(){
+    var url = app.globalData.apiUrl;
+    var that = this;
+    // var openId = app.globalData.openId;
+    var openId = 'ok-z54p4oIgtstl_is_t-RBxU76s';
+    util.requestHttp(url + 'checkOrder', 'POST', { openId: openId}, function (data) {
+      if(data.data == '1'){
+        wx.showModal({
+          title: '提示',
+          content: '你提交过资产咨询表,是否跳过填写直接提交?选择是则采用上次填写过的资料;选择否则重新填写!',
+          showCancel: true,
+          success: function (res) {
+            if (res.confirm) {
+              that.jumpStep()
+            }
+          }
+
+        })
+      }
+    })
+  },
+
+  // 客户选择 不填写 传数据去后台
+  jumpStep(){
+    var url = app.globalData.apiUrl;
+    var that = this;
+    // 已下信息要更新
+    var openId = app.globalData.openId;
+    // var openId = 'ok-z54p4oIgtstl_is_t-RBxU76s';
+    var code = '1';
+    // 从哪个网站如来
+    var wherePage = app.globalData.wherePage
+    var pic = app.globalData.wherePageImg
+
+    util.requestHttp(url + 'checkOrders', 'POST', { openId: openId, code: code, wherePage: wherePage, pic: pic}, function (data) {
+        if(data.data == '1'){
+          util.showModal('提交成功!')
+        }
+    })
   },
 
   /**

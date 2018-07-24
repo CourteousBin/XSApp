@@ -43,6 +43,7 @@
                           
                           <block wx:if="{{orderList.order_status == '100'}}">
                             <view class='orderState greenColor'>订单已完成</view>
+                            <view wx:if="{{orderList.state == '0'}}" catchtap='deleteOrderModal' class='orderState redColor' data-orderId='{{orderList.order_sn}}'>删除订单</view>
                           </block>
                           
                           <view catchtap='toOrderDetail' data-orderId='{{orderList.order_sn}}' class='toDetail'>查看详情</view>
@@ -107,13 +108,11 @@
                           </view>
                         </view>
                         <view class='ItemBottom'>
-                          <!-- 判断订单是否完成 , 完成的状态码未定  -->
-                          <block wx:if="{{orderList.order_status != '100'}}">
-                            <view class='orderState redColor'>订单处理中</view>
-                          </block>
-                          
+        
                           <block wx:if="{{orderList.order_status == '100'}}">
                             <view class='orderState greenColor'>订单已完成</view>
+                            <view wx:if="{{orderList.state == '0'}}" catchtap='deleteOrderModal' class='orderState redColor' data-orderId='{{orderList.order_sn}}'>删除订单</view>
+
                           </block>
                           
                           <view catchtap='toOrderDetail' data-orderId='{{orderList.order_sn}}' class='toDetail'>查看详情</view>

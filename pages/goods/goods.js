@@ -194,12 +194,12 @@ Page({
   onShareAppMessage: function () {
     var page = this;
     var res = {
-      path: "/pages/goods/goods?id=" + this.data.goods_id,
+      path: "/pages/goods/goods?goods_id=" + this.data.goods_id,
       success: function (e) {
         page.shareModalClose()
       },
       title: page.data.dataList.introduce,
-      imageUrl: page.data.dataList.pic,
+      imageUrl:'/images/share.jpg',
     };
     return res;
   },

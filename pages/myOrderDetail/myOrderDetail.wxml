@@ -1,24 +1,25 @@
 <view class="page">
   <view class='orderInfo'>
     <view class='proPic'>
-       <image src='/images/timg.jpg' class='proImg'></image> 
+       <image src='{{dataList.pic}}' class='proImg'></image> 
     </view>
     <view class='infoDetail'>
       <view class='orderNumber'>
         <text class='leftText'>订单名称:</text>
-        <text class='rightText'>阿斯顿发生打发斯蒂芬</text>
+        <text class='rightText'>{{dataList.wherePage}}</text>
       </view>
       <view class='orderNumber'>
         <text class='leftText'>订单编号:</text>
-        <text class='rightText'>132123123</text>
+        <text class='rightText'>{{dataList.order_sn}}</text>
       </view>
       <view class='actOrderDate'>
         <text class='leftText'>下单日期:</text>
-        <text class='rightText'>2018-5-5</text>
+        <text class='rightText'>{{dataList.time}}</text>
       </view>
       <view class='orderState'>
         <text class='leftText'>订单状态:</text>
-        <text class='rightText redColor'>审核中</text>
+        <!-- 如果订单未完成 都是红色 , 订单完成状态码不知道等于 什么 , 默认等于100为完成 redColor-->
+        <text class="rightText {{dataList.order_status == '100'?'greenColor':'redColor'}}">{{dataList.order_status == '100'?'订单已完成':'订单处理中'}}</text>
       </view>
     </view>
   </view>

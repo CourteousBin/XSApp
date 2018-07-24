@@ -112,9 +112,7 @@ Page({
     var id = e.target.dataset.id;
     var imgUrl = e.target.dataset.imgurl;
     var arr = 'arr' + '[' + id + ']';
-    // this.setData({
-    //   [arr]:true
-    // })
+
     this.imgLoader.load(imgUrl, (err, data) => {
       if (!err)
         this.setData({ [arr]: data.src })

@@ -123,7 +123,9 @@ Page({
     // 把 openId 插入 formData 一并提交到后台
     formData.openId = app.globalData.openId;
     util.requestHttp(url + 'order', 'POST', formData, function (data) {
-      console.log(data)
+      if(data.data == '1'){
+        util.showModal('提交成功!')
+      }
     })
   },
 

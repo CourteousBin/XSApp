@@ -36,7 +36,7 @@
 
         <scroll-view class='scrollContainer' style="height:{{scrollHeight}}rpx;" scroll-y="{{true}}" bindscrolltolower="onScrollLower">
           <block wx:for="{{dataList}}">
-          <navigator url="/pages/goods/goods?id={{item.id}}" open-type="navigate" class="goods-item" style='font-size:11pt;'>
+          <navigator url="/pages/goods/goods?goods_id={{item.id}}" open-type="navigate" class="goods-item" style='font-size:11pt;'>
               <image class="goods-pic" src="{{item.pic}}" mode="aspectFill" />
               <view class="goods-info" style='padding:5rpx 20rpx;'>
                   <text class="mb-10 text-more-2" style='height:2.8em;line-height:1.4;'>商品简介商品简介商品简介</text>
