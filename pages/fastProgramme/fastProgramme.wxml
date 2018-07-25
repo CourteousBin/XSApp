@@ -3,7 +3,7 @@
     <view class='head'>
       <view class="weui-flex page__bd_spacing">
           <view class="weui-flex__item">
-            <view class="headTitle">可借贷额度</view>
+            <view class="headTitle">{{LoanData[1]}}</view>
           </view>
       </view>
       <view class="weui-flex">
@@ -36,7 +36,7 @@
       <view class='weui-flex'>
         <view class='weui-flex__item'>
           <view class='toForm'>
-            <image catchtap='toForm' class='toFormImg' src='/images/fastProgramme.jpg'></image>
+            <image catchtap='toForm' class='toFormImg' src='{{LoanData[7]}}'></image>
           </view>
         </view>
       </view>
@@ -49,13 +49,13 @@
             <view class='weui-flex'>
               <!-- <view class='weui-flex__item'></view> -->
               <view class='weui-flex__item infoCenter'>
-                <view class='infoTitle'>无抵押信用贷</view>
+                <view class='infoTitle'>{{LoanData[2]}}</view>
                 <view class='infoRow'>      
-                  <view>还贷利息: {{Interest}} ~ {{maxInterest}}</view>
+                  <view>{{LoanData[3]}} {{Interest}} ~ {{maxInterest}}</view>
                 </view>
-                <view>贷款年限:{{loanYears}}</view>
-                <view>还款方式:等本等息还款</view>
-                <view>每月还款低至:{{payment}}/元 ~ {{maxPayment}}/元</view>
+                <view>{{LoanData[4]}}{{loanYears}}</view>
+                <view>{{LoanData[5]}}</view>
+                <view>{{LoanData[6]}}{{payment}}/元 ~ {{maxPayment}}/元</view>
               </view>
             </view>
 

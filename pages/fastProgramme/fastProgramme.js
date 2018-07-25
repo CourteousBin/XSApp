@@ -37,6 +37,8 @@ Page({
       })
     }
 
+    this.getLoanData()
+
     this.getInfo(total, classfiy, 1, job);
 
     // 数字翻转,发现很多bug , 改回原始值
@@ -127,6 +129,17 @@ Page({
     app.globalData.wherePage = '快速测试';
     app.globalData.wherePageImg = 'https://mp.csnet.net.cn/static/admin/images/fastTest.png'
     util.toPages("/pages/formBase/formBase");
+  },
+  // 后台获取词语
+  getLoanData:function(){
+    var url = app.globalData.apiUrl;
+    var that = this;
+    util.requestHttp(url + 'review', 'GET', '', function (data) {
+      var dataList = data.data;
+      that.setData({
+        LoanData: dataList
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

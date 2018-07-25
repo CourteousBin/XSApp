@@ -10,11 +10,11 @@
 
           <view class='nameRow'>
             <view class=''>
-              <text class='name'>测试人员</text>
-              <text class='position'>职位</text>
+              <text class='name'>{{dataList.user_name}}</text>
+              <text class='position'>{{dataList.role_name}}</text>
             </view>
             <view class='teamNumber'>
-              <text class=''>团队数量 : 123人</text>
+              <text class=''>团队数量 : {{dataList.num}}人</text>
             </view>
           </view>
 
@@ -41,7 +41,36 @@
         </view>
     </view>
 
-    <view class="weui-flex topOne">
+    <block wx:for="{{lowerUserInfo}}">
+        <!-- index 1 2 3 对应不同 class -->
+        <view class="weui-flex {{index == '0'?'topOne':''}} {{index == '1'?'topTwo':''}} {{index == '2'?'topThree':''}} {{index != '0' && index != '1' && index != '2'?'top':''}}">
+            <view class="weui-flex__item">
+              <view class='textCenter'>
+                <!-- 第 1 2 3 显示 序号图片 -->
+                <image wx:if="{{index == '0' || index == '1' || index == '2'}}" class='topImg' src="{{index == '0'?'/images/topOne.png':''}} {{index == '1'?'/images/topTwo.png':''}} {{index == '2'?'/images/topThree.png':''}}"></image>
+                <!-- 其他显示 index -->
+                <text wx:if="{{index != '0' && index != '1' && index != '2'}}">{{index + 1}}</text>
+              </view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="textCenter">{{item.user_name}}</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="textCenter">{{item.scannum}}</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="textCenter">{{item.subnum}}</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="btnCenter" style=''>
+                <button catchtap='toQuarterly' data-id="{{item.id}}" class="weui-btn mini-btn" type="warn" size="mini">详情</button>
+              </view>
+            </view>
+        </view>
+
+    </block>
+
+    <!-- <view class="weui-flex topOne">
         <view class="weui-flex__item">
           <view class='textCenter'>
             <image class='topImg' src='/images/topOne.png'></image>
@@ -193,7 +222,7 @@
             <button catchtap='toQuarterly' class="weui-btn mini-btn" type="warn" size="mini">详情</button>
           </view>
         </view>
-    </view>
+    </view> -->
 
   </view>
 </view>

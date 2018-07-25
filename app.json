@@ -1,12 +1,15 @@
 {
   "pages":[
+    
+    "pages/my/my",
     "pages/index/index",
+    "pages/fastProgramme/fastProgramme",
     "pages/myOrder/myOrder",
     "pages/formBase/formBase",
-    "pages/fastProgramme/fastProgramme",
-    "pages/fastTest/fastTest",
-    "pages/my/my",
     "pages/myTeamLogin/myTeamLogin",
+    "pages/fastTest/fastTest",
+    
+    
     "pages/quarterly/quarterly",
     "pages/merchantEntry/merchantEntry",
     "pages/brandPartner/brandPartner",
@@ -36,7 +39,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#FF4544",
-    "navigationBarTitleText": "貳9貳资产配置",
+    "navigationBarTitleText": "易9易共享资源信息咨询",
     "navigationBarTextStyle":"white"
   },
   "tabBar": {
